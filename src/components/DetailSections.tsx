@@ -10,30 +10,30 @@ export function ServicesDetailed() {
         <h3>AI-Driven Solutions</h3>
         <div className="ai-services">
           <div className="service-detail">
-            <h4>Report Reviewer AI</h4>
+            <h4>AICEMark</h4>
             <ul>
-              <li><i className="fas fa-check-circle"></i> Automated compliance checking</li>
-              <li><i className="fas fa-check-circle"></i> International standards validation</li>
-              <li><i className="fas fa-check-circle"></i> Quality score</li>
-              <li><i className="fas fa-check-circle"></i> Detailed recommendations</li>
+              <li><i className="fas fa-check-circle"></i> Live-preview document editing</li>
+              <li><i className="fas fa-check-circle"></i> True-to-format Word/PDF export</li>
+              <li><i className="fas fa-check-circle"></i> Strict academic/professional formatting</li>
+              <li><i className="fas fa-check-circle"></i> Advanced Markdown syntax support</li>
             </ul>
           </div>
           <div className="service-detail">
-            <h4>First Draft AI</h4>
+            <h4>AICE Deck Edit</h4>
             <ul>
-              <li><i className="fas fa-check-circle"></i> Template-based generation</li>
-              <li><i className="fas fa-check-circle"></i> Technical optimization</li>
-              <li><i className="fas fa-check-circle"></i> Multi-format output</li>
-              <li><i className="fas fa-check-circle"></i> Real-time collaboration</li>
+              <li><i className="fas fa-check-circle"></i> PDF slide deck deconstruction</li>
+              <li><i className="fas fa-check-circle"></i> Background purification &amp; inpainting</li>
+              <li><i className="fas fa-check-circle"></i> Metric-perfect PowerPoint reconstitution</li>
+              <li><i className="fas fa-check-circle"></i> Fully editable layouts and coordinates</li>
             </ul>
           </div>
           <div className="service-detail">
-            <h4>Snap2Studio</h4>
+            <h4>AICE ProScan</h4>
             <ul>
-              <li><i className="fas fa-check-circle"></i> Photo → CAD conversion</li>
-              <li><i className="fas fa-check-circle"></i> Dimension extraction</li>
-              <li><i className="fas fa-check-circle"></i> Multi-format export</li>
-              <li><i className="fas fa-check-circle"></i> Quality enhancement</li>
+              <li><i className="fas fa-check-circle"></i> High-speed civil engineering OCR</li>
+              <li><i className="fas fa-check-circle"></i> Numeric unit preservation (m³, m², kg)</li>
+              <li><i className="fas fa-check-circle"></i> Intelligent anti-recitation rephrasing</li>
+              <li><i className="fas fa-check-circle"></i> Side-by-side split comparative views</li>
             </ul>
           </div>
         </div>
@@ -148,9 +148,9 @@ export function FAQ() {
       { q: "QA process?", a: "Our 4-step QA process includes Initial Review, Compliance Check, Validation, and Certification to ensure 100% compliance." }
     ]},
     { category: "AI Solutions", items: [
-      { q: "Accuracy of Report Reviewer AI?", a: "Our Report Reviewer AI has been trained on thousands of engineering reports and achieves 95%+ accuracy in compliance checking." },
-      { q: "Snap2Studio for complex sites?", a: "Yes, Snap2Studio can handle complex sites with multiple structures and terrain variations, producing detailed CAD drawings." },
-      { q: "First Draft AI technical accuracy?", a: "First Draft AI uses engineering databases and templates to ensure technical accuracy, with expert review before final delivery." }
+      { q: "What is AICEMark designed for?", a: "AICEMark is crafted specifically for drafting strictly formatted civil engineering papers, reports, and academic scripts, with native features supporting direct Word and PDF export." },
+      { q: "How accurate is AICE ProScan for dense engineering documents?", a: "AICE ProScan retains strict numeric integrity (like m³, m², specific currencies and indexes) during deep OCR, preventing any hallucinations or unit displacement." },
+      { q: "Does AICE Deck Edit alter background graphics?", a: "AICE Deck Edit employs advanced multi-modal vision to clean and inpaint slide backplates, preserving original templates while making text and positions fully editable." }
     ]},
     { category: "Onboarding", items: [
       { q: "Info needed?", a: "We require project scope, relevant standards, and any existing documentation to begin work." },
@@ -259,9 +259,9 @@ export function Contact() {
                 <label htmlFor="service">Service of Interest *</label>
                 <select id="service" name="service" required defaultValue="">
                   <option value="" disabled>Select a service</option>
-                  <option value="Report Reviewer AI">Report Reviewer AI</option>
-                  <option value="First Draft AI">First Draft AI</option>
-                  <option value="Snap2Studio">Snap2Studio</option>
+                  <option value="AICEMark">AICEMark Document Editor</option>
+                  <option value="AICE Deck Edit">AICE Deck Edit</option>
+                  <option value="AICE ProScan">AICE ProScan OCR</option>
                   <option value="Engineering Design">Engineering Design</option>
                   <option value="Contracts & Claims">Contracts & Claims</option>
                   <option value="Bid Preparation">Bid Preparation</option>

@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { FadeInSection } from './FadeInSection';
 
 function Modal({ title, isOpen, onClose, children }: { title: string, isOpen: boolean, onClose: () => void, children: ReactNode }) {
@@ -44,9 +45,9 @@ export function Footer() {
             <div className="footer-section">
               <h4>Services</h4>
               <ul>
-                <li><a href="#services">Report Reviewer AI</a></li>
-                <li><a href="#services">First Draft AI</a></li>
-                <li><a href="#services">Snap2Studio</a></li>
+                <li><Link to="/tools/aicemark">AICEMark</Link></li>
+                <li><Link to="/tools/deckedit">AICE Deck Edit</Link></li>
+                <li><Link to="/tools/proscan">AICE ProScan</Link></li>
                 <li><a href="#services">Engineering Design</a></li>
                 <li><a href="#services">Contracts &amp; Claims</a></li>
                 <li><a href="#services">Bid Preparation</a></li>
@@ -108,7 +109,7 @@ export function Footer() {
         <p>By accessing or using AICE Services' website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations.</p>
         
         <h3>Services</h3>
-        <p>We provide AI-powered civil engineering solutions including Report Reviewer AI, First Draft AI, Snap2Studio, and traditional engineering services. Services are provided "as is" and subject to change.</p>
+        <p>We provide AI-powered civil engineering solutions including AICEMark, AICE Deck Edit, AICE ProScan, and traditional engineering services. Services are provided "as is" and subject to change.</p>
         
         <h3>User Responsibilities</h3>
         <p>You agree to:</p>
