@@ -6,7 +6,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
-import { Hero, AISolutions, TraditionalServices, Standards, About, HomeCTA, AIToolEmbed } from './components/MainSections';
+import { Hero, AISolutions, TraditionalServices, Standards, About, HomeCTA, AIToolEmbed, DeckEditEmbed } from './components/MainSections';
 import { ServicesDetailed, StandardsDetailed, FAQ, Contact } from './components/DetailSections';
 import { Footer } from './components/Footer';
 
@@ -52,6 +52,14 @@ function ToolPage() {
   );
 }
 
+function DeckEditPage() {
+  return (
+    <div style={{ paddingTop: '80px', minHeight: 'calc(100vh - 300px)' }}>
+      <DeckEditEmbed />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -62,6 +70,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/tools/aicemark" element={<ToolPage />} />
+            <Route path="/tools/deckedit" element={<DeckEditPage />} />
           </Routes>
         </main>
         <Footer />

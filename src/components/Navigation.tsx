@@ -19,8 +19,8 @@ export function Navigation() {
           <nav>
             <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
               <li><Link to="/#home" onClick={() => setIsOpen(false)}>Home</Link></li>
+              <li><Link to="/#ai-solutions" onClick={() => setIsOpen(false)}>AI Solutions</Link></li>
               <li><Link to="/#services" onClick={() => setIsOpen(false)}>Services</Link></li>
-              <li><Link to="/tools/aicemark" onClick={() => setIsOpen(false)}>AI Tool</Link></li>
               <li><Link to="/#standards" onClick={() => setIsOpen(false)}>Standards</Link></li>
               <li><Link to="/#faq" onClick={() => setIsOpen(false)}>FAQ</Link></li>
               <li><Link to="/#contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
