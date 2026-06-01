@@ -1,4 +1,5 @@
 import { FadeInSection } from './FadeInSection';
+import { Link } from 'react-router-dom';
 
 export function Hero() {
   return (
@@ -25,9 +26,9 @@ export function AISolutions() {
         <div className="solutions-grid">
           <div className="solution-card">
             <div className="card-icon"><i className="fas fa-file-contract"></i></div>
-            <h3>Report Reviewer AI</h3>
-            <p>Automated QA of engineering reports for compliance</p>
-            <a href="#services" className="btn btn-outline">Learn More</a>
+            <h3>AICEMark</h3>
+            <p>Live-preview Markdown editor for strictly formatted academic and professional documents.</p>
+            <Link to="/tools/aicemark" className="btn btn-outline">Try Now</Link>
           </div>
           <div className="solution-card">
             <div className="card-icon"><i className="fas fa-edit"></i></div>
@@ -121,6 +122,28 @@ export function About() {
               <p>“As the founder of AICE Services, I believe the fusion of engineering and AI is not just about speeding up processes. It's about enabling smarter decisions, ensuring accountability, and creating sustainable outcomes.”</p>
             </div>
           </div>
+        </div>
+      </div>
+    </FadeInSection>
+  );
+}
+
+export function AIToolEmbed() {
+  return (
+    <FadeInSection className="ai-tool-embed" id="ai-tool">
+      <div className="container" style={{ maxWidth: '1400px' }}>
+        <h2 className="text-center mb-8 text-3xl font-light">AICEMark Document Editor</h2>
+        <p className="text-center mb-8 text-gray-600" style={{ maxWidth: '800px', margin: '0 auto 2rem' }}>
+          A single-screen, live-preview Markdown editor specifically designed for drafting strictly formatted academic and professional documents. Experience true-to-format Word export and advanced syntax support directly in your browser.
+        </p>
+        <div className="w-full relative shadow-lg rounded-lg overflow-hidden border border-gray-100" style={{ height: '850px', backgroundColor: '#fff' }}>
+          <iframe
+            src="https://tulaibhasan-aicemark.hf.space"
+            className="w-full h-full border-none"
+            title="AICEMark Tool"
+            allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
+            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+          ></iframe>
         </div>
       </div>
     </FadeInSection>

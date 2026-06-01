@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,15 +12,18 @@ export function Navigation() {
       <header className="sticky-nav">
         <div className="container">
           <div className="logo">
-            <h2>AICE Services</h2>
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <h2>AICE Services</h2>
+            </Link>
           </div>
           <nav>
             <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
-              <li><a href="#home" onClick={() => setIsOpen(false)}>Home</a></li>
-              <li><a href="#services" onClick={() => setIsOpen(false)}>Services</a></li>
-              <li><a href="#standards" onClick={() => setIsOpen(false)}>Standards</a></li>
-              <li><a href="#faq" onClick={() => setIsOpen(false)}>FAQ</a></li>
-              <li><a href="#contact" onClick={() => setIsOpen(false)}>Contact</a></li>
+              <li><Link to="/#home" onClick={() => setIsOpen(false)}>Home</Link></li>
+              <li><Link to="/#services" onClick={() => setIsOpen(false)}>Services</Link></li>
+              <li><Link to="/tools/aicemark" onClick={() => setIsOpen(false)}>AI Tool</Link></li>
+              <li><Link to="/#standards" onClick={() => setIsOpen(false)}>Standards</Link></li>
+              <li><Link to="/#faq" onClick={() => setIsOpen(false)}>FAQ</Link></li>
+              <li><Link to="/#contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
             </ul>
             <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
               <span></span>

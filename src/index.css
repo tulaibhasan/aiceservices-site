@@ -246,6 +246,11 @@ img {
 }
 
 /* AI Solutions Section */
+.ai-tool-embed {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--background);
+}
+
 .ai-solutions {
   padding: var(--spacing-xl) 0;
   background-color: var(--white);
