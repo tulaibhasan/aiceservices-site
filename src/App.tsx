@@ -6,7 +6,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
-import { Hero, AISolutions, TraditionalServices, Standards, About, HomeCTA, AIToolEmbed, DeckEditEmbed } from './components/MainSections';
+import { Hero, AISolutions, TraditionalServices, Standards, About, HomeCTA, AIToolEmbed, DeckEditEmbed, ProScanEmbed } from './components/MainSections';
 import { ServicesDetailed, StandardsDetailed, FAQ, Contact } from './components/DetailSections';
 import { Footer } from './components/Footer';
 
@@ -60,6 +60,14 @@ function DeckEditPage() {
   );
 }
 
+function ProScanPage() {
+  return (
+    <div style={{ paddingTop: '80px', minHeight: 'calc(100vh - 300px)' }}>
+      <ProScanEmbed />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -71,6 +79,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/tools/aicemark" element={<ToolPage />} />
             <Route path="/tools/deckedit" element={<DeckEditPage />} />
+            <Route path="/tools/proscan" element={<ProScanPage />} />
           </Routes>
         </main>
         <Footer />

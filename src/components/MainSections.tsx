@@ -38,10 +38,10 @@ export function AISolutions() {
             <Link to="/tools/deckedit" className="btn btn-outline">Try Now</Link>
           </div>
           <div className="solution-card">
-            <div className="card-icon"><i className="fas fa-camera"></i></div>
-            <h3>Snap2Studio</h3>
-            <p>Converts field photos into CAD drawings &amp; documentation</p>
-            <a href="#services" className="btn btn-outline">Learn More</a>
+            <div className="card-icon"><i className="fas fa-search"></i></div>
+            <h3>AICE ProScan</h3>
+            <p>Scan, parse, and OCR-process dense civil engineering bids, contracts, BoQs, and certificates.</p>
+            <Link to="/tools/proscan" className="btn btn-outline">Try Now</Link>
           </div>
         </div>
       </div>
@@ -353,6 +353,218 @@ export function DeckEditEmbed() {
                 <h5 className="text-sm font-medium text-white mb-2">Layout Compiler</h5>
                 <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.5' }}>
                   Binds the pure backgrounds and position structures into direct, compliant office open XML presentations.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </FadeInSection>
+  );
+}
+
+export function ProScanEmbed() {
+  const [activeTab, setActiveTab] = useState<'flow' | 'parsing' | 'safeguards'>('flow');
+
+  return (
+    <FadeInSection className="ai-tool-embed" id="proscan-tool">
+      <div className="container" style={{ maxWidth: '1200px' }}>
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl font-light mb-4 tracking-tight">AICE ProScan</h2>
+          <p className="text-gray-400 font-light mx-auto" style={{ maxWidth: '800px', fontSize: '15px' }}>
+            A specialized, responsive, web-based platform tailored for scanning, parsing, and OCR-processing dense civil engineering bids, contracts, official certificates, and Bills of Quantities (BoQs).
+          </p>
+        </div>
+
+        {/* Secure Workstation Launcher */}
+        <div style={{
+          backgroundColor: '#121212',
+          border: '1px solid #222222',
+          padding: '3rem 2rem',
+          textAlign: 'center',
+          marginBottom: '3.5rem'
+        }}>
+          <div className="font-mono text-xs tracking-widest text-[#A0A0A0] mb-3">
+            <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#38bdf8', borderRadius: '50%', marginRight: '8px' }}></span>
+            SYSTEM ACCESS CONTEXT DIRECTIVE // SECURE OCR WORKSPACE
+          </div>
+          <h3 className="text-2xl font-light mb-4 tracking-tight">Launch Dedicated ProScan Tool</h3>
+          <p className="text-gray-400 font-light mx-auto mb-8" style={{ maxWidth: '700px', fontSize: '14px', lineHeight: '1.6' }}>
+            To satisfy sandboxing and security authentication guidelines and enable full high-speed OCR, side-by-side comparative views, and client-side document exports, the interactive tool runs within a direct secure browser console.
+          </p>
+
+          <a
+            href="https://ai.studio/apps/50201f0c-d8a5-4bb9-9c9d-fc063ec440e6?fullscreenApplet=true"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary inline-flex items-center gap-2"
+            style={{
+              padding: '1rem 2.5rem',
+              fontSize: '11px',
+              letterSpacing: '3px',
+              backgroundColor: '#fff',
+              color: '#000',
+              fontWeight: '600'
+            }}
+          >
+            Launch Interactive Workspace <i className="fas fa-external-link-alt ml-2"></i>
+          </a>
+
+          <div className="font-mono text-[11px] text-gray-500 mt-6">
+            Sandbox Client Authorization: Verified and Secure via Google AI Studio Platform
+          </div>
+        </div>
+
+        {/* Interactive System Specifications Panel */}
+        <div style={{ border: '1px solid #1A1A1A', backgroundColor: '#0D0D0D', padding: '2rem' }}>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#222] pb-4 mb-6" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <h4 className="text-lg font-light tracking-tight text-white mb-1">Architecture & Parsing Specifications</h4>
+              <p className="text-xs text-gray-500 font-mono">EXPLORE DETAILED EXTRACTION SCHEMAS AND PARSING PIPELINES</p>
+            </div>
+            
+            <div className="flex gap-2 mt-4 md:mt-0" style={{ display: 'flex', gap: '8px' }}>
+              <button
+                onClick={() => setActiveTab('flow')}
+                style={{
+                  padding: '6px 14px',
+                  fontSize: '11px',
+                  fontFamily: 'monospace',
+                  border: '1px solid',
+                  borderColor: activeTab === 'flow' ? '#fff' : '#222',
+                  backgroundColor: activeTab === 'flow' ? '#1A1A1A' : 'transparent',
+                  color: activeTab === 'flow' ? '#fff' : '#888',
+                  cursor: 'pointer',
+                  outline: 'none'
+                }}
+              >
+                1. DOCUMENTS & FLOW
+              </button>
+              <button
+                onClick={() => setActiveTab('parsing')}
+                style={{
+                  padding: '6px 14px',
+                  fontSize: '11px',
+                  fontFamily: 'monospace',
+                  border: '1px solid',
+                  borderColor: activeTab === 'parsing' ? '#fff' : '#222',
+                  backgroundColor: activeTab === 'parsing' ? '#1A1A1A' : 'transparent',
+                  color: activeTab === 'parsing' ? '#fff' : '#888',
+                  cursor: 'pointer',
+                  outline: 'none'
+                }}
+              >
+                2. PARSING COMPASS
+              </button>
+              <button
+                onClick={() => setActiveTab('safeguards')}
+                style={{
+                  padding: '6px 14px',
+                  fontSize: '11px',
+                  fontFamily: 'monospace',
+                  border: '1px solid',
+                  borderColor: activeTab === 'safeguards' ? '#fff' : '#222',
+                  backgroundColor: activeTab === 'safeguards' ? '#1A1A1A' : 'transparent',
+                  color: activeTab === 'safeguards' ? '#fff' : '#888',
+                  cursor: 'pointer',
+                  outline: 'none'
+                }}
+              >
+                3. SAFEGUARDS & BATCHING
+              </button>
+            </div>
+          </div>
+
+          {/* Tab 1: Documents & Flow */}
+          {activeTab === 'flow' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-2">MODULE 01 // VIEWER</div>
+                <h5 className="text-sm font-medium text-white mb-2">INTERACTIVE PDF ENGINE</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.6' }}>
+                  Highly responsive, browser-side rendering of dense multi-page documents. Dynamic scale sliders and seamless slide-by-slide zoom metrics ensure precise orientation controls.
+                </p>
+              </div>
+
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-2">MODULE 02 // INTERACT</div>
+                <h5 className="text-sm font-medium text-white mb-2">SIDE-BY-SIDE PLAYGROUND</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.6' }}>
+                  A neat split-pane interface comparing original scanned pages side-by-side with the real-time extraction canvas. Enhances correction efficiency and ensures zero structural drop-offs.
+                </p>
+              </div>
+
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-2">MODULE 03 // OUTPUT</div>
+                <h5 className="text-sm font-medium text-white mb-2">CONSOLIDATED EXPORT</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.6' }}>
+                  Converts active extractions into compiled, formatted Markdown documents. Download your entire document audit run as an offline `.md` file with a single click.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 2: Parsing Compass */}
+          {activeTab === 'parsing' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-2">SYNTAX // EXTRACTORS</div>
+                <h5 className="text-sm font-medium text-white mb-2">CIVIL ENGINEERING MODELING</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.6' }}>
+                  System layouts configured explicitly for dense bids, contracts, layouts, schedules, and complex structural lists, translating visual grids into elegant Markdown syntax.
+                </p>
+              </div>
+
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-2">ACCURACY // CALIBRATION</div>
+                <h5 className="text-sm font-medium text-white mb-2">UNIT PRESERVATION ENGINE</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.6' }}>
+                  Strictly tracks civil engineering identifiers (e.g. m³, m², kg, currencies, indexes, percentages), leaving no room for numerical hallucination or decimal displacement.
+                </p>
+              </div>
+
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-2">SEGREGATE // MARKUP</div>
+                <h5 className="text-sm font-medium text-white mb-2">STAMPS & DRAWINGS MAPPING</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.6' }}>
+                  Identifies official governmental seals, signatures, embossed stamps, and technical drawings. Renders distinct, localized tags (e.g., `[Stamp/Seal: description]`) to retain structural layout context.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 3: Safeguards & Batching */}
+          {activeTab === 'safeguards' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-1">cognitive-sec</div>
+                <h5 className="text-sm font-medium text-white mb-2">Anti-Recitation Filter</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.5' }}>
+                  Intelligently rephrases boilerplate legal bonds while preserving essential names, dates, amounts, and calculations.
+                </p>
+              </div>
+
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-1">batch-worker.ts</div>
+                <h5 className="text-sm font-medium text-white mb-2">Asynchronous Flows</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.5' }}>
+                  Initiates continuous batch actions running in the background. Tracks global progress and permits complete aborts gracefully.
+                </p>
+              </div>
+
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-1">workspace-tabs</div>
+                <h5 className="text-sm font-medium text-white mb-2">Dynamic Views</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.5' }}>
+                  Toggle inside the console amongst the live rendered Markdown, direct text editor inputs, and raw AI processing schemas.
+                </p>
+              </div>
+
+              <div style={{ padding: '1.5rem', backgroundColor: '#111', border: '1px solid #1A1A1A' }}>
+                <div className="font-mono text-xs text-gray-500 mb-1">local-cache.ts</div>
+                <h5 className="text-sm font-medium text-white mb-2">Local Isolation</h5>
+                <p className="text-xs text-gray-400 font-light" style={{ lineHeight: '1.5' }}>
+                  Runs entirely as a client-side environment. Secures structural assets without persistent server uploads.
                 </p>
               </div>
             </div>
