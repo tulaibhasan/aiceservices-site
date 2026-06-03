@@ -153,30 +153,9 @@ export function AIToolEmbed() {
 
 export function DeckEditEmbed() {
   return (
-    <FadeInSection className="ai-tool-embed" id="deck-edit-tool">
-      <div className="container" style={{ maxWidth: '1400px' }}>
-        <div className="text-center pt-20 pb-12">
-          <h2 className="text-4xl md:text-5xl font-light mb-8 tracking-wide text-white leading-tight font-heading">AICE Deck Edit</h2>
-          <p className="text-center text-gray-400 font-light mx-auto leading-relaxed text-sm md:text-base mb-16" style={{ maxWidth: '800px' }}>
-            A high-performance presentation slide processing, retouching, and vector editing suite combining server-side multimodal intelligence with offline vector graphics processing to modify, clean, and rebuild slide decks.
-          </p>
-          <div className="flex justify-center mt-12 mb-16">
-            <a
-              href="https://ai.studio/apps/caa00651-c278-4279-b798-8c906372e374?fullscreenApplet=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center transition-all duration-300 outline-none border border-white/10 hover:border-[#00FF66] hover:text-[#00FF66] bg-white/[0.01] hover:bg-white/[0.03] font-mono tracking-widest uppercase text-[11px] text-gray-300 rounded-none cursor-pointer"
-              style={{
-                padding: '0.85rem 2.4rem',
-                letterSpacing: '3px',
-                fontWeight: '400',
-              }}
-            >
-              Launch Interactive Workspace <i className="fas fa-external-link-alt ml-3 text-[9px]"></i>
-            </a>
-          </div>
-        </div>
-        <div className="w-full relative shadow-lg rounded-none overflow-hidden border border-gray-900 mb-20 animate-fade-in" style={{ height: '850px', backgroundColor: '#0A0A0A' }}>
+    <FadeInSection className="ai-tool-embed w-full min-h-screen bg-[#0A0A0A]" id="deck-edit-tool">
+      <div className="w-full px-4 md:px-8 max-w-full">
+        <div className="w-full relative shadow-2xl rounded-none overflow-hidden border border-gray-900 animate-fade-in" style={{ height: 'calc(100vh - 120px)', backgroundColor: '#0A0A0A' }}>
           <iframe
             src="https://tulaibhasan-aice-deck-edit.hf.space"
             className="w-full h-full border-none"
@@ -184,96 +163,6 @@ export function DeckEditEmbed() {
             allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
             sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
           ></iframe>
-        </div>
-
-        {/* Specifications & Technical Blueprint (Branding from Brief) */}
-        <div className="mt-20 border-t border-gray-900 pt-16 pb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 text-left">
-            
-            {/* Architectural Frame */}
-            <div className="space-y-6">
-              <div className="font-mono text-xs text-[#00FF66] tracking-widest uppercase">
-                // TECHNICAL ARCHITECTURE
-              </div>
-              <h3 className="text-2xl font-light text-white tracking-tight">Full-Stack Slide Processing</h3>
-              <p className="text-xs text-gray-400 font-light leading-relaxed">
-                AICE Deck Edit combines server-side multimodal intelligence with offline vector graphics processing. Features a Brutalist High-Contrast Dark Theme (#0A0A0A) punctuated by neon-green accents (#00FF66) minimizing digital fatigue during extended retouching runs.
-              </p>
-              
-              <div className="pt-6 border-t border-gray-900/50 space-y-4">
-                <div className="font-mono text-[10px] text-gray-500 uppercase tracking-widest">// REVOLUTIONARY INTERACTION</div>
-                <div className="bg-white/[0.01] border border-gray-900 p-4">
-                  <div className="font-mono text-xs text-white mb-2 uppercase tracking-wider">Split-Screen Compare Slider</div>
-                  <p className="text-xs text-gray-400 font-light leading-relaxed">
-                    Toggle and inspect slide evolution interactively. Drag a synchronized vertical divisor line to inspect before (original graphics) and after (purified background) state in real time.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Core Capabilities */}
-            <div className="space-y-6">
-              <div className="font-mono text-xs text-[#00FF66] tracking-widest uppercase">
-                // CORE CAPABILITIES
-              </div>
-              <h3 className="text-2xl font-light text-white tracking-tight">Precision AI Pipelines</h3>
-              
-              <div className="space-y-5">
-                <div>
-                  <h4 className="text-xs font-mono text-white uppercase tracking-wider mb-1">01 / Multisource Document Import</h4>
-                  <p className="text-xs text-gray-400 font-light leading-relaxed">
-                    Accepts direct PDF presentation exports from Microsoft PowerPoint, Google Slides, and Apple Keynote. It parses PDF vector containers to ensure pixel-perfect consistency and native font-metrics preservation.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-mono text-white uppercase tracking-wider mb-1">02 / Gemini AI Bounding-Box Detection</h4>
-                  <p className="text-xs text-gray-400 font-light leading-relaxed">
-                    Integrates advanced multimodal capabilities (utilizing <code>gemini-3.1-flash-lite</code> with fallbacks) to autonomously scan layout matrices and extract text layers, bounds, labels, and floating annotations.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-mono text-white uppercase tracking-wider mb-1">03 / Typography Style Estimation</h4>
-                  <p className="text-xs text-gray-400 font-light leading-relaxed">
-                    Analyzes structural composition in real time, tracking font size metrics, typeface families, alignment paradigms, weight overrides (bold/italic), and exact hexadecimal color values.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Local Filters & Output */}
-            <div className="space-y-6">
-              <div className="font-mono text-xs text-[#00FF66] tracking-widest uppercase">
-                // EDGE COMPUTING & UX
-              </div>
-              <h3 className="text-2xl font-light text-white tracking-tight">Reconstitute &amp; Re-Export</h3>
-              
-              <div className="space-y-5">
-                <div>
-                  <h4 className="text-xs font-mono text-white uppercase tracking-wider mb-1">04 / Instant Local Frame Inpainting</h4>
-                  <p className="text-xs text-gray-400 font-light leading-relaxed">
-                    Features a responsive, client-side canvas-inpainting model. Users can instantaneously brush and erase target text coordinates with contextual backplate matching directly on an HTML5 canvas.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-mono text-white uppercase tracking-wider mb-1">05 / Editable PowerPoint (.pptx) Export</h4>
-                  <p className="text-xs text-gray-400 font-light leading-relaxed">
-                    Re-compiles extracted slide components back into standalone presentation files. Retains high-definition vector backgrounds while overlaying native, editable text placeholders for effortless post-production editing.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-mono text-white uppercase tracking-wider mb-1">06 / Keyboard Navigation &amp; Fluid Controls</h4>
-                  <p className="text-xs text-gray-400 font-light leading-relaxed">
-                    Browse dense collections of deck slides effortlessly using integrated global keyboard event listeners (Arrow keys support) and responsive visual state transitions.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </div>
       </div>
     </FadeInSection>

@@ -54,7 +54,7 @@ function ToolPage() {
 
 function DeckEditPage() {
   return (
-    <div style={{ paddingTop: '80px', minHeight: 'calc(100vh - 300px)' }}>
+    <div style={{ paddingTop: '80px', minHeight: 'calc(100vh - 80px)', backgroundColor: '#0A0A0A' }}>
       <DeckEditEmbed />
     </div>
   );
