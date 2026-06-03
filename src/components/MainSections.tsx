@@ -152,14 +152,37 @@ export function AIToolEmbed() {
 }
 
 export function DeckEditEmbed() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <FadeInSection className="ai-tool-embed w-full min-h-screen bg-[#0A0A0A]" id="deck-edit-tool">
       <div className="w-full px-4 md:px-8 max-w-full">
         <div className="w-full relative shadow-2xl rounded-none overflow-hidden border border-gray-900 animate-fade-in" style={{ height: 'calc(100vh - 120px)', backgroundColor: '#0A0A0A' }}>
+          {isLoading && (
+            <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0A0A0A]">
+              <div className="flex flex-col items-center space-y-6">
+                {/* Brutalist high-performance loader */}
+                <div className="relative w-16 h-16">
+                  <div className="absolute inset-0 rounded-full border border-gray-900"></div>
+                  <div className="absolute inset-0 rounded-full border-t border-b border-[#00FF66] animate-spin" style={{ animationDuration: '0.8s' }}></div>
+                </div>
+                
+                <div className="space-y-1.5 text-center">
+                  <div className="text-[11px] font-mono text-[#00FF66] tracking-widest uppercase animate-pulse">
+                    // INITIALIZING AICE WORKSPACE
+                  </div>
+                  <div className="text-[10px] font-mono text-gray-500 tracking-wider">
+                    Loading Deck Retouch &amp; Vector Processing Units...
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           <iframe
             src="https://tulaibhasan-aice-deck-edit.hf.space"
             className="w-full h-full border-none"
             title="AICE Deck Edit Tool"
+            onLoad={() => setIsLoading(false)}
             allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
             sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
           ></iframe>
