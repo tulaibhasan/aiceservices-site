@@ -139,7 +139,7 @@ export function AIToolEmbed() {
         </p>
         <div className="w-full relative shadow-lg rounded-none overflow-hidden border border-gray-800" style={{ height: '850px', backgroundColor: '#fff' }}>
           <iframe
-            src="https://tulaibhasan-aicemark.hf.space"
+            src="https://tulaibhasan-aicemark-v1.hf.space"
             className="w-full h-full border-none"
             title="AICEMark Tool"
             allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
