@@ -130,18 +130,37 @@ export function About() {
 }
 
 export function AIToolEmbed() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <FadeInSection className="ai-tool-embed" id="ai-tool">
-      <div className="container" style={{ maxWidth: '1400px' }}>
-        <h2 className="text-center mb-8 text-3xl font-light text-white">AICEMark Document Editor</h2>
-        <p className="text-center mb-8 text-gray-400 font-light mx-auto leading-relaxed text-sm md:text-base" style={{ maxWidth: '800px', margin: '0 auto 2.5rem' }}>
-          A single-screen, live-preview Markdown editor specifically designed for drafting strictly formatted academic and professional documents. Experience true-to-format Word export and advanced syntax support directly in your browser.
-        </p>
-        <div className="w-full relative shadow-lg rounded-none overflow-hidden border border-gray-800" style={{ height: '850px', backgroundColor: '#fff' }}>
+    <FadeInSection className="w-full bg-[#0A0A0A] p-0 m-0" id="ai-tool">
+      <div className="w-full max-w-full p-0 m-0">
+        <div className="w-full relative shadow-2xl rounded-none overflow-hidden border-none animate-fade-in" style={{ height: 'calc(100vh - 70px)', backgroundColor: '#0A0A0A' }}>
+          {isLoading && (
+            <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0A0A0A]">
+              <div className="flex flex-col items-center space-y-6">
+                {/* Brutalist high-performance loader */}
+                <div className="relative w-16 h-16">
+                  <div className="absolute inset-0 rounded-full border border-gray-900"></div>
+                  <div className="absolute inset-0 rounded-full border-t border-b border-[#00FF66] animate-spin" style={{ animationDuration: '0.8s' }}></div>
+                </div>
+                
+                <div className="space-y-1.5 text-center">
+                  <div className="text-[11px] font-mono text-[#00FF66] tracking-widest uppercase animate-pulse">
+                    // INITIALIZING AICEMARK WORKSPACE
+                  </div>
+                  <div className="text-[10px] font-mono text-gray-500 tracking-wider">
+                    Loading Rich Document Engine &amp; Live-Preview Units...
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           <iframe
             src="https://tulaibhasan-aicemark-v1.hf.space"
             className="w-full h-full border-none"
             title="AICEMark Tool"
+            onLoad={() => setIsLoading(false)}
             allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
             sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
           ></iframe>
@@ -155,9 +174,9 @@ export function DeckEditEmbed() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <FadeInSection className="ai-tool-embed w-full min-h-screen bg-[#0A0A0A]" id="deck-edit-tool">
-      <div className="w-full px-4 md:px-8 max-w-full">
-        <div className="w-full relative shadow-2xl rounded-none overflow-hidden border border-gray-900 animate-fade-in" style={{ height: 'calc(100vh - 120px)', backgroundColor: '#0A0A0A' }}>
+    <FadeInSection className="w-full bg-[#0A0A0A] p-0 m-0" id="deck-edit-tool">
+      <div className="w-full max-w-full p-0 m-0">
+        <div className="w-full relative shadow-2xl rounded-none overflow-hidden border-none animate-fade-in" style={{ height: 'calc(100vh - 70px)', backgroundColor: '#0A0A0A' }}>
           {isLoading && (
             <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0A0A0A]">
               <div className="flex flex-col items-center space-y-6">
@@ -193,29 +212,40 @@ export function DeckEditEmbed() {
 }
 
 export function ProScanEmbed() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <FadeInSection className="ai-tool-embed" id="proscan-tool">
-      <div className="container" style={{ maxWidth: '1200px' }}>
-        <div className="text-center pt-24 pb-16">
-          <h2 className="text-4xl md:text-5xl font-light mb-8 tracking-wide text-white leading-tight font-heading">AICE ProScan</h2>
-          <p className="text-gray-400 font-light mx-auto leading-relaxed text-sm md:text-base max-w-2xl mb-16">
-            Scan, digest, and OCR-process highly dense civil engineering bids, contracts, BoQs, and official certificates while strictly preserving complex numeric units and layout integrity.
-          </p>
-          <div className="flex justify-center mt-16 mb-8">
-            <a
-              href="https://ai.studio/apps/50201f0c-d8a5-4bb9-9c9d-fc063ec440e6?fullscreenApplet=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center transition-all duration-300 outline-none border border-white/10 hover:border-[#00FF66] hover:text-[#00FF66] bg-white/[0.01] hover:bg-white/[0.03] font-mono tracking-widest uppercase text-[11px] text-gray-300 rounded-none cursor-pointer"
-              style={{
-                padding: '0.85rem 2.4rem',
-                letterSpacing: '3px',
-                fontWeight: '400',
-              }}
-            >
-              Launch Interactive Workspace <i className="fas fa-external-link-alt ml-3 text-[9px]"></i>
-            </a>
-          </div>
+    <FadeInSection className="w-full bg-[#0A0A0A] p-0 m-0" id="proscan-tool">
+      <div className="w-full max-w-full p-0 m-0">
+        <div className="w-full relative shadow-2xl rounded-none overflow-hidden border-none animate-fade-in" style={{ height: 'calc(100vh - 70px)', backgroundColor: '#0A0A0A' }}>
+          {isLoading && (
+            <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0A0A0A]">
+              <div className="flex flex-col items-center space-y-6">
+                {/* Brutalist high-performance loader */}
+                <div className="relative w-16 h-16">
+                  <div className="absolute inset-0 rounded-full border border-gray-900"></div>
+                  <div className="absolute inset-0 rounded-full border-t border-b border-[#00FF66] animate-spin" style={{ animationDuration: '0.8s' }}></div>
+                </div>
+                
+                <div className="space-y-1.5 text-center">
+                  <div className="text-[11px] font-mono text-[#00FF66] tracking-widest uppercase animate-pulse">
+                    // INITIALIZING AICE PROSCAN WORKSPACE
+                  </div>
+                  <div className="text-[10px] font-mono text-gray-500 tracking-wider">
+                    Loading Engineering Document Scanner &amp; OCR Units...
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <iframe
+            src="https://tulaibhasan-aice-proscan.hf.space"
+            className="w-full h-full border-none"
+            title="AICE ProScan Tool"
+            onLoad={() => setIsLoading(false)}
+            allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
+            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+          ></iframe>
         </div>
       </div>
     </FadeInSection>

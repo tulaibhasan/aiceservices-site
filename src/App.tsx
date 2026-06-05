@@ -46,7 +46,7 @@ function HomePage() {
 
 function ToolPage() {
   return (
-    <div style={{ paddingTop: '80px', minHeight: 'calc(100vh - 300px)' }}>
+    <div style={{ backgroundColor: '#0A0A0A' }}>
       <AIToolEmbed />
     </div>
   );
@@ -54,7 +54,7 @@ function ToolPage() {
 
 function DeckEditPage() {
   return (
-    <div style={{ paddingTop: '80px', minHeight: 'calc(100vh - 80px)', backgroundColor: '#0A0A0A' }}>
+    <div style={{ backgroundColor: '#0A0A0A' }}>
       <DeckEditEmbed />
     </div>
   );
@@ -62,7 +62,7 @@ function DeckEditPage() {
 
 function ProScanPage() {
   return (
-    <div style={{ paddingTop: '80px', minHeight: 'calc(100vh - 300px)' }}>
+    <div style={{ backgroundColor: '#0A0A0A' }}>
       <ProScanEmbed />
     </div>
   );
