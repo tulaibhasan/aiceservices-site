@@ -179,7 +179,7 @@ export function DeckEditEmbed() {
             </div>
           )}
           <iframe
-            src="https://tulaibhasan-aice-deck-edit.hf.space"
+            src="https://tulaibhasan-aice-deck-edit-v1.hf.space"
             className="w-full h-full border-none"
             title="AICE Deck Edit Tool"
             onLoad={() => setIsLoading(false)}
