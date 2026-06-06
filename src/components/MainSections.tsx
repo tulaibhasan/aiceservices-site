@@ -23,72 +23,69 @@ export function AISolutions() {
   return (
     <FadeInSection id="ai-solutions" className="ai-solutions">
       <div className="container">
-        <h2>AI-Powered Solutions</h2>
+        <h2>AI Solutions</h2>
         <div className="solutions-grid">
-          <div className="solution-card">
-            <div className="card-icon"><i className="fas fa-file-contract"></i></div>
-            <h3>AICEMark</h3>
-            <p>Live-preview Markdown editor for strictly formatted academic and professional documents.</p>
-            <Link to="/tools/aicemark" className="btn btn-outline">Try Now</Link>
+          <div className="solution-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+            <div>
+              <div className="card-icon"><i className="fas fa-file-contract"></i></div>
+              <h3>AICEMark</h3>
+              <p style={{ textAlign: 'justify', marginBottom: '2.5rem', lineHeight: '1.7', color: 'rgb(209, 213, 219)' }}>
+                Direct copy-pasting of AI-generated math formulas, engineering symbols, and tables into Microsoft Word often corrupts formatting. AICEMark solves this by translating GFM Markdown into beautifully styled, native Word (.docx) documents with a secure, on-demand client-side AI repair engine.
+              </p>
+            </div>
+            <Link to="/tools/aicemark" className="btn btn-outline w-full block">Try Now</Link>
           </div>
-          <div className="solution-card">
-            <div className="card-icon"><i className="fas fa-file-powerpoint"></i></div>
-            <h3>AICE Deck Edit</h3>
-            <p>Deconstruct, purify backgrounds, and rebuild PDF decks into editable PowerPoint slides.</p>
-            <Link to="/tools/deckedit" className="btn btn-outline">Try Now</Link>
+
+          <div className="solution-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+            <div>
+              <div className="card-icon"><i className="fas fa-file-powerpoint"></i></div>
+              <h3>AICE Deck Edit</h3>
+              <p style={{ textAlign: 'justify', marginBottom: '2.5rem', lineHeight: '1.7', color: 'rgb(209, 213, 219)' }}>
+                Google NotebookLM generates state-of-the-art slides but bakes them into locked, flat image layers that are uneditable. AICE Deck Edit liberates these templates—clearing background plates, inpainting graphics, and compiling them back into native, fully editable PowerPoint (.pptx) presentations.
+              </p>
+            </div>
+            <Link to="/tools/deckedit" className="btn btn-outline w-full block">Try Now</Link>
           </div>
-          <div className="solution-card">
-            <div className="card-icon"><i className="fas fa-search"></i></div>
-            <h3>AICE ProScan</h3>
-            <p>Scan, parse, and OCR-process dense civil engineering bids, contracts, BoQs, and certificates.</p>
-            <Link to="/tools/proscan" className="btn btn-outline">Try Now</Link>
+
+          <div className="solution-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+            <div>
+              <div className="card-icon"><i className="fas fa-search"></i></div>
+              <h3>AICE ProScan</h3>
+              <p style={{ textAlign: 'justify', marginBottom: '2.5rem', lineHeight: '1.7', color: 'rgb(209, 213, 219)' }}>
+                A precise, web-based intelligence utility designed to scan, parse, and digitize technical documents, technical bids, and complex civil engineering Bills of Quantities (BoQs) securely page by page.
+              </p>
+            </div>
+            <Link to="/tools/proscan" className="btn btn-outline w-full block">Try Now</Link>
           </div>
         </div>
-      </div>
-    </FadeInSection>
-  );
-}
 
-export function TraditionalServices() {
-  return (
-    <FadeInSection className="traditional-services">
-      <div className="container">
-        <h2>Traditional Engineering Services</h2>
-        <div className="services-grid">
-          <div className="service-card">
-            <div className="card-icon"><i className="fas fa-drafting-compass"></i></div>
-            <h3>Engineering Design</h3>
-            <p>Water supply, sewerage, solid waste management</p>
-            <a href="#services" className="btn btn-outline">Learn More</a>
+        {/* Custom AI Automation & App Dev Conversion Banner */}
+        <div 
+          className="flex flex-col md:flex-row md:items-center justify-between gap-8 text-left"
+          style={{ 
+            backgroundColor: 'var(--white)', 
+            border: '1px solid var(--gray-300)', 
+            borderRadius: 'var(--radius-lg)', 
+            padding: 'var(--spacing-lg)',
+            marginTop: 'var(--spacing-lg)'
+          }}
+        >
+          <div className="space-y-4 max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#00FF66]/10 border border-[#00FF66]/20 text-[11px] font-mono text-[#00FF66] w-fit" style={{ borderRadius: '0px' }}>
+              <i className="fas fa-bolt"></i> Custom Engineering Automation
+            </div>
+            <h3 className="text-xl md:text-2xl font-light tracking-tight text-white m-0" style={{ letterSpacing: '-0.03em' }}>
+              Need Custom AI Automation or Specialized App Development?
+            </h3>
+            <p className="text-sm font-normal leading-relaxed text-justify m-0" style={{ color: 'rgb(209, 213, 219)' }}>
+              The free workspace tools above showcase our in-house rapid automation capabilities. Beyond these public utilities, we partner directly with engineering firms, consultancy groups, and public authorities to design, build, and deploy private, high-precision Client-Side AI Engines, automated Quality Assurance pipelines, complex PDF-to-BoQ scrapers, and enterprise-grade web dashboards engineered precisely to your project guidelines.
+            </p>
           </div>
-          <div className="service-card">
-            <div className="card-icon"><i className="fas fa-file-signature"></i></div>
-            <h3>Contracts &amp; Claims</h3>
-            <p>Contract management and claims resolution</p>
-            <a href="#services" className="btn btn-outline">Learn More</a>
+          <div className="flex-shrink-0 flex items-center">
+            <a href="#contact" className="btn btn-primary w-full md:w-auto inline-flex items-center justify-center gap-2 whitespace-nowrap">
+              Hire Us for Custom Work <i className="fas fa-arrow-right text-[10px]"></i>
+            </a>
           </div>
-          <div className="service-card">
-            <div className="card-icon"><i className="fas fa-file-invoice"></i></div>
-            <h3>Bid Preparation</h3>
-            <p>Competitive, compliant proposals</p>
-            <a href="#services" className="btn btn-outline">Learn More</a>
-          </div>
-        </div>
-      </div>
-    </FadeInSection>
-  );
-}
-
-export function Standards() {
-  return (
-    <FadeInSection className="standards">
-      <div className="container">
-        <h2>Standards Compliance</h2>
-        <div className="standards-icons">
-          <div className="standard-icon"><i className="fas fa-shield-alt"></i><span>NDA</span></div>
-          <div className="standard-icon"><i className="fas fa-gavel"></i><span>FIDIC</span></div>
-          <div className="standard-icon"><i className="fas fa-building"></i><span>ADB</span></div>
-          <div className="standard-icon"><i className="fas fa-globe"></i><span>World Bank</span></div>
         </div>
       </div>
     </FadeInSection>
@@ -108,11 +105,11 @@ export function About() {
                </div>
               <h3>Muhammad Tulaib Hasan</h3>
               <p>Founder - AICE Services</p>
-              <p>8+ years in ADB/World Bank/Govt projects especially related to Water, Sanitation and Solid Waste.</p>
+              <p>A decade of experience in ADB/World Bank/Govt projects especially related to Water, Sanitation and Solid Waste.</p>
             </div>
             <div className="founder-details">
-              <p>AICE Services is a founder-led initiative created by Muhammad Tulaib Hasan, a Water &amp; Sanitation Expert with over 8 years of experience in donor-funded and government projects. He has contributed to major programs financed by the Asian Development Bank, World Bank, and the Government of Punjab, where he led cost optimization, contract administration, engineering design reviews, and AI-driven automation.</p>
-              <p>At AICE Services, we combine cutting-edge AI tools with hands-on engineering expertise to deliver faster reviews, compliant outputs, and audit-ready deliverables for complex projects.</p>
+              <p>Led by Water &amp; Sanitation Expert Muhammad Tulaib Hasan, AICE Services bridges donor-funded compliance with AI engineering workflows.</p>
+              <p>We combine cutting-edge AI tools with hands-on engineering reviews to deliver compliant, audit-ready deliverables for complex infrastructure projects with unmatched speed.</p>
             </div>
             <div className="vision">
               <h3>Vision</h3>
@@ -246,20 +243,6 @@ export function ProScanEmbed() {
             allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
             sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
           ></iframe>
-        </div>
-      </div>
-    </FadeInSection>
-  );
-}
-
-export function HomeCTA() {
-  return (
-    <FadeInSection className="home-cta">
-      <div className="container">
-        <h2>Ready to Transform Your Engineering Projects?</h2>
-        <div className="cta-buttons">
-          <a href="#contact" className="btn btn-primary">Contact Us Today</a>
-          <a href="https://wa.me/923013666088" target="_blank" rel="noreferrer" className="btn btn-secondary">WhatsApp: +92 301 3666088</a>
         </div>
       </div>
     </FadeInSection>

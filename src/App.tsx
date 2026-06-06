@@ -6,7 +6,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
-import { Hero, AISolutions, TraditionalServices, Standards, About, HomeCTA, AIToolEmbed, DeckEditEmbed, ProScanEmbed } from './components/MainSections';
+import { Hero, AISolutions, About, AIToolEmbed, DeckEditEmbed, ProScanEmbed } from './components/MainSections';
 import { ServicesDetailed, StandardsDetailed, FAQ, Contact } from './components/DetailSections';
 import { Footer } from './components/Footer';
 
@@ -32,12 +32,9 @@ function HomePage() {
     <>
       <Hero />
       <AISolutions />
-      <TraditionalServices />
-      <Standards />
-      <About />
-      <HomeCTA />
       <ServicesDetailed />
       <StandardsDetailed />
+      <About />
       <FAQ />
       <Contact />
     </>

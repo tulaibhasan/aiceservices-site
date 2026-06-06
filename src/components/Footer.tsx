@@ -38,27 +38,34 @@ export function Footer() {
       <FadeInSection className="footer">
         <div className="container">
           <div className="footer-content">
-            <div className="footer-section">
+            <div className="footer-section" style={{ minWidth: '220px' }}>
               <h3>AICE Services</h3>
-              <p>AI + Civil Engineering for Smarter Cities</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--gray-300)', lineHeight: '1.6', marginTop: '0.5rem' }}>
+                AI + Civil Engineering for Smarter Cities. Empowering complex infrastructure projects with high-precision intelligent workflows and rigorous compliance advisory.
+              </p>
             </div>
             <div className="footer-section">
-              <h4>Services</h4>
+              <h4>AI Workspaces</h4>
               <ul>
-                <li><Link to="/tools/aicemark">AICEMark</Link></li>
+                <li><Link to="/tools/aicemark">AICEMark Editor</Link></li>
                 <li><Link to="/tools/deckedit">AICE Deck Edit</Link></li>
-                <li><Link to="/tools/proscan">AICE ProScan</Link></li>
-                <li><a href="#services">Engineering Design</a></li>
-                <li><a href="#services">Contracts &amp; Claims</a></li>
-                <li><a href="#services">Bid Preparation</a></li>
+                <li><Link to="/tools/proscan">AICE ProScan OCR</Link></li>
               </ul>
             </div>
             <div className="footer-section">
-              <h4>Company</h4>
+              <h4>Consultancy</h4>
               <ul>
-                <li><a href="#standards">Standards</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#services">Engineering Design Review</a></li>
+                <li><a href="#services">Contract &amp; Claims</a></li>
+                <li><a href="#services">Bid Preparation &amp; Evaluation</a></li>
+              </ul>
+            </div>
+            <div className="footer-section">
+              <h4>Explore</h4>
+              <ul>
+                <li><a href="#standards">Standards Compliance</a></li>
+                <li><a href="#faq">FAQ Helpdesk</a></li>
+                <li><a href="#contact">Contact Support</a></li>
               </ul>
             </div>
             <div className="footer-section">
@@ -69,8 +76,8 @@ export function Footer() {
               </ul>
             </div>
           </div>
-          <div className="footer-bottom">
-            <p>&copy; 2025 AICE Services. All rights reserved.</p>
+          <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem', marginTop: '1.5rem' }}>
+            <p>&copy; 2026 AICE Services. All rights reserved.</p>
           </div>
         </div>
       </FadeInSection>
