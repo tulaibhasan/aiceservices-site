@@ -285,6 +285,7 @@ export function Contact() {
                   <option value="AICEMark">AICEMark Document Editor</option>
                   <option value="AICE Deck Edit">AICE Deck Edit</option>
                   <option value="AICE ProScan">AICE ProScan OCR</option>
+                  <option value="AICE BOQ Auditor">AICE BOQ Auditor</option>
                   <option value="Engineering Design">Engineering Design</option>
                   <option value="Contract & Claims">Contract & Claims</option>
                   <option value="Bid Preparation & Evaluation">Bid Preparation & Evaluation</option>

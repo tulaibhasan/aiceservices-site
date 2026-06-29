@@ -6,7 +6,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
-import { Hero, AISolutions, About, AIToolEmbed, DeckEditEmbed, ProScanEmbed } from './components/MainSections';
+import { Hero, AISolutions, About, AIToolEmbed, DeckEditEmbed, ProScanEmbed, BOQAuditorEmbed } from './components/MainSections';
 import { ServicesDetailed, StandardsDetailed, FAQ, Contact } from './components/DetailSections';
 import { Footer } from './components/Footer';
 
@@ -65,6 +65,14 @@ function ProScanPage() {
   );
 }
 
+function BOQAuditorPage() {
+  return (
+    <div style={{ backgroundColor: '#0A0A0A' }}>
+      <BOQAuditorEmbed />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -77,6 +85,7 @@ export default function App() {
             <Route path="/tools/aicemark" element={<ToolPage />} />
             <Route path="/tools/deckedit" element={<DeckEditPage />} />
             <Route path="/tools/proscan" element={<ProScanPage />} />
+            <Route path="/tools/boqauditor" element={<BOQAuditorPage />} />
           </Routes>
         </main>
         <Footer />

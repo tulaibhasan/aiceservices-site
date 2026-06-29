@@ -57,6 +57,17 @@ export function AISolutions() {
             </div>
             <Link to="/tools/proscan" className="btn btn-outline w-full block">Try Now</Link>
           </div>
+          
+          <div className="solution-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+            <div>
+              <div className="card-icon"><i className="fas fa-file-invoice-dollar"></i></div>
+              <h3>AICE BOQ Auditor</h3>
+              <p style={{ textAlign: 'justify', marginBottom: '2.5rem', lineHeight: '1.7', color: 'rgb(209, 213, 219)' }}>
+                A smart spreadsheet comparison tool designed specifically to audit Bill of Quantities (BOQ) documents. It automatically finds differences between a Master BOQ and a Contractor's submitted BOQ.
+              </p>
+            </div>
+            <Link to="/tools/boqauditor" className="btn btn-outline w-full block">Try Now</Link>
+          </div>
         </div>
 
         {/* Custom AI Automation & App Dev Conversion Banner */}
@@ -239,6 +250,47 @@ export function ProScanEmbed() {
             src="https://tulaibhasan-aice-proscan.hf.space"
             className="w-full h-full border-none"
             title="AICE ProScan Tool"
+            onLoad={() => setIsLoading(false)}
+            allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
+            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+          ></iframe>
+        </div>
+      </div>
+    </FadeInSection>
+  );
+}
+
+export function BOQAuditorEmbed() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <FadeInSection className="w-full bg-[#0A0A0A] p-0 m-0" id="boq-auditor-tool">
+      <div className="w-full max-w-full p-0 m-0">
+        <div className="w-full relative shadow-2xl rounded-none overflow-hidden border-none animate-fade-in" style={{ height: 'calc(100vh - 70px)', backgroundColor: '#0A0A0A' }}>
+          {isLoading && (
+            <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0A0A0A]">
+              <div className="flex flex-col items-center space-y-6">
+                {/* Brutalist high-performance loader */}
+                <div className="relative w-16 h-16">
+                  <div className="absolute inset-0 rounded-full border border-gray-900"></div>
+                  <div className="absolute inset-0 rounded-full border-t border-b border-[#00FF66] animate-spin" style={{ animationDuration: '0.8s' }}></div>
+                </div>
+                
+                <div className="space-y-1.5 text-center">
+                  <div className="text-[11px] font-mono text-[#00FF66] tracking-widest uppercase animate-pulse">
+                    // INITIALIZING AICE WORKSPACE
+                  </div>
+                  <div className="text-[10px] font-mono text-gray-500 tracking-wider">
+                    Loading BOQ Auditor &amp; Spreadsheet Analysis Units...
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <iframe
+            src="https://tulaibhasan-aice-boq-auditor.hf.space"
+            className="w-full h-full border-none"
+            title="AICE BOQ Auditor Tool"
             onLoad={() => setIsLoading(false)}
             allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking"
             sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
