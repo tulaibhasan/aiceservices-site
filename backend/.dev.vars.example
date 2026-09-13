@@ -1,0 +1,8 @@
+# Copy this file to .dev.vars for local testing with `wrangler dev`
+# Add your real Gemini API key below:
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# For Phase 4 (Google Calendar Booking):
+# GOOGLE_SERVICE_ACCOUNT_EMAIL=your-sa@project-id.iam.gserviceaccount.com
+# GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+# GOOGLE_CALENDAR_ID=primary_or_your_calendar_id@group.calendar.google.com
