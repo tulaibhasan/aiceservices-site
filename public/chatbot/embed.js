@@ -172,7 +172,7 @@
   // Chat Window Frame (with microphone permission enabled)
   const frame = document.createElement('iframe');
   frame.id = 'ai-assistant-frame';
-  frame.src = `${scriptBaseUrl}/index.html?backend=${encodeURIComponent(backendUrl)}&embedded=true`;
+  frame.src = `${scriptBaseUrl}/index.html?backend=${encodeURIComponent(backendUrl)}&embedded=true&v=${Date.now()}`;
   frame.setAttribute('allow', 'microphone; camera; clipboard-write; autoplay');
   frame.setAttribute('title', 'AICE AI Text and Voice Assistant');
   frame.style.cssText = `
@@ -240,6 +240,12 @@
   };
   window.toggleAICEAssistant = function () {
     toggleChat();
+  };
+  window.newAICEAssistantChat = function () {
+    toggleChat(true);
+    if (frame && frame.contentWindow) {
+      frame.contentWindow.postMessage({ type: 'AICE_ASSISTANT_NEW_CHAT' }, '*');
+    }
   };
 
   // Mount to DOM

@@ -64,10 +64,13 @@
     isLiveActive: false,
   };
 
+  let activeAbortController = null;
+
   // DOM Element References
   const elements = {
     launcher: document.getElementById('widgetLauncher'),
     widget: document.getElementById('chatWidget'),
+    newChatBtn: document.getElementById('newChatBtn'),
     closeBtn: document.getElementById('closeWidgetBtn'),
     minimizeBtn: document.getElementById('minimizeWidgetBtn'),
     statusIndicator: document.getElementById('connectionStatusIndicator'),
@@ -508,6 +511,9 @@
     if (elements.launcher) {
       elements.launcher.addEventListener('click', toggleWidget);
     }
+    if (elements.newChatBtn) {
+      elements.newChatBtn.addEventListener('click', startNewChat);
+    }
     if (elements.closeBtn) {
       elements.closeBtn.addEventListener('click', closeWidget);
     }
@@ -544,6 +550,20 @@
         } else {
           closeWidget();
         }
+      }
+    });
+
+    // Handle cross-window / parent iframe messages
+    window.addEventListener('message', (event) => {
+      if (!event.data) return;
+      if (event.data.type === 'AICE_ASSISTANT_NEW_CHAT' || event.data.type === 'NEW_CHAT') {
+        startNewChat();
+      }
+      if (event.data.type === 'AICE_ASSISTANT_OPEN') {
+        openWidget();
+      }
+      if (event.data.type === 'AICE_ASSISTANT_CLOSE' || event.data.type === 'CLOSE_ASSISTANT') {
+        closeWidget();
       }
     });
   }
@@ -596,6 +616,105 @@
     } else {
       openWidget();
     }
+  }
+
+  // ==========================================================================
+  // START NEW CHAT (CONVERSATION RESET)
+  // ==========================================================================
+  function startNewChat() {
+    // 1. Play sleek micro-rotation animation on the pen button
+    if (elements.newChatBtn) {
+      elements.newChatBtn.classList.remove('new-chat-animating');
+      void elements.newChatBtn.offsetWidth; // force DOM reflow
+      elements.newChatBtn.classList.add('new-chat-animating');
+      setTimeout(() => elements.newChatBtn?.classList.remove('new-chat-animating'), 500);
+    }
+
+    // 2. Abort any running streaming request immediately
+    if (activeAbortController) {
+      try {
+        activeAbortController.abort();
+      } catch (_) {}
+      activeAbortController = null;
+    }
+
+    // 3. Stop active voice / speech synthesis
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    if (state.isLiveActive) {
+      geminiLiveController.endLiveSession();
+    }
+
+    // 4. Reset internal conversation state
+    state.history = [];
+    state.currentAssistantBubble = null;
+    state.currentAssistantText = '';
+
+    // 5. Hide typing indicator
+    if (elements.typingIndicator) {
+      elements.typingIndicator.classList.add('hidden');
+    }
+
+    // 6. Reset messages stream back to initial welcome card & quick chips
+    resetMessagesToWelcome();
+
+    // 7. Clear text input area & reset sizing
+    if (elements.messageInput) {
+      elements.messageInput.value = '';
+      handleInputChange();
+      elements.messageInput.focus();
+    }
+
+    // 8. Display brief, elegant notification toast
+    showToastNotification('New conversation started');
+  }
+
+  function resetMessagesToWelcome() {
+    if (!elements.messagesContainer) return;
+
+    const glyph = activeConfig.branding?.botAvatarGlyph || 'AI';
+
+    elements.messagesContainer.innerHTML = `
+      <!-- Auto-displayed Welcome Message -->
+      <div class="message-wrapper assistant intro-card" id="welcomeMessageWrapper">
+        <div class="msg-avatar">
+          <span class="avatar-glyph">${escapeHtml(glyph)}</span>
+        </div>
+        <div class="msg-content">
+          <div class="msg-bubble"></div>
+          <div class="msg-time" id="welcomeTimestamp">${formatTime(new Date())}</div>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips (Hydrated from chatbot.config.json) -->
+      <div class="suggestion-chips" id="suggestionChips"></div>
+    `;
+
+    // Re-bind DOM references for refreshed elements
+    elements.welcomeMessageWrapper = document.getElementById('welcomeMessageWrapper');
+    elements.welcomeTimestamp = document.getElementById('welcomeTimestamp');
+    elements.suggestionChips = document.getElementById('suggestionChips');
+
+    displayWelcomeMessage();
+    scrollToBottom();
+  }
+
+  function showToastNotification(text) {
+    if (!elements.widget) return;
+    let toast = document.getElementById('chatToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'chatToast';
+      toast.className = 'chat-toast';
+      elements.widget.appendChild(toast);
+    }
+    toast.innerHTML = `<i class="ph ph-note-pencil"></i> <span>${escapeHtml(text)}</span>`;
+    toast.classList.add('visible');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => {
+      toast.classList.remove('visible');
+    }, 2200);
   }
 
   // ==========================================================================
@@ -891,9 +1010,17 @@
     state.currentAssistantBubble = bubbleEl;
     state.currentAssistantText = '';
 
+    if (activeAbortController) {
+      try {
+        activeAbortController.abort();
+      } catch (_) {}
+    }
+    activeAbortController = new AbortController();
+
     try {
       const response = await fetch(`${state.backendUrl}/chat`, {
         method: 'POST',
+        signal: activeAbortController.signal,
         headers: {
           'Content-Type': 'application/json',
           Accept: 'text/event-stream',
@@ -946,6 +1073,10 @@
         }
       }
     } catch (err) {
+      if (err.name === 'AbortError') {
+        console.log('[Chat] Stream cleanly aborted by user action or new chat.');
+        return;
+      }
       console.error('Chat error:', err);
       elements.typingIndicator.classList.add('hidden');
       bubbleEl.innerHTML = `<span style="color: #f87171;"><i class="ph ph-warning-circle"></i> Error: ${escapeHtml(err.message)}</span>`;
