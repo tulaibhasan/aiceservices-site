@@ -21,22 +21,6 @@ export function Navigation() {
               <li><Link to="/#standards" onClick={() => setIsOpen(false)}>Standards</Link></li>
               <li><Link to="/#faq" onClick={() => setIsOpen(false)}>FAQ</Link></li>
               <li><Link to="/#contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
-              <li>
-                <button
-                  type="button"
-                  className="nav-assistant-btn"
-                  onClick={() => {
-                    setIsOpen(false);
-                    if (typeof (window as any).openAICEAssistant === 'function') {
-                      (window as any).openAICEAssistant();
-                    }
-                  }}
-                  aria-label="Open AI Assistant"
-                >
-                  <span className="assistant-badge-dot"></span>
-                  AI Assistant
-                </button>
-              </li>
             </ul>
             <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
               <span></span>
