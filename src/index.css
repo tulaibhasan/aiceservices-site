@@ -132,30 +132,6 @@ img {
   color: #0A0A0A;
 }
 
-/* WhatsApp Chat Button */
-.whatsapp-chat {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background-color: var(--primary);
-  color: #0A0A0A;
-  border-radius: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  z-index: 1000;
-  transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
-}
-
-.whatsapp-chat:hover {
-  background-color: #0A0A0A;
-  color: var(--primary);
-}
-
 /* Sticky Navigation */
 .sticky-nav {
   position: sticky;

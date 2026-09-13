@@ -5,11 +5,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
-      <a href="https://wa.me/923013666088" target="_blank" rel="noreferrer" className="whatsapp-chat">
-        <i className="fab fa-whatsapp"></i>
-      </a>
-      <header className="sticky-nav">
+    <header className="sticky-nav">
         <div className="container">
           <div className="logo">
             <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
@@ -33,6 +29,5 @@ export function Navigation() {
           </nav>
         </div>
       </header>
-    </>
   );
 }
