@@ -176,6 +176,40 @@ img {
   color: var(--primary);
 }
 
+.nav-assistant-btn {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: 600;
+  color: #10b981;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.nav-assistant-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #34d399;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
+}
+
+.assistant-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;

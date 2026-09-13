@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_contract" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <radialGradient id="glow_contract" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="600" height="350" fill="url(#bg_contract)" rx="16" />
+  <circle cx="300" cy="150" r="160" fill="url(#glow_contract)" />
+  
+  <!-- Icon: Contract / Tender / Seal -->
+  <g transform="translate(255, 65) scale(1.4)" stroke="#38bdf8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="12" y="8" width="40" height="52" rx="4" stroke="#7dd3fc" />
+    <path d="M20 20h24M20 28h24M20 36h16" stroke="#bae6fd" stroke-width="2" />
+    <circle cx="44" cy="46" r="10" fill="#0284c7" stroke="#38bdf8" />
+    <path d="M41 46l2 2 4-4" stroke="#ffffff" stroke-width="2" />
+    <path d="M44 56l-3 6 3-2 3 2-3-6" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5" />
+  </g>
+
+  <!-- Labels -->
+  <text x="300" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#ffffff" letter-spacing="0.5">
+    Contract, Claims &amp; Bid Preparation
+  </text>
+  <text x="300" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#bae6fd">
+    FIDIC Contract Advisory • ADB/WB/PPRA Tender Method Statements
+  </text>
+</svg>

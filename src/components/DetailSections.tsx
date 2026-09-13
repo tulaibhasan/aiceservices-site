@@ -232,7 +232,6 @@ export function FAQ() {
         ))}
         <div className="faq-ctas">
           <a href="#contact" className="btn btn-primary">Contact Our Team</a>
-          <a href="https://wa.me/923013666088" target="_blank" rel="noreferrer" className="btn btn-secondary">WhatsApp Support</a>
         </div>
       </div>
     </FadeInSection>
@@ -307,7 +306,7 @@ export function Contact() {
               <span>contact@aiceservices.com</span>
             </div>
             <div className="contact-detail">
-              <i className="fab fa-whatsapp"></i>
+              <i className="fas fa-phone"></i>
               <span>+92 301 3666088</span>
             </div>
             <div className="contact-detail">

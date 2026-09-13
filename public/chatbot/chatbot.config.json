@@ -1,0 +1,154 @@
+{
+  "business": {
+    "name": "AICE Services",
+    "tagline": "AI + Civil Engineering for Smarter Cities",
+    "description": "Delivering audit-ready engineering solutions, automated BOQ auditing, and CAD conversions compliant with ADB, World Bank, and Government of Punjab regulations. We fuse advanced AI technology with senior civil engineering expertise to accelerate infrastructure project delivery.",
+    "website": "https://aiceservices.com",
+    "address": "Lahore / Punjab, Pakistan (Serving National & International Donor-Funded Projects)",
+    "operatingHours": "Monday – Friday: 09:00 – 18:00 | Saturday: 09:00 – 14:00 (PST)",
+    "email": "contact@aiceservices.com",
+    "whatsapp": "923013666088"
+  },
+  "branding": {
+    "botName": "AICE Assistant",
+    "botAvatarGlyph": "AICE",
+    "botGreeting": "Welcome to AICE Services! I am your AI civil engineering assistant. How may I help you explore our AI tools (AICEMark, Deck Edit, ProScan, BOQ Auditor), request an engineering design review, or discuss donor compliance today?",
+    "primaryColor": "#10b981",
+    "accentColor": "#06b6d4",
+    "backgroundColor": "#0b0f17",
+    "cardBackground": "#111827",
+    "textColor": "#f8fafc",
+    "fontFamily": "'Inter', 'Poppins', sans-serif",
+    "theme": "dark"
+  },
+  "quickChips": [
+    "What AI tools do you offer?",
+    "Show engineering & AI catalog",
+    "Book an engineering consultation",
+    "Connect on WhatsApp"
+  ],
+  "catalog": [
+    {
+      "id": "service_1",
+      "key": "aicemark",
+      "title": "AICEMark — AI Markdown to Word",
+      "badge": "AI Productivity",
+      "price": "Free Web Utility / Enterprise Scope",
+      "turnaround": "Instant / In-Browser",
+      "image": "assets/products/aicemark.svg",
+      "features": [
+        "Converts GFM markdown into native Microsoft Word .docx files",
+        "AI auto-repair engine fixes malformed tables & broken syntax",
+        "Native KaTeX & LaTeX mathematical equation rendering"
+      ],
+      "primaryAction": "Explore AICEMark",
+      "promptText": "Tell me about AICEMark and how it converts AI markdown to Word"
+    },
+    {
+      "id": "service_2",
+      "key": "aice_deck_edit",
+      "title": "AICE Deck Edit — Slide Restorer",
+      "badge": "AI Slide Tool",
+      "price": "Free Web Utility / Enterprise Scope",
+      "turnaround": "Instant / In-Browser",
+      "image": "assets/products/deck-edit.svg",
+      "features": [
+        "Converts flat NotebookLM slide graphics into fully editable PPTX",
+        "AI OCR coordinate tracing with background inpainting",
+        "Preserves exact fonts, alignment, geometry, and layout"
+      ],
+      "primaryAction": "Learn About Deck Edit",
+      "promptText": "Can you explain how AICE Deck Edit converts flat slides into editable PowerPoint?"
+    },
+    {
+      "id": "service_3",
+      "key": "aice_proscan_boq",
+      "title": "AICE ProScan & BOQ Auditor",
+      "badge": "Civil AI Utility",
+      "price": "On-Demand / Project Scope",
+      "turnaround": "Real-time Scan",
+      "image": "assets/products/proscan-boq.svg",
+      "features": [
+        "High-precision OCR for complex civil BOQs and JV agreements",
+        "Automated discrepancy detection between Master BOQs and contractor bids",
+        "Itemized cash-flow analysis and instant Excel spreadsheet exports"
+      ],
+      "primaryAction": "Explore BOQ Auditor",
+      "promptText": "Show me details on AICE ProScan & BOQ Auditor for bid analysis"
+    },
+    {
+      "id": "service_4",
+      "key": "engineering_design_review",
+      "title": "Engineering Design & Hydraulic Review",
+      "badge": "Specialist Consultancy",
+      "price": "Project-based Quote",
+      "turnaround": "Tailored Milestone Timeline",
+      "image": "assets/products/design-review.svg",
+      "features": [
+        "Hydraulic modeling & network verification for water supply and sanitation",
+        "Full compliance vetting for ADB, World Bank, and PHED projects",
+        "Direct oversight by senior engineering specialist Muhammad Tulaib Hasan"
+      ],
+      "primaryAction": "Request Design Review",
+      "promptText": "I would like to request an Engineering Design Review for our project"
+    },
+    {
+      "id": "service_5",
+      "key": "contract_claims_bid",
+      "title": "Contract, Claims & Bid Preparation",
+      "badge": "Advisory & Tenders",
+      "price": "Project-based Quote",
+      "turnaround": "Fast-track Available",
+      "image": "assets/products/contract-bid.svg",
+      "features": [
+        "FIDIC-based contract advisory, dispute avoidance, and claims management",
+        "Technical proposals and method statements for donor-funded tenders",
+        "Rigorous PPRA and international procurement eligibility checks"
+      ],
+      "primaryAction": "Request Bid Advisory",
+      "promptText": "How can AICE Services assist with contract management and bid preparation?"
+    },
+    {
+      "id": "service_6",
+      "key": "custom_ai_engineering",
+      "title": "Custom AI Automation & App Dev",
+      "badge": "Enterprise AI",
+      "price": "Custom Scope",
+      "turnaround": "1–4 weeks",
+      "image": "assets/products/custom-ai.svg",
+      "features": [
+        "Private client-side AI tools and automated engineering QA pipelines",
+        "Custom PDF-to-BOQ scrapers and engineering calculation bots",
+        "High-security web platforms tailored to institutional requirements"
+      ],
+      "primaryAction": "Inquire Custom Dev",
+      "promptText": "We need a custom AI tool or web application developed for our engineering firm"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is AICE Services and what do you specialize in?",
+      "answer": "AICE Services is an AI-driven civil engineering consultancy. We combine hands-on engineering reviews with cutting-edge AI tools to deliver audit-ready reports, hydraulic models, BOQ discrepancy audits, and donor-compliant designs for ADB, World Bank, and government infrastructure projects."
+    },
+    {
+      "question": "How do your solutions ensure compliance with ADB and World Bank standards?",
+      "answer": "Our deliverables adhere strictly to international donor guidelines, FIDIC contract conditions, and local statutory codes (such as PHED, WASA, and PPRA). Our engineering team performs rigorous multi-stage audits to guarantee that designs and documentation are tender- and audit-ready."
+    },
+    {
+      "question": "What are the core AI tools built by AICE Services?",
+      "answer": "We have developed specialized utilities including AICEMark (converts AI markdown to native Word .docx with KaTeX formula support), AICE Deck Edit (transforms flat NotebookLM slides into editable PPTX), and AICE ProScan (OCR and automated BOQ discrepancy auditing)."
+    },
+    {
+      "question": "How does AICEMark help when working with AI tools?",
+      "answer": "When copying responses from AI chatbots, tables and math equations often break in Microsoft Word. AICEMark repairs malformed syntax on the fly and exports clean, publication-grade Word documents with editable equations."
+    },
+    {
+      "question": "Can AICE Services build custom AI applications for our firm?",
+      "answer": "Yes! We design bespoke private AI engines, document scrapers, and workflow automation tailored specifically for civil engineering consultants, contractors, and government agencies."
+    },
+    {
+      "question": "How can we schedule a consultation or get a proposal?",
+      "answer": "You can book an appointment directly through this assistant, click the WhatsApp button to chat directly with our engineering team (+92 301 3666088), or email us at contact@aiceservices.com."
+    }
+  ]
+}

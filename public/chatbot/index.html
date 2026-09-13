@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assistant</title>
+  
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- FLOATING CHAT WIDGET TRIGGER -->
+  <button id="widgetLauncher" class="widget-launcher" aria-label="Open AI Assistant" title="Chat with Assistant">
+    <div class="launcher-pulse"></div>
+    <div class="launcher-icon">
+      <i class="ph-fill ph-chat-circle-dots icon-chat"></i>
+      <i class="ph ph-x icon-close"></i>
+    </div>
+    <div class="launcher-tooltip">
+      <span>Chat with Assistant</span>
+    </div>
+  </button>
+
+  <!-- EXPANDABLE CHAT WIDGET -->
+  <div id="chatWidget" class="chat-widget hidden" role="dialog" aria-modal="true" aria-labelledby="assistantHeaderTitle">
+    <!-- Clean Minimalist Header -->
+    <div class="widget-header">
+      <div class="header-left">
+        <div class="assistant-avatar">
+          <span class="avatar-glyph">AI</span>
+          <span class="status-indicator online" id="connectionStatusIndicator" title="Online"></span>
+        </div>
+        <div class="header-title-block">
+          <h2 id="assistantHeaderTitle" class="header-name">AI Assistant</h2>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button class="widget-action-btn" id="minimizeWidgetBtn" aria-label="Minimize Assistant" title="Minimize">
+          <i class="ph ph-minus"></i>
+        </button>
+        <button class="widget-action-btn" id="closeWidgetBtn" aria-label="Close Assistant" title="Close">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Conversation Stream -->
+    <div class="messages-container" id="messagesContainer">
+      <!-- Auto-displayed Welcome Message -->
+      <div class="message-wrapper assistant intro-card" id="welcomeMessageWrapper">
+        <div class="msg-avatar">
+          <span class="avatar-glyph">AI</span>
+        </div>
+        <div class="msg-content">
+          <div class="msg-bubble">
+            <p><strong>Welcome!</strong></p>
+            <p>I am your virtual assistant. How may I help you explore our services, review pricing, or schedule a consultation today?</p>
+          </div>
+          <div class="msg-time" id="welcomeTimestamp">Just now</div>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips (Hydrated from chatbot.config.json) -->
+      <div class="suggestion-chips" id="suggestionChips"></div>
+    </div>
+
+    <!-- Typing Indicator (Minimalist Animated Dots) -->
+    <div class="typing-indicator hidden" id="typingIndicator">
+      <div class="typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Antigravity-Style Clean Input Box with Gemini Live Button -->
+    <form class="chat-input-area" id="chatForm">
+      <div class="input-card">
+        <textarea
+          id="messageInput"
+          placeholder="Ask a question or tap Live to speak..."
+          rows="1"
+          aria-label="Message to assistant"
+        ></textarea>
+        <div class="input-actions-row">
+          <!-- Gemini Live Soundwave Icon Button -->
+          <button type="button" id="liveBtn" class="chat-action-btn live-btn" aria-label="Start Gemini Live voice mode" title="Gemini Live">
+            <svg class="gemini-live-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <rect x="3" y="9" width="2.5" height="6" rx="1.25" />
+              <rect x="8" y="5" width="2.5" height="14" rx="1.25" />
+              <rect x="13.5" y="3" width="2.5" height="18" rx="1.25" />
+              <rect x="19" y="8" width="2.5" height="8" rx="1.25" />
+            </svg>
+          </button>
+          <!-- Circular Blue Arrow Send Button -->
+          <button type="submit" id="sendBtn" class="chat-action-btn send-btn" aria-label="Send message" title="Send message" disabled>
+            <i class="ph-bold ph-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- GEMINI LIVE IMMERSIVE OVERLAY -->
+    <div class="gemini-live-overlay hidden" id="geminiLiveOverlay">
+      <!-- Live Header -->
+      <div class="live-overlay-header">
+        <div class="live-badge">
+          <span class="live-dot"></span>
+          <span class="live-title">Live Voice</span>
+        </div>
+        <button class="live-collapse-btn" id="liveCollapseBtn" title="Return to text view">
+          <i class="ph ph-caret-down"></i>
+        </button>
+      </div>
+
+      <!-- Live Centerpiece: Fluid Organic Orb -->
+      <div class="live-orb-stage">
+        <div class="live-orb-aura aura-3"></div>
+        <div class="live-orb-aura aura-2"></div>
+        <div class="live-orb-aura aura-1"></div>
+        <div class="live-orb-core" id="liveOrbCore">
+          <div class="orb-inner-swirl"></div>
+        </div>
+      </div>
+
+      <!-- Live Status Indicator (Exclusively "Listening" or "Speaking") -->
+      <div class="live-status-container">
+        <p class="live-status-label" id="liveStatusLabel">Listening</p>
+      </div>
+
+      <!-- Live Control Bar -->
+      <div class="live-controls-bar">
+        <button class="live-action-circle mic-toggle" id="liveMicToggleBtn" title="Mute / Unmute">
+          <i class="ph-fill ph-microphone" id="liveMicToggleIcon"></i>
+        </button>
+        <button class="live-end-btn" id="liveEndBtn" title="End Live and return to chat">
+          <i class="ph-bold ph-x"></i>
+          <span>End Live</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
