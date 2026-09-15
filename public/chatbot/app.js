@@ -185,7 +185,7 @@
         chip.addEventListener('click', () => {
           const prompt = chip.getAttribute('data-prompt');
           if (prompt) {
-            elements.messageInput.value = prompt;
+            elements.messageInput.value = '';
             handleInputChange();
             sendMessage(prompt);
           }
@@ -824,9 +824,11 @@
     if (bookBtn) {
       bookBtn.addEventListener('click', () => {
         const prompt = bookBtn.getAttribute('data-prompt');
-        elements.messageInput.value = prompt;
-        handleInputChange();
-        sendMessage(prompt);
+        if (prompt) {
+          elements.messageInput.value = '';
+          handleInputChange();
+          sendMessage(prompt);
+        }
       });
     }
 
@@ -997,6 +999,10 @@
   }
 
   async function sendMessage(text, fromLive = false) {
+    if (elements.messageInput && elements.messageInput.value) {
+      elements.messageInput.value = '';
+      handleInputChange();
+    }
     appendUserMessage(text);
     state.history.push({ role: 'user', text });
 
