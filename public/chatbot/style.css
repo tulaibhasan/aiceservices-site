@@ -946,16 +946,40 @@ body {
 /* ==========================================================================
    RESPONSIVE DESIGN (MOBILE ADAPTATION)
    ========================================================================== */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .chat-widget {
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    border-radius: 0;
-    border: none;
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  /* Prevent launcher close button from overlaying send and live buttons on mobile */
+  .widget-launcher.active,
+  .chat-widget:not(.hidden) ~ .widget-launcher {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .widget-header {
+    padding-top: max(16px, env(safe-area-inset-top, 16px));
+  }
+
+  .widget-action-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .chat-input-area {
+    padding-bottom: max(14px, env(safe-area-inset-bottom, 14px));
   }
 
   .widget-launcher {
@@ -1693,7 +1717,7 @@ body.embedded-mode .chat-widget {
   pointer-events: auto !important;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   body.embedded-mode .chat-widget {
     border-radius: 0 !important;
     border: none !important;

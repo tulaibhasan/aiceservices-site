@@ -59,17 +59,25 @@
       visibility: visible;
       transform: translateX(-10px);
     }
-    @media (max-width: 480px) {
+    @media (max-width: 768px) {
       #ai-assistant-frame {
         width: 100vw !important;
         height: 100vh !important;
+        height: 100dvh !important;
         max-width: 100vw !important;
         max-height: 100vh !important;
+        max-height: 100dvh !important;
         top: 0 !important;
         left: 0 !important;
         bottom: 0 !important;
         right: 0 !important;
         border-radius: 0 !important;
+      }
+      #ai-assistant-embed-container.chat-open,
+      body.aice-assistant-open #ai-assistant-embed-container {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
       }
     }
   `;
@@ -199,6 +207,8 @@
   function toggleChat(forceState) {
     isOpen = typeof forceState === 'boolean' ? forceState : !isOpen;
     if (isOpen) {
+      container.classList.add('chat-open');
+      document.body.classList.add('aice-assistant-open');
       frame.style.display = 'block';
       // Force repaint before adding opacity for smooth transition
       requestAnimationFrame(() => {
@@ -209,6 +219,8 @@
       pulseRing.style.display = 'none';
       tooltip.style.display = 'none';
     } else {
+      container.classList.remove('chat-open');
+      document.body.classList.remove('aice-assistant-open');
       frame.style.opacity = '0';
       frame.style.transform = 'translateY(16px) scale(0.97)';
       setTimeout(() => {
