@@ -6,7 +6,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { MotionConfig } from 'motion/react';
-import { Footer, Header, Loader } from './components/Layout';
+import { Footer, Header } from './components/Layout';
 import { HomePage } from './components/Home';
 import { ToolEmbed } from './components/ToolEmbed';
 
@@ -33,7 +33,6 @@ export default function App() {
       <MotionConfig reducedMotion="user">
         <ScrollToHashElement />
         <a href="#main" className="skip-link">Skip to content</a>
-        <Loader />
         <Header />
         <main id="main">
           <Routes>

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, X } from 'lucide-react';
-import { CONTACT, TOOLS } from '../data/content';
+import { CONTACT, SERVICES, WORK } from '../data/content';
 import { ContourField } from './art';
 
 /* ---------- Small helpers ---------- */
@@ -41,66 +41,11 @@ export function BrandMark() {
   );
 }
 
-/* ---------- Loader: blueprint crosshair (once per session) ---------- */
-export function Loader() {
-  const reduce = useReducedMotion();
-  const [show, setShow] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    if (window.location.pathname !== '/') return false;
-    try {
-      return !sessionStorage.getItem('aice-loaded');
-    } catch {
-      return true;
-    }
-  });
-  const [pct, setPct] = useState(0);
-
-  useEffect(() => {
-    if (!show) return;
-    try { sessionStorage.setItem('aice-loaded', '1'); } catch { /* ignore */ }
-    if (reduce) { setShow(false); return; }
-    const start = performance.now();
-    const dur = 1100;
-    let raf = 0;
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / dur);
-      setPct(Math.round(p * 100));
-      if (p < 1) raf = requestAnimationFrame(tick);
-      else setTimeout(() => setShow(false), 250);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [show, reduce]);
-
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          className="loader"
-          aria-hidden="true"
-          exit={{ clipPath: 'inset(0 0 100% 0)' }}
-          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-        >
-          <span className="cross-h" />
-          <span className="cross-v" />
-          <span className="ring" />
-          <span className="coords mono">
-            GRID REF 00.00<br />SHEET A-{String(pct).padStart(3, '0')}
-          </span>
-          <span className="brand-l mono">AICE Services</span>
-          <span className="pct mono">{String(pct).padStart(3, '0')}%</span>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
 /* ---------- Header + full-screen menu ---------- */
 const NAV = [
-  { href: '/#tools', label: 'AI Tools' },
-  { href: '/#consultancy', label: 'Consultancy' },
-  { href: '/#automation', label: 'Custom automation' },
-  { href: '/#standards', label: 'Standards' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#assistants', label: 'AI assistants' },
+  { href: '/#work', label: 'Work' },
   { href: '/#about', label: 'About' },
   { href: '/#faq', label: 'FAQ' },
   { href: '/#contact', label: 'Contact' },
@@ -164,7 +109,7 @@ export function Header() {
             <span>AICE Services</span>
           </Link>
           <nav className="header-links" aria-label="Main">
-            {NAV.slice(0, 5).map((n) => (
+            {NAV.slice(0, 4).map((n) => (
               <Link key={n.href} to={n.href}>{n.label}</Link>
             ))}
           </nav>
@@ -210,9 +155,7 @@ export function Header() {
               </ol>
             </nav>
             <div className="menu-foot mono">
-              {TOOLS.map((t) => (
-                <Link key={t.id} to={t.route} onClick={() => setOpen(false)}>{t.name} ↗</Link>
-              ))}
+              <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
               <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
             </div>
           </motion.div>
@@ -261,29 +204,30 @@ export function Footer() {
             <div className="footer-brand">
               <Link to="/" className="brand" aria-label="AICE Services, home"><BrandMark /><span>AICE Services</span></Link>
               <p style={{ color: 'var(--muted-dark)', maxWidth: '36ch', marginTop: 16 }}>
-                AI + Civil Engineering for Smarter Cities. Precise AI workflows and compliance-first consultancy for complex infrastructure projects.
+                Engineering consultancy, custom websites, AI assistants and video, delivered fast with AI.
               </p>
             </div>
             <div>
-              <h3>AI tools</h3>
-              <ul>{TOOLS.map((t) => <li key={t.id}><Link to={t.route}>{t.name}</Link></li>)}</ul>
+              <h3>Services</h3>
+              <ul>{SERVICES.map((sv) => <li key={sv.id}><Link to="/#services">{sv.name}</Link></li>)}</ul>
             </div>
             <div>
-              <h3>Consultancy</h3>
+              <h3>Work</h3>
               <ul>
-                <li><Link to="/#consultancy">Design Review</Link></li>
-                <li><Link to="/#consultancy">Contract &amp; Claims</Link></li>
-                <li><Link to="/#consultancy">Bid Preparation</Link></li>
-                <li><Link to="/#automation">Custom automation</Link></li>
+                {WORK.map((w) => (
+                  <li key={w.id}>
+                    {w.href ? (w.internal ? <Link to={w.href}>{w.name}</Link> : <a href={w.href} target="_blank" rel="noopener noreferrer">{w.name}</a>) : <Link to="/#work">{w.name}</Link>}
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
-              <h3>Explore</h3>
+              <h3>Free tools</h3>
               <ul>
-                <li><Link to="/#standards">Standards</Link></li>
-                <li><Link to="/#about">About</Link></li>
-                <li><Link to="/#faq">FAQ</Link></li>
-                <li><Link to="/#contact">Contact</Link></li>
+                <li><Link to="/tools/aicemark">AICEMark</Link></li>
+                <li><Link to="/tools/deckedit">AICE Deck Edit</Link></li>
+                <li><Link to="/tools/proscan">AICE ProScan</Link></li>
+                <li><Link to="/tools/boqauditor">AICE BOQ Auditor</Link></li>
               </ul>
             </div>
             <div>
@@ -313,7 +257,7 @@ export function Footer() {
           <li>Send you technical notices and support messages</li>
           <li>Comply with legal obligations</li>
         </ul>
-        <h3>AI tools and API keys</h3>
+        <h3>Free tools and API keys</h3>
         <p>Our AI tools run in your browser. Any Gemini API key you enter is stored only in your browser’s local storage and is sent directly to Google’s Gemini API. We do not receive or store your keys.</p>
         <h3>Data security</h3>
         <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
@@ -331,7 +275,7 @@ export function Footer() {
         <h3>Acceptance of terms</h3>
         <p>By accessing or using AICE Services’ website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations.</p>
         <h3>Services</h3>
-        <p>We provide AI-powered civil engineering solutions including AICEMark, AICE Deck Edit, AICE ProScan, AICE BOQ Auditor, and traditional engineering services. Services are provided “as is” and subject to change.</p>
+        <p>We provide engineering consultancy, website design and development, AI assistants, video editing, and free tools including AICEMark, AICE Deck Edit, AICE ProScan and AICE BOQ Auditor. Services are provided “as is” and subject to change.</p>
         <h3>User responsibilities</h3>
         <ul>
           <li>Provide accurate and complete information</li>

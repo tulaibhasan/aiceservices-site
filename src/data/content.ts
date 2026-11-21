@@ -5,231 +5,160 @@ export const CONTACT = {
   hours: 'Mon–Fri 09:00–18:00 · Sat 09:00–14:00 (PKT)',
 };
 
-export type Tool = {
-  id: string;
+/* ---------- Services (walked through in the 3D corridor) ---------- */
+export type Service = {
+  id: 'engineering' | 'websites' | 'assistants' | 'video';
   code: string;
   name: string;
-  route: string;
+  short: string;
   tagline: string;
-  problem: string;
-  solution: string;
-  input: string;
-  output: string;
-  chips: string[];
+  summary: string;
+  points: string[];
+  spec: [string, string][];
 };
 
-export const TOOLS: Tool[] = [
+export const SERVICES: Service[] = [
   {
-    id: 'aicemark',
-    code: 'T-01',
-    name: 'AICEMark',
-    route: '/tools/aicemark',
-    tagline: 'Markdown & LaTeX → native Word',
-    problem:
-      'Copy-pasting AI-generated formulas, engineering symbols and tables into Microsoft Word breaks the formatting.',
-    solution:
-      'AICEMark turns GFM Markdown and LaTeX into clean, natively styled Word (.docx) files, with an optional client-side AI repair pass for broken lists, tables and equations.',
-    input: '.md / LaTeX',
-    output: '.docx',
-    chips: ['KaTeX', 'GFM tables', 'AI repair'],
+    id: 'engineering',
+    code: '01',
+    name: 'Engineering Consultancy',
+    short: 'Engineering',
+    tagline: 'Water · Sanitation · Solid waste',
+    summary:
+      'Design review, FIDIC contract and claims support, and bid preparation for donor-funded and public-sector projects, checked against ADB, World Bank and PPRA requirements.',
+    points: [
+      'Design review: water supply, sewerage, solid waste',
+      'Contract & claims under FIDIC',
+      'Bid preparation & evaluation (ADB · WB · PPRA)',
+    ],
+    spec: [['For', 'Funders · firms · authorities'], ['Standards', 'FIDIC · ADB · WB · PPRA'], ['Output', 'Audit-ready']],
   },
   {
-    id: 'deckedit',
-    code: 'T-02',
-    name: 'AICE Deck Edit',
-    route: '/tools/deckedit',
-    tagline: 'NotebookLM slides → editable PPTX',
-    problem:
-      'Google NotebookLM produces great slides, but bakes them into flat, locked images that cannot be edited.',
-    solution:
-      'Deck Edit traces the text, cleans the background plates and rebuilds every slide as a native, fully editable PowerPoint (.pptx).',
-    input: 'Flat slide images',
-    output: '.pptx',
-    chips: ['OCR', 'Inpainting', 'Layout mapping'],
+    id: 'websites',
+    code: '02',
+    name: 'Custom Websites',
+    short: 'Websites',
+    tagline: 'Built in hours · minimal budget',
+    summary:
+      'Fast, modern, mobile-first websites designed and built from scratch, with SEO and analytics in place. No templates, no long timelines, no inflated budgets.',
+    points: ['Design + build from scratch', 'Fast, accessible, search-ready', 'Hosting and domain set up for you'],
+    spec: [['Turnaround', 'Hours, not weeks'], ['Budget', 'Minimal'], ['Score', 'Lighthouse 90+']],
   },
   {
-    id: 'proscan',
-    code: 'T-03',
-    name: 'AICE ProScan',
-    route: '/tools/proscan',
-    tagline: 'Engineering-grade OCR for bids & BoQs',
-    problem:
-      'Scanned bids, JV agreements and dense BoQs trip up generic AI tools: units, decimals and clauses go missing.',
-    solution:
-      'ProScan digitises technical documents page by page, keeping m³, m², rates and currencies exact, with side-by-side verification and batch runs.',
-    input: 'Scanned PDF',
-    output: 'Structured Markdown',
-    chips: ['Units-safe', 'Page by page', 'Batch'],
+    id: 'assistants',
+    code: '03',
+    name: 'AI Voice & Chat Assistants',
+    short: 'AI Assistants',
+    tagline: 'Custom voice + text, on your site',
+    summary:
+      'Branded assistants that answer customers by text or voice, trained on your own documents and services, and built into your website or app.',
+    points: ['Text chat and live voice', 'Answers from your own documents', 'Hand-off to email or WhatsApp'],
+    spec: [['Modes', 'Text · Voice'], ['Knowledge', 'Your documents'], ['Runs on', 'Your website']],
   },
   {
-    id: 'boqauditor',
-    code: 'T-04',
-    name: 'AICE BOQ Auditor',
-    route: '/tools/boqauditor',
-    tagline: 'Master BOQ vs Contractor BOQ diff',
-    problem:
-      'Checking a contractor’s submitted Bill of Quantities against the master, line by line, is slow and error-prone.',
-    solution:
-      'BOQ Auditor compares the two spreadsheets automatically and flags every changed quantity, rate, item and amount.',
-    input: '2 × spreadsheet',
-    output: 'Difference report',
-    chips: ['Line-by-line', 'Rates & qty', 'Audit trail'],
+    id: 'video',
+    code: '04',
+    name: 'AI Video Editing',
+    short: 'Video',
+    tagline: 'Reels · ads · explainers',
+    summary:
+      'Professional edits produced with AI workflows: cuts, captions, motion graphics and sound, including matching the style of any reference video you love.',
+    points: ['Short-form reels and ads', 'Captions, motion graphics, sound', 'Match any reference edit'],
+    spec: [['Formats', '9:16 · 1:1 · 16:9'], ['Includes', 'Captions · motion'], ['Speed', 'Fast turnaround']],
   },
 ];
 
-export const SERVICES = [
-  {
-    code: 'S-01',
-    title: 'Engineering Design Review',
-    summary:
-      'Comprehensive analysis, hydraulic modelling and design verification for critical public-works components.',
-    points: [
-      'Water supply networks and distribution systems',
-      'Urban sewerage and environmental safeguards',
-      'Solid waste collection, sorting and disposal planning',
-    ],
-    chips: ['Water supply', 'Sewerage', 'Solid waste'],
-  },
-  {
-    code: 'S-02',
-    title: 'Contract & Claims',
-    summary:
-      'Proactive management of donor-funded agreements for transparency, audit readiness and dispute prevention.',
-    points: [
-      'FIDIC-based contract review (Red, Yellow, Silver)',
-      'Dispute prevention and resolution advisory',
-      'Rigorous assessment of engineering claims',
-    ],
-    chips: ['FIDIC', 'Claims', 'Disputes'],
-  },
-  {
-    code: 'S-03',
-    title: 'Bid Preparation & Evaluation',
-    summary:
-      'Competitive, meticulously compliant proposals built for ADB, World Bank and PPRA requirements.',
-    points: [
-      'Drafting of complex technical proposals',
-      'Cost estimation, pricing and index analysis',
-      'Two-stage compliance and audit-readiness checks',
-    ],
-    chips: ['ADB', 'World Bank', 'PPRA'],
-  },
-];
+/* ---------- Selected work ---------- */
+export type Work = {
+  id: string;
+  name: string;
+  kind: string;
+  text: string;
+  status: string;
+  href?: string;
+  hrefLabel?: string;
+  internal?: boolean;
+};
 
-export const STANDARDS = [
-  { code: 'STD-01', name: 'FIDIC', note: 'Conditions of Contract', scope: 'International' },
-  { code: 'STD-02', name: 'ADB Guidelines', note: 'Procurement & safeguards', scope: 'International' },
-  { code: 'STD-03', name: 'World Bank', note: 'Procurement framework', scope: 'International' },
-  { code: 'STD-04', name: 'NDA', note: 'Confidential handling', scope: 'International' },
-  { code: 'STD-05', name: 'PPRA', note: 'Act and Rules', scope: 'National' },
-  { code: 'STD-06', name: 'PHED', note: 'Codes & standards', scope: 'National' },
-  { code: 'STD-07', name: 'EPA', note: 'Environmental guidelines', scope: 'National' },
-  { code: 'STD-08', name: 'WASA', note: 'Water & sewerage standards', scope: 'National' },
-  { code: 'STD-09', name: 'PEC', note: 'Engineering council guidelines', scope: 'National' },
-  { code: 'STD-10', name: 'Safety & Labor', note: 'Site safety standards', scope: 'National' },
-];
-
-export const PROCESS = [
-  { n: '01', title: 'Instant response', text: 'We acknowledge your enquiry promptly.' },
-  { n: '02', title: 'Consultation call', text: 'A short call to understand scope, standards and deadlines.' },
-  { n: '03', title: 'Proposal & timelines', text: 'A clear written proposal with deliverables and dates.' },
-  { n: '04', title: 'Commencement', text: 'Work starts, with regular, audit-ready progress updates.' },
+export const WORK: Work[] = [
+  {
+    id: 'freemytv',
+    name: 'Free My TV',
+    kind: 'Open-source app',
+    text: 'A fast, ad-free home screen for Google TV, LG and Samsung TVs: your apps on a glass shelf, trending picks, and a look that follows the sunset.',
+    status: 'Live',
+    href: 'https://freemytv.io',
+    hrefLabel: 'freemytv.io',
+  },
+  {
+    id: 'synckutub',
+    name: 'SyncKutub',
+    kind: 'Windows app',
+    text: 'Ask questions of your own files and get answers with clickable citations that open the original page, highlighted. Private: it runs on your computer.',
+    status: 'Released',
+    href: 'https://github.com/tulaibhasan/synckutub-releases/releases',
+    hrefLabel: 'Download',
+  },
+  {
+    id: 'videostudio',
+    name: 'AICE Video Studio',
+    kind: 'Desktop video editor',
+    text: 'An offline video editor for Windows: multi-track timeline, word-timed captions, background removal, colour tools and 4K export, all on your own computer.',
+    status: 'In development',
+  },
+  {
+    id: 'tools',
+    name: 'Engineering AI tools',
+    kind: 'Web tools',
+    text: 'AICEMark (Markdown to Word), Deck Edit (NotebookLM slides to PowerPoint), ProScan (engineering OCR) and BOQ Auditor (BOQ comparison).',
+    status: 'Free',
+    href: '/tools/aicemark',
+    hrefLabel: 'Try AICEMark',
+    internal: true,
+  },
 ];
 
 export const TICKER = [
-  'Audit-ready deliverables',
+  'Engineering consultancy',
+  'Custom websites in hours',
+  'AI voice & chat assistants',
+  'AI video editing',
   'ADB · World Bank · PPRA',
-  'Water · Sanitation · Solid waste',
-  'FIDIC contract & claims',
-  'Free client-side AI tools',
-  'Custom engineering automation',
+];
+
+export const STANDARDS_LINE = 'FIDIC · ADB · World Bank · PPRA · PHED · EPA · WASA · PEC';
+
+export const PROCESS = [
+  { n: '01', title: 'Tell us the goal', text: 'A short message or call about scope, budget and deadline.' },
+  { n: '02', title: 'Clear proposal', text: 'Fixed deliverables, price and dates in writing.' },
+  { n: '03', title: 'Fast delivery', text: 'Work starts at once, with progress you can see.' },
 ];
 
 export type FaqGroup = { category: string; items: { q: string; a: string }[] };
 
 export const FAQS: FaqGroup[] = [
   {
-    category: 'Specialist consultancy & regulatory frameworks',
+    category: 'General',
     items: [
       {
-        q: 'How does AICE manage master planning, hydraulic modelling and design verification for municipal water supply and sewerage networks?',
-        a: 'Our engineering design reviews cover full hydraulic simulations, water distribution balancing and sewer network staging. All master planning deliverables align with WASA and PHED (Public Health Engineering Department) codes, so pressure thresholds, environmental safeguards, flow velocities and urban growth models satisfy local government requirements and EPA (Environmental Protection Agency) guidelines.',
+        q: 'What kind of engineering projects do you support?',
+        a: 'Water supply, sewerage and solid-waste projects, mostly donor-funded or public-sector. We review designs and hydraulic models, support FIDIC contract administration and claims, and prepare or evaluate bids to ADB, World Bank and PPRA requirements.',
       },
       {
-        q: 'What FIDIC contract administration, advisory and dispute resolution services do you provide?',
-        a: 'AICE provides audit-ready administration support under FIDIC Conditions of Contract (including the Red, Yellow and Silver books). We review complex international and national tender dossiers, handle claims under FIDIC Clause 20.1 (such as extensions of time, unforeseen physical conditions and cost index adjustments), and prepare comprehensive evidence packs to support dispute resolution and audits.',
+        q: 'How can a custom website be ready in hours, and what does it cost?',
+        a: 'We design and build with modern AI-assisted workflows, so a focused business website can go from brief to live in hours rather than weeks. Because the build is fast, the budget stays minimal. Send us your brief and we will reply with a fixed price.',
       },
       {
-        q: 'How do you prepare bid proposals that meet ADB, World Bank and PPRA compliance standards?',
-        a: 'We use a two-stage compliance process. Stage one checks eligibility, Joint Venture (JV) formatting and tender guidelines such as the PPRA Act and Rules. Stage two focuses on technical bid writing: engineering method statements, work schedules, cash-flow curves and detailed Bill of Quantities (BoQ) itemisation, aiming for zero technical non-responsiveness and well-structured pricing under donor-funded criteria.',
-      },
-    ],
-  },
-  {
-    category: 'AICEMark: math, GFM & Word formatting',
-    items: [
-      {
-        q: 'Why does copy-pasting equations and tables from AI chat tools (ChatGPT, Gemini, Claude, DeepSeek, Grok) into Word break the layout?',
-        a: 'AI chat platforms render their answers as HTML built from raw Markdown. When pasted into Microsoft Word, GFM (GitHub Flavored Markdown) tables, LaTeX formulas and inline equations do not translate properly: you get raw code, broken list indents, detached table columns and missing symbols. AICEMark converts the raw Markdown into a properly typeset, Calibri-styled Word (.docx) document with clean margins and table borders.',
+        q: 'Can you add a voice and text assistant to my existing website?',
+        a: 'Yes. We build a branded assistant that answers from your own documents and services, by text or live voice, and add it to your current website with a small embed. It can hand conversations over to email or WhatsApp.',
       },
       {
-        q: 'How does AICEMark’s Smart AI Repair fix rendering problems, subscripts and nested lists?',
-        a: 'If the copied text has malformed structure, AICEMark’s repair engine detects the layout breaks. Using Gemini through the official @google/genai SDK, it balances unclosed emphasis, fixes nested list indents, restores split GFM columns and converts flat multi-line equations into KaTeX-compliant syntax ($ for inline, $$ for blocks) before exporting.',
+        q: 'What video editing do you offer?',
+        a: 'Short-form reels, ads and explainers with captions, motion graphics and sound design. Send raw clips and, if you like, a reference video: we can match its pacing, transitions and style.',
       },
       {
-        q: 'Does AICEMark support equations and inline scientific formulas?',
-        a: 'Yes. AICEMark integrates KaTeX through remark-math and rehype-katex. It parses both LaTeX math blocks and inline notation, shows them typeset in the live preview, and writes them into a clean Word document without dropped or overlapping characters.',
-      },
-    ],
-  },
-  {
-    category: 'AICE Deck Edit: editable NotebookLM presentations',
-    items: [
-      {
-        q: 'Why are NotebookLM slides flat images, and how does Deck Edit make them editable?',
-        a: 'NotebookLM’s slide pipeline renders the final layout with an image model, baking colours, icons, boxes and text into one flat pixel layer. AICE Deck Edit uses Gemini’s OCR to trace text boxes, inpaints the background to create clean templates, and rebuilds everything as native, editable PowerPoint (.pptx) slides with text fields at the original coordinates.',
-      },
-      {
-        q: 'Can I erase backgrounds and clean slide templates manually?',
-        a: 'Yes. Deck Edit has a zoom-and-focus workspace with automatic OCR erasure and manual selection boxes. Draw boxes on a slide to remove artefacts, placeholder text or flat graphics. An undo history and status badges (original vs cleaned) keep you in full control.',
-      },
-      {
-        q: 'Does Deck Edit change fonts, formatting or margins when exporting to PPTX?',
-        a: 'No. Coordinate-translation keeps box widths, heights, margins and proportions aligned with the original slide, and font sizes are matched so text sits on the clean background without overlapping key content.',
-      },
-    ],
-  },
-  {
-    category: 'AICE ProScan: engineering OCR, JV agreements & BoQs',
-    items: [
-      {
-        q: 'Why do signed bids, JV agreements and scanned PDFs cause errors in generic AI tools, and how does ProScan help?',
-        a: 'Scanned contracts and dense tables are often skewed or watermarked, and generic tools read them as flat lines, missing items such as JV agreements or liability clauses. ProScan processes documents page by page, mapping stamps, seals, signatures and dense schedules into clear, readable Markdown.',
-      },
-      {
-        q: 'How does ProScan protect units (m³, m², kg) and currencies from rounding errors and hallucinations?',
-        a: 'General OCR often misreads exponents, decimals and units (for example m³ as m). ProScan uses specialised prompts that treat BoQs and schedules as strict numeric tables, so units, rates, PKR/USD values and calculations are captured without rounding.',
-      },
-      {
-        q: 'What is ProScan’s Anti-Recitation Safeguard for legal agreements?',
-        a: 'Language models sometimes refuse to reproduce legal boilerplate from contracts, bonds or stamp papers. ProScan rephrases standard structural clauses without changing names, dates, amounts or binding specifications, producing an editable working draft for review.',
-      },
-      {
-        q: 'Does ProScan support batch processing, model switching and side-by-side checking?',
-        a: 'Yes. Compare the source page and the draft side by side, process single pages or whole dossiers in batch, choose the Gemini model to suit document complexity, edit drafts in workspace tabs and export everything as one combined Markdown (.md) file.',
-      },
-    ],
-  },
-  {
-    category: 'Data security & API keys',
-    items: [
-      {
-        q: 'How does AICE handle my Gemini API key? Is my data shared with third parties?',
-        a: 'The tools run client-side in your browser. Your Gemini API key is stored only in your browser’s local storage (localStorage) on your device and is sent directly to Google’s official Gemini API. AICE has no database for keys, our servers never receive or store them, and your documents are not shared with third parties.',
-      },
-      {
-        q: 'How do I update, swap or delete my stored Gemini key?',
-        a: 'Key entry stays hidden by default. Once a key is saved, a small key icon appears near the workspace controls; it opens the Key Manager, where you can clear the stored key from localStorage or replace it at any time.',
+        q: 'How do you handle my files and data?',
+        a: 'Your files are used only for your project and are never shared with third parties. Where possible we use tools that run locally, and we can sign an NDA before work starts.',
       },
     ],
   },

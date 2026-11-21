@@ -142,3 +142,28 @@ Reference folders found: `ocimadebybuzzworthy` (Outsource Consultants), `structu
 `prefers-reduced-motion` turns off all of the above, except the instant state changes the key demo needs to work.
 
 **Imagery:** all illustrations are original SVGs drawn in code: the pipe network, plant plan, contour field and isometric facility. We used no third-party photos, so there's no licence to track. When real project photography is available, it can drop into the same duotone treatment (`.duotone` class).
+
+---
+
+## Design audit and declutter (v3)
+
+**Decisions:**
+- **Theme:** kept survey amber on charcoal and paper. It's distinctive, warm and suits an engineering-plus-AI studio better than any single reference.
+- **Removed:**
+  - The loading screen, which only delayed visitors.
+  - The live chatbot widget, which kept hitting API errors.
+  - The API-key demo.
+  - The 10-tile standards grid (now one line).
+  - The separate process section (now three steps inside Contact).
+  - Long tool and FAQ copy (cut to 5 questions).
+  - The large founder portrait, vision quote and founder's note.
+- **Restructured:**
+  - The homepage is now: hero → ticker → services corridor → AI assistant showcase → work → about → FAQ → contact.
+  - The four free tools moved from the homepage to one Work card and the footer. Their pages and URLs still work.
+- **Added services:** custom websites (built in hours on a minimal budget) and AI video editing, next to engineering consultancy and AI assistants.
+- **Work section:** Free My TV (freemytv.io), SyncKutub (public releases), AICE Video Studio (in development) and the engineering AI tools.
+
+**Original motion (not taken from any reference):**
+- **Plotter drawing:** the hero's network drawing is "plotted" left to right on load, with a pen head sweeping across. It's a CSS `scaleX` clip and plays once.
+- **Drafting crosshair:** on desktop, a crosshair with live X/Y coordinates follows the pointer across the hero. It runs only with a fine pointer, and is off for reduced motion.
+- **Assistant showcase:** a scripted text conversation with typing indicators. A voice mode adds an animated equaliser waveform and live captions. It makes no API calls, so it cannot fail.
