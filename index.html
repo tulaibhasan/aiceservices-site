@@ -3,18 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AI + engineering solutions delivering audit-ready reports, CAD conversions, and compliant designs for ADB, World Bank, and Government of Punjab projects.">
     <title>AICE Services — AI + Civil Engineering for Smarter Cities</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="Audit-ready civil engineering consultancy for water, sanitation and solid-waste projects (ADB, World Bank, PPRA, FIDIC), plus free client-side AI tools: AICEMark, Deck Edit, ProScan and BOQ Auditor." />
+    <link rel="canonical" href="https://www.aiceservices.com/" />
+    <meta name="theme-color" content="#0e0d0b" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AICE Services" />
+    <meta property="og:title" content="AICE Services — AI + Civil Engineering for Smarter Cities" />
+    <meta property="og:description" content="Audit-ready engineering consultancy for ADB, World Bank and PPRA projects, plus free AI tools for Word, PowerPoint, OCR and BoQ audits." />
+    <meta property="og:url" content="https://www.aiceservices.com/" />
+    <meta property="og:image" content="https://www.aiceservices.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AICE Services — AI + Civil Engineering for Smarter Cities" />
+    <meta name="twitter:description" content="Audit-ready engineering consultancy plus free client-side AI tools for engineers." />
+    <meta name="twitter:image" content="https://www.aiceservices.com/og-image.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&display=swap" /></noscript>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://www.aiceservices.com/#org",
+          "name": "AICE Services",
+          "url": "https://www.aiceservices.com/",
+          "logo": "https://www.aiceservices.com/favicon.svg",
+          "image": "https://www.aiceservices.com/og-image.png",
+          "slogan": "AI + Civil Engineering for Smarter Cities",
+          "description": "Civil engineering consultancy for water supply, sewerage and solid-waste projects, FIDIC contract and claims support, and bid preparation for ADB, World Bank and PPRA, plus free client-side AI tools.",
+          "email": "contact@aiceservices.com",
+          "telephone": "+92-301-3666088",
+          "areaServed": "PK",
+          "founder": { "@type": "Person", "name": "Muhammad Tulaib Hasan", "jobTitle": "Founder" },
+          "openingHoursSpecification": [
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" },
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "14:00" }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Engineering consultancy",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Engineering Design Review", "description": "Hydraulic modelling and design verification for water supply, sewerage and solid-waste systems." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Contract & Claims (FIDIC)", "description": "FIDIC contract review, dispute prevention and engineering claims assessment." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bid Preparation & Evaluation", "description": "Compliant technical proposals and evaluation for ADB, World Bank and PPRA tenders." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom engineering automation", "description": "Private AI engines, QA pipelines, PDF-to-BoQ scrapers and dashboards for firms and public authorities." } }
+            ]
+          }
+        },
+        { "@type": "WebApplication", "name": "AICEMark", "url": "https://www.aiceservices.com/tools/aicemark", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Convert Markdown and LaTeX into native Word (.docx) documents.", "publisher": { "@id": "https://www.aiceservices.com/#org" } },
+        { "@type": "WebApplication", "name": "AICE Deck Edit", "url": "https://www.aiceservices.com/tools/deckedit", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Turn flat NotebookLM slides into editable PowerPoint (.pptx).", "publisher": { "@id": "https://www.aiceservices.com/#org" } },
+        { "@type": "WebApplication", "name": "AICE ProScan", "url": "https://www.aiceservices.com/tools/proscan", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Engineering-grade OCR for bids, JV agreements and BoQs.", "publisher": { "@id": "https://www.aiceservices.com/#org" } },
+        { "@type": "WebApplication", "name": "AICE BOQ Auditor", "url": "https://www.aiceservices.com/tools/boqauditor", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Compare a Master BOQ with a Contractor BOQ and flag every difference.", "publisher": { "@id": "https://www.aiceservices.com/#org" } }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Static copy of the contact form so Netlify Forms can detect it at deploy time (React renders the visible one). -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input type="email" name="email" />
+      <select name="service"><option value="x">x</option></select>
+      <textarea name="details"></textarea>
+    </form>
+
+    <noscript>
+      <p>AICE Services — AI + Civil Engineering for Smarter Cities. Please enable JavaScript to use this site, or email contact@aiceservices.com.</p>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
     <!-- AICE Services AI Text + Voice Assistant -->
-    <script src="/chatbot/embed.js" data-backend="https://aice-voice-bot-backend.aiceservices.workers.dev"></script>
+    <script src="/chatbot/embed.js" data-backend="https://aice-voice-bot-backend.aiceservices.workers.dev" defer></script>
   </body>
 </html>
-
