@@ -17,7 +17,8 @@ function ScrollToHashElement() {
     if (hash) {
       const element = document.getElementById(hash.replace('#', ''));
       if (element) {
-        setTimeout(() => element.scrollIntoView(), 100);
+        const lenis = (window as unknown as { __lenis?: { scrollTo: (t: Element, o?: object) => void } }).__lenis;
+        setTimeout(() => (lenis ? lenis.scrollTo(element, { offset: 0 }) : element.scrollIntoView()), 100);
       }
     } else {
       window.scrollTo(0, 0);
@@ -38,9 +39,6 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/tools/aicemark" element={<ToolEmbed id="aicemark" />} />
-            <Route path="/tools/deckedit" element={<ToolEmbed id="deckedit" />} />
-            <Route path="/tools/proscan" element={<ToolEmbed id="proscan" />} />
-            <Route path="/tools/boqauditor" element={<ToolEmbed id="boqauditor" />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
         </main>
