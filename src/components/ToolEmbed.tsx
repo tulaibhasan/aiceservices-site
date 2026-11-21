@@ -29,8 +29,8 @@ export function ToolEmbed({ id }: { id: keyof typeof TOOL_EMBEDS }) {
           <div className="tool-loading" role="status">
             <div>
               <div className="spin" aria-hidden="true" />
-              <p className="mono" style={{ color: 'var(--accent-ink)' }}>// Initialising {cfg.title.replace(' Tool', '')} workspace</p>
-              <p className="mono" style={{ color: 'var(--muted-dark)', marginTop: 6, textTransform: 'none' }}>{cfg.loading}</p>
+              <p className="mono" style={{ color: 'var(--fg)' }}>// Initialising {cfg.title.replace(' Tool', '')} workspace</p>
+              <p className="mono" style={{ color: 'var(--fg-dim)', marginTop: 6, textTransform: 'none' }}>{cfg.loading}</p>
             </div>
           </div>
         )}

@@ -167,3 +167,43 @@ Reference folders found: `ocimadebybuzzworthy` (Outsource Consultants), `structu
 - **Plotter drawing:** the hero's network drawing is "plotted" left to right on load, with a pen head sweeping across. It's a CSS `scaleX` clip and plays once.
 - **Drafting crosshair:** on desktop, a crosshair with live X/Y coordinates follows the pointer across the hero. It runs only with a fine pointer, and is off for reduced motion.
 - **Assistant showcase:** a scripted text conversation with typing indicators. A voice mode adds an animated equaliser waveform and live captions. It makes no API calls, so it cannot fail.
+
+---
+
+## v4: premium rebuild
+
+**Why:** the amber, cream and serif-italic system read as generic "AI-made" design. The page carried too many words, and the corridor's info cards overlapped its titles.
+
+**System:**
+- **Palette:** near-black `#0A0A0B` and off-white `#EBEBE6`. The photography carries the colour. A single signal orange `#FF5B1F` appears only on active markers and hover states.
+- **Type:** Archivo throughout. The display weight uses the wide cut (`font-stretch: 125%`), uppercase, a nod to Konk's industrial wide grotesk. Geist Mono handles the small labels. No serif.
+- **Imagery:** one editorial grade, monochrome by default with colour on hover. Sources:
+  - Two generated cinematic images: the treatment-plant aerial and the pipes in a trench.
+  - The real Free My TV product shot and a screenshot of freemytv.io.
+  - Frames from the "Claude Copies Any Edit" tutorial.
+  - Planned replacements are in `google-flow-prompts.md`.
+
+**Structure:**
+1. The opening corridor, Konk-style and first on the page. It starts on a hero headline over the photo, then flies through Engineering, Websites, AI Assistants and Video.
+2. A one-sentence statement whose words fill in as you scroll.
+3. Selected work, as a staggered image grid.
+4. The assistant demo.
+5. About.
+6. Contact.
+7. A one-line footer.
+
+**Corridor geometry, the overlap fix:**
+- Stations are 2,000 world units apart.
+- Plates fade in only from 1,300 units away. Titles are visible from 2,300 units to 300 units away.
+- Plates sit about ±920 units to the sides on desktop, so they never cross a title.
+- On phones, the plates fly in above and below the title instead.
+
+**Motion:**
+- Lenis smooth scroll.
+- Line-mask headline rise.
+- Corridor dolly.
+- Scroll-linked word fill.
+- **Halftone bloom** (original): images arrive as an 11 px dot screen whose dots grow until they merge into the picture. It uses `@property --dot` and a radial-gradient mask.
+- A header that inverts over light and dark sections (`mix-blend-mode: difference`).
+
+**Performance:** `index.html` paints the hero photo and headline before JavaScript loads. The app continues the same animation from the same moment, then removes the static copy. Lighthouse mobile: Performance 99, Accessibility 100, Best Practices 100, SEO 100.

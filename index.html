@@ -3,33 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AICE Services — Engineering, Websites & AI, Delivered Fast</title>
-    <meta name="description" content="Civil engineering consultancy for donor-funded water, sanitation and solid-waste projects (ADB, World Bank, PPRA, FIDIC), plus custom websites built in hours, AI voice and chat assistants, and AI video editing." />
+    <title>AICE Services — Engineering & AI Studio</title>
+    <meta name="description" content="AICE Services is an engineering and AI studio: civil engineering consultancy for donor-funded water and sanitation projects (ADB, World Bank, PPRA, FIDIC), custom websites built in hours, AI voice and chat assistants, and AI video editing." />
     <link rel="canonical" href="https://www.aiceservices.com/" />
-    <meta name="theme-color" content="#0e0d0b" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="preload" as="image" href="/img/hero.webp" fetchpriority="high" media="(min-width: 701px)" />
+    <link rel="preload" as="image" href="/img/hero-m.webp" fetchpriority="high" media="(max-width: 700px)" />
     <meta name="robots" content="index, follow" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AICE Services" />
-    <meta property="og:title" content="AICE Services — Engineering, Websites & AI, Delivered Fast" />
+    <meta property="og:title" content="AICE Services — Engineering & AI Studio" />
     <meta property="og:description" content="Engineering consultancy, custom websites in hours, AI voice and chat assistants, and AI video editing." />
     <meta property="og:url" content="https://www.aiceservices.com/" />
     <meta property="og:image" content="https://www.aiceservices.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AICE Services — Engineering, Websites & AI, Delivered Fast" />
+    <meta name="twitter:title" content="AICE Services — Engineering & AI Studio" />
     <meta name="twitter:description" content="Engineering consultancy, custom websites, AI assistants and video, delivered fast." />
     <meta name="twitter:image" content="https://www.aiceservices.com/og-image.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&display=swap" /></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist+Mono:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist+Mono:wght@400&display=swap" /></noscript>
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -43,7 +45,7 @@
           "url": "https://www.aiceservices.com/",
           "logo": "https://www.aiceservices.com/favicon.svg",
           "image": "https://www.aiceservices.com/og-image.png",
-          "slogan": "Engineering, websites and AI, delivered fast",
+          "slogan": "Engineering & AI studio",
           "description": "Civil engineering consultancy for donor-funded water, sanitation and solid-waste projects, plus custom websites, AI voice and chat assistants, and AI video editing.",
           "email": "contact@aiceservices.com",
           "telephone": "+92-301-3666088",
@@ -69,7 +71,24 @@
     }
     </script>
   </head>
-  <body>
+  <body style="background:#0a0a0b">
+    <!-- Instant first paint: hero photo + headline before JavaScript loads. The app takes over seamlessly and removes this. -->
+    <script>window.__bootT = performance.now();</script>
+    <div id="boot" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 700px)" srcset="/img/hero-m.webp" />
+        <img src="/img/hero.webp" alt="" fetchpriority="high" />
+      </picture>
+      <div class="op-vignette"></div>
+      <div class="op-intro wrap">
+        <p class="eyebrow mono"><span class="mask-line"><span>AICE Services</span></span></p>
+        <p class="mega"><span class="mask-line"><span>Engineering</span></span><span class="mask-line"><span style="animation-delay:.09s">&amp; AI studio</span></span></p>
+        <div class="op-intro-foot">
+          <p class="hero-sub"><span class="mask-line"><span style="animation-delay:.25s">Consultancy, websites, AI assistants and video.</span></span><span class="mask-line"><span style="animation-delay:.34s">Precise, and fast.</span></span></p>
+          <span class="scroll-cue mono">Scroll <i></i></span>
+        </div>
+      </div>
+    </div>
     <div id="root"></div>
 
     <!-- Static copy of the contact form so Netlify Forms can detect it at deploy time (React renders the visible one). -->

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useInView, useReducedMotion } from 'motion/react';
-import { ArrowRight, MessageSquareText, Mic, RotateCcw } from 'lucide-react';
-import { Reveal, SectionHead } from './Layout';
+import { MessageSquareText, Mic, RotateCcw } from 'lucide-react';
+import { Label, Reveal } from './Layout';
 
 /**
  * Showcase of a custom voice + text assistant.
@@ -80,24 +79,13 @@ export function AssistantDemo() {
   const done = step >= lines.length;
 
   return (
-    <section id="assistants" className="section ink-2 glow-section" data-theme="dark" aria-labelledby="assistant-title">
+    <section id="assistants" className="sec dark assistants" aria-labelledby="assistant-title">
       <div className="wrap">
-        <SectionHead index="02" title="AI assistants" />
+        <div className="sec-head">
+          <Label n="03">AI assistants</Label>
+          <h2 id="assistant-title" className="h2">Assistants that sound<br />like your business.</h2>
+        </div>
         <div className="assist">
-          <div>
-            <Reveal>
-              <h2 id="assistant-title" className="display h-lg">An assistant that <span className="mark">talks</span> like your business.</h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="lede" style={{ marginTop: 20 }}>
-                Custom text and voice assistants trained on your own services and documents, built into your website. They answer questions, book appointments and hand over to your team.
-              </p>
-              <div style={{ marginTop: 28 }}>
-                <Link to="/#contact" className="btn btn-primary">Get an assistant <ArrowRight size={16} aria-hidden="true" /></Link>
-              </div>
-            </Reveal>
-          </div>
-
           <Reveal delay={0.15}>
             <div className="assist-panel" ref={ref}>
               <div className="assist-top">
