@@ -138,16 +138,23 @@ function WorkGlyph({ id }: { id: string }) {
     default:
       return (
         <svg viewBox="0 0 320 180" fill="none" aria-hidden="true">
-          {[0, 1, 2, 3].map((i) => (
-            <g key={i} transform={`translate(${24 + i * 72} 30)`}>
-              <rect width="60" height="80" stroke="currentColor" strokeWidth="1.5" />
-              <rect x="10" y="14" width="40" height="5" fill="currentColor" />
-              <rect x="10" y="26" width="30" height="4" fill="currentColor" opacity=".5" />
-              <rect x="10" y="36" width="36" height="4" fill="currentColor" opacity=".5" />
-              <text x="10" y="70" fill="currentColor" fontFamily="IBM Plex Mono, monospace" fontSize="10">T-0{i + 1}</text>
-            </g>
-          ))}
-          <path d="M24 140 H292" stroke="currentColor" strokeDasharray="4 4" opacity=".6" />
+          {/* markdown in → Word document out */}
+          <g fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="currentColor" opacity=".75">
+            <text x="28" y="44">## Results</text>
+            <text x="28" y="66">$$Q = V·A$$</text>
+            <text x="28" y="88">| Ø | Q |</text>
+            <text x="28" y="106">|---|---|</text>
+            <text x="28" y="124">| 300 | 62 |</text>
+            <text x="28" y="146">- [x] checked</text>
+          </g>
+          <path d="M140 92 h30 m-8 -6 l8 6 l-8 6" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="186" y="18" width="110" height="146" fill="var(--paper)" />
+          <rect x="198" y="32" width="56" height="7" fill="var(--ink)" />
+          <text x="214" y="68" fontFamily="Georgia, serif" fontStyle="italic" fontSize="15" fill="var(--ink)">Q = V·A</text>
+          <rect x="198" y="84" width="86" height="40" stroke="var(--ink)" />
+          <rect x="198" y="84" width="86" height="13" fill="currentColor" />
+          <path d="M198 110 h86 M240 84 v40" stroke="var(--ink)" />
+          <text x="246" y="154" fontFamily="IBM Plex Mono, monospace" fontSize="10" fill="var(--ink)">.DOCX</text>
         </svg>
       );
   }

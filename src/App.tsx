@@ -38,9 +38,6 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/tools/aicemark" element={<ToolEmbed id="aicemark" />} />
-            <Route path="/tools/deckedit" element={<ToolEmbed id="deckedit" />} />
-            <Route path="/tools/proscan" element={<ToolEmbed id="proscan" />} />
-            <Route path="/tools/boqauditor" element={<ToolEmbed id="boqauditor" />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
         </main>

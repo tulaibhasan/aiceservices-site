@@ -398,7 +398,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .footer-word span { color: var(--accent-ink); }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid var(--rule-dark); padding-top: 20px; color: var(--muted-dark); }
 @media (min-width: 900px) {
-  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
   .footer-brand { grid-column: auto; }
 }
 

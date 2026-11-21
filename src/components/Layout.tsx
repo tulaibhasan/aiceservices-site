@@ -222,15 +222,6 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3>Free tools</h3>
-              <ul>
-                <li><Link to="/tools/aicemark">AICEMark</Link></li>
-                <li><Link to="/tools/deckedit">AICE Deck Edit</Link></li>
-                <li><Link to="/tools/proscan">AICE ProScan</Link></li>
-                <li><Link to="/tools/boqauditor">AICE BOQ Auditor</Link></li>
-              </ul>
-            </div>
-            <div>
               <h3>Legal</h3>
               <ul>
                 <li><button onClick={() => setPrivacy(true)}>Privacy Policy</button></li>
@@ -257,8 +248,8 @@ export function Footer() {
           <li>Send you technical notices and support messages</li>
           <li>Comply with legal obligations</li>
         </ul>
-        <h3>Free tools and API keys</h3>
-        <p>Our AI tools run in your browser. Any Gemini API key you enter is stored only in your browser’s local storage and is sent directly to Google’s Gemini API. We do not receive or store your keys.</p>
+        <h3>AICEMark and API keys</h3>
+        <p>AICEMark runs in your browser. Any Gemini API key you enter is stored only in your browser’s local storage and is sent directly to Google’s Gemini API. We do not receive or store your keys.</p>
         <h3>Data security</h3>
         <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
         <h3>Data sharing</h3>
@@ -275,7 +266,7 @@ export function Footer() {
         <h3>Acceptance of terms</h3>
         <p>By accessing or using AICE Services’ website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations.</p>
         <h3>Services</h3>
-        <p>We provide engineering consultancy, website design and development, AI assistants, video editing, and free tools including AICEMark, AICE Deck Edit, AICE ProScan and AICE BOQ Auditor. Services are provided “as is” and subject to change.</p>
+        <p>We provide engineering consultancy, website design and development, AI assistants, video editing, and the free AICEMark tool. Services are provided “as is” and subject to change.</p>
         <h3>User responsibilities</h3>
         <ul>
           <li>Provide accurate and complete information</li>

@@ -107,13 +107,13 @@ export const WORK: Work[] = [
     status: 'In development',
   },
   {
-    id: 'tools',
-    name: 'Engineering AI tools',
-    kind: 'Web tools',
-    text: 'AICEMark (Markdown to Word), Deck Edit (NotebookLM slides to PowerPoint), ProScan (engineering OCR) and BOQ Auditor (BOQ comparison).',
+    id: 'aicemark',
+    name: 'AICEMark',
+    kind: 'Free web tool',
+    text: 'Paste an AI answer full of equations, tables and lists, and get a clean, natively formatted Word document. Runs in your browser.',
     status: 'Free',
     href: '/tools/aicemark',
-    hrefLabel: 'Try AICEMark',
+    hrefLabel: 'Open AICEMark',
     internal: true,
   },
 ];

@@ -10,24 +10,6 @@ export const TOOL_EMBEDS: Record<string, { src: string; title: string; loading: 
     loading: 'Loading rich document engine & live preview…',
     pageTitle: 'AICEMark — Markdown & LaTeX to Word | AICE Services',
   },
-  deckedit: {
-    src: 'https://tulaibhasan-aice-deck-edit-v1.hf.space',
-    title: 'AICE Deck Edit Tool',
-    loading: 'Loading deck retouch & vector processing…',
-    pageTitle: 'AICE Deck Edit — NotebookLM slides to editable PPTX | AICE Services',
-  },
-  proscan: {
-    src: 'https://tulaibhasan-aice-proscan.hf.space',
-    title: 'AICE ProScan Tool',
-    loading: 'Loading engineering document scanner & OCR…',
-    pageTitle: 'AICE ProScan — Engineering OCR for bids & BoQs | AICE Services',
-  },
-  boqauditor: {
-    src: 'https://tulaibhasan-aice-boq-auditor.hf.space',
-    title: 'AICE BOQ Auditor Tool',
-    loading: 'Loading BOQ auditor & spreadsheet analysis…',
-    pageTitle: 'AICE BOQ Auditor — Master vs Contractor BOQ | AICE Services',
-  },
 };
 
 export function ToolEmbed({ id }: { id: keyof typeof TOOL_EMBEDS }) {
