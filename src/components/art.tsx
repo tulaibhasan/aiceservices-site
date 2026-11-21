@@ -2,7 +2,7 @@
  * Original line art for AICE, drawn in code (no third-party imagery).
  * Everything uses `currentColor` so it can be tinted with the accent colour.
  */
-import { useMemo } from 'react';
+import { useId, useMemo } from 'react';
 
 /* ---------- Topographic contour field ---------- */
 function contourPaths(width: number, height: number) {
@@ -50,13 +50,20 @@ export function ContourField({ className = '' }: { className?: string }) {
 }
 
 /* ---------- Hero: water / sewer network on a plant plan ---------- */
-export function NetworkPlan({ className = '' }: { className?: string }) {
+export function NetworkPlan({ className = '', plot = false }: { className?: string; plot?: boolean }) {
+  const clip = useId().replace(/:/g, '');
   const nodes: [number, number, string][] = [
     [80, 420, 'MH-01'], [210, 380, 'MH-02'], [330, 300, 'MH-03'], [470, 300, 'MH-04'],
     [330, 470, 'MH-07'], [470, 470, 'MH-08'], [600, 380, 'MH-05'], [250, 150, 'R-01'],
   ];
   return (
     <svg className={className} viewBox="0 0 820 620" fill="none" aria-hidden="true" focusable="false">
+      {plot && (
+        <defs>
+          <clipPath id={clip}><rect className="plot-rect" width="820" height="620" /></clipPath>
+        </defs>
+      )}
+      <g clipPath={plot ? `url(#${clip})` : undefined}>
       {/* halftone fills: treatment plant & reservoir */}
       <g className="halftone" fill="currentColor">
         <rect x="560" y="120" width="220" height="170" />
@@ -96,173 +103,78 @@ export function NetworkPlan({ className = '' }: { className?: string }) {
         <text x="372" y="292">Ø300</text>
         <text x="372" y="462">Ø225</text>
       </g>
+      </g>
+      {/* plotter pen head sweeping across while the drawing is "plotted" */}
+      {plot && (
+        <g className="plot-pen" stroke="currentColor">
+          <path d="M0 0 V620" strokeOpacity=".5" />
+          <circle cx="0" cy="310" r="6" fill="var(--paper)" strokeWidth="1.5" />
+        </g>
+      )}
     </svg>
   );
 }
 
-/* ---------- Tool visuals ---------- */
+/* ---------- Service visuals ---------- */
 const mono = { fontFamily: 'IBM Plex Mono, monospace', fontSize: 11, letterSpacing: '.04em' } as const;
 
-export function ToolArt({ id }: { id: string }) {
+export function ServiceArt({ id }: { id: string }) {
   switch (id) {
-    case 'aicemark':
+    case 'websites':
       return (
         <svg viewBox="0 0 400 300" fill="none" aria-hidden="true" focusable="false">
-          <g style={mono} fill="var(--muted-dark)">
-            <text x="24" y="62">## Pipe sizing</text>
-            <text x="24" y="86">$$Q = V \cdot A$$</text>
-            <text x="24" y="110">| Ø | Q (l/s) |</text>
-            <text x="24" y="130">|---|---|</text>
-            <text x="24" y="150">| 300 | 62.4 |</text>
-            <text x="24" y="170">| 450 | 140.1 |</text>
-            <text x="24" y="194">- [x] PHED check</text>
-          </g>
-          <path d="M180 150 h34 m-8 -6 l8 6 l-8 6" stroke="currentColor" strokeWidth="1.25" />
-          <rect x="228" y="40" width="148" height="196" fill="var(--paper)" />
-          <g fill="var(--ink)">
-            <rect x="244" y="58" width="76" height="7" />
-            <text x="262" y="96" fontFamily="Georgia, serif" fontStyle="italic" fontSize="16">Q = V·A</text>
-          </g>
-          <g stroke="var(--ink)" strokeWidth="1">
-            <rect x="244" y="116" width="116" height="60" />
-            <path d="M244 136 h116 M244 156 h116 M290 116 v60" />
-          </g>
-          <rect x="244" y="116" width="116" height="20" fill="currentColor" opacity=".9" />
-          <rect x="244" y="192" width="100" height="5" fill="var(--ink)" opacity=".4" />
-          <rect x="244" y="204" width="80" height="5" fill="var(--ink)" opacity=".4" />
-          <text x="296" y="230" style={mono} fill="var(--ink)">.DOCX</text>
+          <rect x="30" y="30" width="340" height="240" stroke="currentColor" strokeWidth="1.25" fill="var(--ink-2)" />
+          <path d="M30 56 H370" stroke="currentColor" strokeWidth="1" />
+          {[44, 58, 72].map((x) => <circle key={x} cx={x} cy="43" r="4" stroke="currentColor" />)}
+          <rect x="52" y="78" width="160" height="16" fill="var(--paper)" />
+          <rect x="52" y="102" width="120" height="16" fill="var(--paper)" />
+          <rect x="52" y="130" width="140" height="5" fill="var(--muted-dark)" />
+          <rect x="52" y="142" width="110" height="5" fill="var(--muted-dark)" />
+          <rect x="52" y="164" width="70" height="20" fill="currentColor" />
+          <rect x="232" y="78" width="116" height="106" className="halftone" fill="currentColor" />
+          {[0, 1, 2].map((i) => <rect key={i} x={52 + i * 102} y="204" width="90" height="48" stroke="var(--rule-dark)" />)}
+          <text x="290" y="290" style={mono} fill="currentColor">LIVE IN HOURS</text>
         </svg>
       );
-    case 'deckedit':
+    case 'assistants':
       return (
         <svg viewBox="0 0 400 300" fill="none" aria-hidden="true" focusable="false">
-          {[0, 1, 2].map((i) => (
-            <g key={i} transform={`translate(${70 + i * 26} ${70 - i * 18})`} opacity={1 - i * 0.25}>
-              <rect width="220" height="140" stroke="currentColor" strokeWidth="1.25" fill="var(--ink-2)" />
-            </g>
-          ))}
-          <g transform="translate(70 70)">
-            <rect width="220" height="140" fill="var(--ink-3)" stroke="currentColor" strokeWidth="1.25" />
-            <rect x="18" y="20" width="120" height="12" fill="var(--paper)" />
-            <rect x="18" y="44" width="90" height="6" fill="var(--muted-dark)" />
-            <rect x="18" y="58" width="100" height="6" fill="var(--muted-dark)" />
-            <rect x="150" y="40" width="54" height="72" className="halftone" fill="currentColor" />
-            <rect x="14" y="16" width="128" height="20" stroke="currentColor" strokeDasharray="3 3" />
-            <rect x="14" y="40" width="108" height="28" stroke="currentColor" strokeDasharray="3 3" />
+          <rect x="40" y="40" width="200" height="44" fill="var(--ink-3)" stroke="var(--rule-dark)" />
+          <rect x="54" y="56" width="150" height="5" fill="var(--muted-dark)" />
+          <rect x="54" y="68" width="100" height="5" fill="var(--muted-dark)" />
+          <rect x="160" y="100" width="200" height="44" fill="currentColor" />
+          <rect x="174" y="116" width="150" height="5" fill="var(--ink)" />
+          <rect x="174" y="128" width="110" height="5" fill="var(--ink)" />
+          <rect x="40" y="160" width="160" height="34" fill="var(--ink-3)" stroke="var(--rule-dark)" />
+          <rect x="54" y="174" width="110" height="5" fill="var(--muted-dark)" />
+          <g stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+            {Array.from({ length: 26 }).map((_, i) => {
+              const h = 6 + Math.abs(Math.sin(i * 0.9) * 22) + (i % 3) * 3;
+              return <path key={i} d={`M${70 + i * 10} ${240 - h / 2} V${240 + h / 2}`} />;
+            })}
           </g>
-          <g style={mono} fill="var(--muted-dark)">
-            <text x="70" y="240">LAYER 3 · TEXT (EDITABLE)</text>
-            <text x="70" y="258">LAYER 2 · GRAPHICS</text>
-            <text x="70" y="276">LAYER 1 · CLEAN PLATE</text>
-          </g>
+          <text x="40" y="290" style={mono} fill="currentColor">TEXT + VOICE</text>
         </svg>
       );
-    case 'proscan':
+    case 'video':
       return (
         <svg viewBox="0 0 400 300" fill="none" aria-hidden="true" focusable="false">
-          <g transform="rotate(-4 110 150)">
-            <rect x="34" y="44" width="150" height="200" fill="var(--paper)" opacity=".92" />
-            {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-              <rect key={i} x="48" y={66 + i * 20} width={110 - (i % 3) * 18} height="5" fill="var(--ink)" opacity=".35" />
-            ))}
-            <circle cx="150" cy="214" r="18" stroke="var(--accent)" strokeWidth="1.5" />
+          <rect x="110" y="24" width="180" height="128" fill="var(--ink-3)" stroke="currentColor" strokeWidth="1.25" />
+          <path d="M188 70 L218 88 L188 106 Z" fill="currentColor" />
+          <path d="M30 176 H370" stroke="var(--rule-dark)" />
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => <path key={i} d={`M${30 + i * 48} 170 V182`} stroke="var(--muted-dark)" />)}
+          <g>
+            <rect x="30" y="192" width="120" height="22" fill="currentColor" />
+            <rect x="154" y="192" width="80" height="22" fill="currentColor" opacity=".7" />
+            <rect x="238" y="192" width="132" height="22" fill="currentColor" />
+            <rect x="60" y="220" width="200" height="16" stroke="currentColor" />
+            <rect x="30" y="242" width="340" height="16" fill="var(--ink-3)" stroke="var(--rule-dark)" />
           </g>
-          <path d="M34 150 H184" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M200 150 h22 m-8 -6 l8 6 l-8 6" stroke="currentColor" strokeWidth="1.25" />
-          <g style={mono}>
-            <rect x="236" y="56" width="140" height="190" stroke="currentColor" strokeWidth="1" />
-            <text x="246" y="80" fill="currentColor">ITEM   QTY   UNIT</text>
-            {[
-              ['2.01', '1,240', 'm'],
-              ['2.04', '86.5', 'm³'],
-              ['3.10', '412', 'm²'],
-              ['4.02', '9,800', 'kg'],
-              ['5.07', '24', 'No.'],
-            ].map(([a, b, c], i) => (
-              <g key={a} fill="var(--paper)">
-                <text x="246" y={110 + i * 26}>{a}</text>
-                <text x="290" y={110 + i * 26}>{b}</text>
-                <text x="340" y={110 + i * 26} fill="currentColor">{c}</text>
-              </g>
-            ))}
-          </g>
+          <path d="M210 160 V266" stroke="var(--paper)" strokeWidth="1.5" />
+          <text x="30" y="290" style={mono} fill="currentColor">CUT · CAPTION · GRADE</text>
         </svg>
       );
     default:
-      return (
-        <svg viewBox="0 0 400 300" fill="none" aria-hidden="true" focusable="false">
-          <g style={mono}>
-            <text x="30" y="46" fill="var(--muted-dark)">MASTER BOQ</text>
-            <text x="214" y="46" fill="var(--muted-dark)">CONTRACTOR BOQ</text>
-            {[0, 1, 2, 3, 4, 5, 6].map((i) => {
-              const diff = i === 2 || i === 5;
-              return (
-                <g key={i}>
-                  <rect x="30" y={60 + i * 30} width="156" height="22" stroke="var(--rule-dark)" fill="var(--ink-2)" />
-                  <rect x="214" y={60 + i * 30} width="156" height="22" stroke={diff ? 'currentColor' : 'var(--rule-dark)'} fill={diff ? 'rgba(227,161,59,.16)' : 'var(--ink-2)'} />
-                  <rect x="40" y={69 + i * 30} width={70 - (i % 3) * 12} height="4" fill="var(--muted-dark)" />
-                  <rect x="224" y={69 + i * 30} width={70 - (i % 3) * 12} height="4" fill="var(--muted-dark)" />
-                  <text x="150" y={75 + i * 30} fill="var(--paper)">{(i + 1) * 12}</text>
-                  <text x="334" y={75 + i * 30} fill={diff ? 'currentColor' : 'var(--paper)'}>{diff ? (i + 1) * 12 + 7 : (i + 1) * 12}</text>
-                  {diff && <text x="378" y={75 + i * 30} fill="currentColor">Δ</text>}
-                </g>
-              );
-            })}
-          </g>
-        </svg>
-      );
+      return <NetworkPlan />;
   }
-}
-
-/* ---------- Automation: isometric facility ---------- */
-export function IsoFacility({ className = '' }: { className?: string }) {
-  // simple isometric helper
-  const iso = (x: number, y: number, z = 0) => {
-    const X = 260 + (x - y) * 0.866 * 1;
-    const Y = 120 + (x + y) * 0.5 - z;
-    return `${X.toFixed(1)},${Y.toFixed(1)}`;
-  };
-  const box = (x: number, y: number, w: number, d: number, h: number) => {
-    const top = [iso(x, y, h), iso(x + w, y, h), iso(x + w, y + d, h), iso(x, y + d, h)].join(' ');
-    const left = [iso(x, y + d, 0), iso(x, y + d, h), iso(x + w, y + d, h), iso(x + w, y + d, 0)].join(' ');
-    const right = [iso(x + w, y, 0), iso(x + w, y, h), iso(x + w, y + d, h), iso(x + w, y + d, 0)].join(' ');
-    return { top, left, right };
-  };
-  const slab = box(0, 0, 220, 180, 0);
-  const b1 = box(20, 20, 90, 60, 60);
-  const b2 = box(130, 30, 70, 50, 36);
-  const b3 = box(30, 110, 60, 50, 24);
-  return (
-    <svg className={className} viewBox="0 0 520 380" fill="none" aria-hidden="true" focusable="false">
-      <polygon points={slab.top} stroke="currentColor" strokeDasharray="4 4" strokeOpacity=".6" />
-      {[b1, b2, b3].map((b, i) => (
-        <g key={i} stroke="currentColor" strokeWidth="1.2">
-          <polygon points={b.left} fill="var(--ink-2)" />
-          <polygon points={b.right} fill="var(--ink-3)" />
-          <polygon points={b.top} className={i === 0 ? 'halftone' : undefined} fill={i === 0 ? 'currentColor' : 'var(--ink)'} />
-          <polygon points={b.top} />
-        </g>
-      ))}
-      {/* tanks */}
-      {[ [150, 120], [185, 145] ].map(([x, y], i) => {
-        const [cx, cy] = iso(x, y, 0).split(',').map(Number);
-        return (
-          <g key={i} stroke="currentColor" strokeWidth="1.2">
-            <ellipse cx={cx} cy={cy - 30} rx="22" ry="11" fill="var(--ink-2)" />
-            <path d={`M${cx - 22} ${cy - 30} V${cy} M${cx + 22} ${cy - 30} V${cy}`} />
-            <path d={`M${cx - 22} ${cy} A22 11 0 0 0 ${cx + 22} ${cy}`} />
-          </g>
-        );
-      })}
-      {/* data lines */}
-      <g stroke="currentColor" strokeDasharray="2 4" strokeOpacity=".8">
-        <path d={`M${iso(65, 50, 60)} L${iso(65, 50, 140)}`} />
-        <path d={`M${iso(165, 55, 36)} L${iso(165, 55, 120)}`} />
-      </g>
-      <g fill="currentColor" style={mono}>
-        <text x={Number(iso(65, 50, 150).split(',')[0]) - 30} y={Number(iso(65, 50, 150).split(',')[1])}>QA PIPELINE</text>
-        <text x={Number(iso(165, 55, 130).split(',')[0]) - 20} y={Number(iso(165, 55, 130).split(',')[1])}>BOQ API</text>
-      </g>
-    </svg>
-  );
 }
