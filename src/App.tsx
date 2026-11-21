@@ -5,13 +5,13 @@
 
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { Navigation } from './components/Navigation';
-import { Hero, AISolutions, About, AIToolEmbed, DeckEditEmbed, ProScanEmbed, BOQAuditorEmbed } from './components/MainSections';
-import { ServicesDetailed, StandardsDetailed, FAQ, Contact } from './components/DetailSections';
-import { Footer } from './components/Footer';
+import { MotionConfig } from 'motion/react';
+import { Footer, Header, Loader } from './components/Layout';
+import { HomePage } from './components/Home';
+import { ToolEmbed } from './components/ToolEmbed';
 
 function ScrollToHashElement() {
-  const { hash } = useLocation();
+  const { hash, pathname } = useLocation();
 
   useEffect(() => {
     if (hash) {
@@ -22,74 +22,31 @@ function ScrollToHashElement() {
     } else {
       window.scrollTo(0, 0);
     }
-  }, [hash]);
+  }, [hash, pathname]);
 
   return null;
-}
-
-function HomePage() {
-  return (
-    <>
-      <Hero />
-      <AISolutions />
-      <ServicesDetailed />
-      <StandardsDetailed />
-      <About />
-      <FAQ />
-      <Contact />
-    </>
-  );
-}
-
-function ToolPage() {
-  return (
-    <div style={{ backgroundColor: '#0A0A0A' }}>
-      <AIToolEmbed />
-    </div>
-  );
-}
-
-function DeckEditPage() {
-  return (
-    <div style={{ backgroundColor: '#0A0A0A' }}>
-      <DeckEditEmbed />
-    </div>
-  );
-}
-
-function ProScanPage() {
-  return (
-    <div style={{ backgroundColor: '#0A0A0A' }}>
-      <ProScanEmbed />
-    </div>
-  );
-}
-
-function BOQAuditorPage() {
-  return (
-    <div style={{ backgroundColor: '#0A0A0A' }}>
-      <BOQAuditorEmbed />
-    </div>
-  );
 }
 
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToHashElement />
-      <div className="font-body text-text-dark bg-background">
-        <Navigation />
-        <main>
+      <MotionConfig reducedMotion="user">
+        <ScrollToHashElement />
+        <a href="#main" className="skip-link">Skip to content</a>
+        <Loader />
+        <Header />
+        <main id="main">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/tools/aicemark" element={<ToolPage />} />
-            <Route path="/tools/deckedit" element={<DeckEditPage />} />
-            <Route path="/tools/proscan" element={<ProScanPage />} />
-            <Route path="/tools/boqauditor" element={<BOQAuditorPage />} />
+            <Route path="/tools/aicemark" element={<ToolEmbed id="aicemark" />} />
+            <Route path="/tools/deckedit" element={<ToolEmbed id="deckedit" />} />
+            <Route path="/tools/proscan" element={<ToolEmbed id="proscan" />} />
+            <Route path="/tools/boqauditor" element={<ToolEmbed id="boqauditor" />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </main>
         <Footer />
-      </div>
+      </MotionConfig>
     </BrowserRouter>
   );
 }
