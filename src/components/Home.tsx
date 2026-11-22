@@ -2,7 +2,8 @@ import { useRef, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, type MotionValue } from 'motion/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { CONTACT, EXPERTISE, SERVICE_OPTIONS, WORK, type Work } from '../data/content';
+import { CONTACT, SERVICE_OPTIONS, WORK, type Work } from '../data/content';
+import { ExpertiseFilm } from './ExpertiseFilm';
 import { Bloom, Label, Reveal } from './Layout';
 import { OpeningSequence } from './Corridor';
 import { AssistantDemo } from './AssistantDemo';
@@ -42,40 +43,6 @@ function Statement() {
               {STATEMENT.map((t, k) => <Chunk key={k} text={t} k={k} n={STATEMENT.length} p={scrollYProgress} />)}
             </p>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Expertise: the full service list, grouped ---------- */
-function Expertise() {
-  return (
-    <section id="expertise" className="sec dark expertise" aria-labelledby="xp-title">
-      <div className="wrap">
-        <div className="sec-head">
-          <Label n="02">Expertise</Label>
-          <h2 id="xp-title" className="h2">Two disciplines.<br />One desk.</h2>
-        </div>
-        <div className="xp-grid">
-          {EXPERTISE.map((d) => (
-            <div key={d.id} className="xp-domain">
-              <Reveal className="xp-head">
-                <h3>{d.title}</h3>
-                <span className="mono">{String(d.groups.reduce((n, g) => n + g.items.length, 0)).padStart(2, '0')}</span>
-              </Reveal>
-              {d.groups.map((g, i) => (
-                <Reveal key={g.name} delay={i * 0.06} className="xp-group">
-                  <p className="mono">{g.name}</p>
-                  <ul className="xp-items">
-                    {g.items.map((it) => (
-                      <li key={it.t}>{it.t}{it.note && <small>{it.note}</small>}</li>
-                    ))}
-                  </ul>
-                </Reveal>
-              ))}
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -230,7 +197,7 @@ export function HomePage() {
     <>
       <OpeningSequence />
       <Statement />
-      <Expertise />
+      <ExpertiseFilm />
       <WorkSection />
       <AssistantDemo />
       <About />

@@ -138,7 +138,8 @@ export const WORK: Work[] = [
 
 /* ---------- Expertise: the full list, grouped ---------- */
 export type XpItem = { t: string; note?: string };
-export type XpDomain = { id: string; title: string; groups: { name: string; items: XpItem[] }[] };
+export type XpGroup = { name: string; img?: string; type?: { big: string; small: string }; items: XpItem[] };
+export type XpDomain = { id: string; title: string; groups: XpGroup[] };
 
 export const EXPERTISE: XpDomain[] = [
   {
@@ -147,6 +148,7 @@ export const EXPERTISE: XpDomain[] = [
     groups: [
       {
         name: 'Design',
+        img: '/img/plant.webp',
         items: [
           { t: 'Water supply systems' },
           { t: 'Wastewater systems' },
@@ -157,10 +159,12 @@ export const EXPERTISE: XpDomain[] = [
       },
       {
         name: 'Procurement',
+        img: '/img/synckutub.webp',
         items: [{ t: 'Bid documents' }, { t: 'Bid preparation' }, { t: 'Bid evaluation' }, { t: 'Grievance redressal' }],
       },
       {
         name: 'Contracts',
+        img: '/img/aicemark.webp',
         items: [
           { t: 'Contract management' },
           { t: 'Planning, scheduling & control' },
@@ -174,11 +178,11 @@ export const EXPERTISE: XpDomain[] = [
     id: 'ai',
     title: 'AI & Software',
     groups: [
-      { name: 'Assistants', items: [{ t: 'Custom text & voice chatbots', note: 'Built for Punjab’s LG&CDD and ADB’s PICIIP programme' }] },
-      { name: 'Applications', items: [{ t: 'Custom desktop & web apps', note: 'SyncKutub, AICEMark, AICE Video Studio' }] },
-      { name: 'Video', items: [{ t: 'AI video pipelines', note: 'Reverse-engineer any video and its editing style' }] },
-      { name: 'Websites', items: [{ t: 'Custom websites, live in hours' }] },
-      { name: 'Android TV', items: [{ t: 'Launcher customisation' }, { t: 'High-res games for kids', note: 'Made to run on low-end TVs' }] },
+      { name: 'Assistants', img: '/img/assistant.webp', items: [{ t: 'Custom text & voice chatbots', note: 'Built for Punjab’s LG&CDD and ADB’s PICIIP programme' }] },
+      { name: 'Applications', img: '/img/videostudio.webp', items: [{ t: 'Custom desktop & web apps', note: 'SyncKutub, AICEMark, AICE Video Studio' }] },
+      { name: 'Video', img: '/img/video-frames.webp', items: [{ t: 'AI video pipelines', note: 'Reverse-engineer any video and its editing style' }] },
+      { name: 'Websites', img: '/img/studio.webp', items: [{ t: 'Custom websites, live in hours' }] },
+      { name: 'Android TV', type: { big: 'Your TV, your rules.', small: 'Launchers · kids’ games' }, items: [{ t: 'Launcher customisation' }, { t: 'High-res games for kids', note: 'Made to run on low-end TVs' }] },
     ],
   },
 ];
