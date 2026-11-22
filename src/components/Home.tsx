@@ -2,68 +2,47 @@ import { useRef, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, type MotionValue } from 'motion/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { CONTACT, EXPERTISE, SERVICE_OPTIONS, WORK, type Work } from '../data/content';
+import { CONTACT, SERVICE_OPTIONS, WORK, type Work } from '../data/content';
+import { ExpertiseFilm } from './ExpertiseFilm';
 import { Bloom, Label, Reveal } from './Layout';
 import { OpeningSequence } from './Corridor';
 import { AssistantDemo } from './AssistantDemo';
 
-/* ---------- Statement: words fill in as you scroll ---------- */
-const STATEMENT =
-  'Ten years of donor-funded engineering, now moving at the speed of AI. We review designs, win bids, and build the websites, assistants and films that move a business forward.';
+/* ---------- Statement: pinned while it lights up a few words at a time ---------- */
+const STATEMENT = [
+  'Ten years of',
+  'donor-funded engineering,',
+  'now moving at',
+  'the speed of AI.',
+  'We review designs,',
+  'win bids,',
+  'and build the websites,',
+  'assistants and films',
+  'that move a business forward.',
+];
 
-function Word({ w, i, n, p }: { w: string; i: number; n: number; p: MotionValue<number> }) {
-  const start = i / n;
+function Chunk({ text, k, n, p }: { text: string; k: number; n: number; p: MotionValue<number> }) {
+  // each phrase owns an equal slice of the pinned scroll, lights over the first 60% of it
+  const span = 0.86 / n;
+  const start = 0.04 + k * span;
   // dimmed words stay above 3:1 contrast (large text)
-  const opacity = useTransform(p, [start - 0.08, start + 0.04], [0.46, 1]);
-  return <motion.span style={{ opacity }}>{w} </motion.span>;
+  const opacity = useTransform(p, [start, start + span * 0.6], [0.46, 1]);
+  return <motion.span style={{ opacity }}>{text} </motion.span>;
 }
 
 function Statement() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.45'] });
-  const words = STATEMENT.split(' ');
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   return (
-    <section className="sec light statement" aria-label="About AICE">
-      <div className="wrap">
-        <Label n="01">Studio</Label>
-        <div ref={ref}>
-          <p className="statement-text">
-            {words.map((w, i) => <Word key={i} w={w} i={i} n={words.length} p={scrollYProgress} />)}
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Expertise: the full service list, grouped ---------- */
-function Expertise() {
-  return (
-    <section id="expertise" className="sec dark expertise" aria-labelledby="xp-title">
-      <div className="wrap">
-        <div className="sec-head">
-          <Label n="02">Expertise</Label>
-          <h2 id="xp-title" className="h2">Two disciplines.<br />One desk.</h2>
-        </div>
-        <div className="xp-grid">
-          {EXPERTISE.map((d) => (
-            <div key={d.id} className="xp-domain">
-              <Reveal className="xp-head">
-                <h3>{d.title}</h3>
-                <span className="mono">{String(d.groups.reduce((n, g) => n + g.items.length, 0)).padStart(2, '0')}</span>
-              </Reveal>
-              {d.groups.map((g, i) => (
-                <Reveal key={g.name} delay={i * 0.06} className="xp-group">
-                  <p className="mono">{g.name}</p>
-                  <ul className="xp-items">
-                    {g.items.map((it) => (
-                      <li key={it.t}>{it.t}{it.note && <small>{it.note}</small>}</li>
-                    ))}
-                  </ul>
-                </Reveal>
-              ))}
-            </div>
-          ))}
+    <section className="light statement" aria-label="About AICE">
+      <div ref={ref} className="statement-track" style={{ height: `${100 + STATEMENT.length * 22}vh` }}>
+        <div className="statement-pin">
+          <div className="wrap">
+            <Label n="01">Studio</Label>
+            <p className="statement-text">
+              {STATEMENT.map((t, k) => <Chunk key={k} text={t} k={k} n={STATEMENT.length} p={scrollYProgress} />)}
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -218,7 +197,7 @@ export function HomePage() {
     <>
       <OpeningSequence />
       <Statement />
-      <Expertise />
+      <ExpertiseFilm />
       <WorkSection />
       <AssistantDemo />
       <About />

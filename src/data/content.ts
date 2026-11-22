@@ -22,41 +22,63 @@ export type Service = {
 
 export const SERVICES: Service[] = [
   {
-    id: 'engineering',
+    id: 'design',
     n: '01',
-    title: 'Engineering',
-    name: 'Engineering consultancy',
-    line: 'Design review, FIDIC claims and bids for water, sanitation and solid-waste projects. ADB, World Bank, PPRA.',
+    title: 'Design',
+    name: 'Water & waste engineering design',
+    line: 'Water supply, wastewater, treatment plants and integrated solid waste management: designed from scratch, or reviewed.',
     plates: [
       { kind: 'img', src: '/img/plant.webp' },
       { kind: 'img', src: '/img/pipes.webp' },
     ],
   },
   {
-    id: 'websites',
+    id: 'procurement',
     n: '02',
-    title: 'Websites',
-    name: 'Custom websites',
-    line: 'Designed and built from scratch in hours, on a minimal budget. Fast, search-ready, yours.',
+    title: 'Procurement',
+    name: 'Bids & procurement',
+    line: 'Bid documents, bid preparation and bid evaluation, plus grievance redressal. ADB, World Bank and PPRA rules.',
     plates: [
-      { kind: 'img', src: '/img/studio.webp' },
-      { kind: 'type', big: 'Live in hours', small: 'Design · build · launch', light: true },
+      { kind: 'img', src: '/img/synckutub.webp' },
+      { kind: 'type', big: 'Bid to award', small: 'Documents · evaluation · grievances', light: true },
+    ],
+  },
+  {
+    id: 'contracts',
+    n: '03',
+    title: 'Contracts',
+    name: 'Contract management & claims',
+    line: 'Contract management, planning and scheduling, variations, extension of time, claims, disputes and arbitration.',
+    plates: [
+      { kind: 'img', src: '/img/aicemark.webp' },
+      { kind: 'type', big: 'EOT · Claims', small: 'Variations · disputes · arbitration' },
     ],
   },
   {
     id: 'assistants',
-    n: '03',
+    n: '04',
     title: 'AI Assistants',
     name: 'AI voice & chat assistants',
-    line: 'Assistants that answer your customers by text or voice, from your own documents, on your website.',
+    line: 'Custom text and voice chatbots trained on your documents. Built for Punjab’s LG&CDD and ADB’s PICIIP programme.',
     plates: [{ kind: 'img', src: '/img/assistant.webp' }, { kind: 'chat' }],
   },
   {
+    id: 'software',
+    n: '05',
+    title: 'Software',
+    name: 'Apps, websites & Android TV',
+    line: 'Custom desktop and web apps, websites live in hours, and Android TV launchers and light, high-res games for kids.',
+    plates: [
+      { kind: 'img', src: '/img/studio.webp' },
+      { kind: 'type', big: 'Apps · Web · TV', small: 'Built in hours, not months', light: true },
+    ],
+  },
+  {
     id: 'video',
-    n: '04',
+    n: '06',
     title: 'Video',
     name: 'AI video editing',
-    line: 'Reels, ads and explainers: cut, captioned and graded, even matched to a reference you love.',
+    line: 'AI pipelines that take apart any reference video, editing style and all, and rebuild it on your footage.',
     plates: [
       { kind: 'img', src: '/img/video-frames.webp' },
       { kind: 'img', src: '/img/video-clips.webp' },
@@ -116,7 +138,8 @@ export const WORK: Work[] = [
 
 /* ---------- Expertise: the full list, grouped ---------- */
 export type XpItem = { t: string; note?: string };
-export type XpDomain = { id: string; title: string; groups: { name: string; items: XpItem[] }[] };
+export type XpGroup = { name: string; img?: string; type?: { big: string; small: string }; items: XpItem[] };
+export type XpDomain = { id: string; title: string; groups: XpGroup[] };
 
 export const EXPERTISE: XpDomain[] = [
   {
@@ -125,6 +148,7 @@ export const EXPERTISE: XpDomain[] = [
     groups: [
       {
         name: 'Design',
+        img: '/img/plant.webp',
         items: [
           { t: 'Water supply systems' },
           { t: 'Wastewater systems' },
@@ -135,10 +159,12 @@ export const EXPERTISE: XpDomain[] = [
       },
       {
         name: 'Procurement',
+        img: '/img/synckutub.webp',
         items: [{ t: 'Bid documents' }, { t: 'Bid preparation' }, { t: 'Bid evaluation' }, { t: 'Grievance redressal' }],
       },
       {
         name: 'Contracts',
+        img: '/img/aicemark.webp',
         items: [
           { t: 'Contract management' },
           { t: 'Planning, scheduling & control' },
@@ -152,13 +178,13 @@ export const EXPERTISE: XpDomain[] = [
     id: 'ai',
     title: 'AI & Software',
     groups: [
-      { name: 'Assistants', items: [{ t: 'Custom text & voice chatbots', note: 'Built for Punjab’s LG&CDD and ADB’s PICIIP programme' }] },
-      { name: 'Applications', items: [{ t: 'Custom desktop & web apps', note: 'SyncKutub, AICEMark, AICE Video Studio' }] },
-      { name: 'Video', items: [{ t: 'AI video pipelines', note: 'Reverse-engineer any video and its editing style' }] },
-      { name: 'Websites', items: [{ t: 'Custom websites, live in hours' }] },
-      { name: 'Android TV', items: [{ t: 'Launcher customisation' }, { t: 'High-res games for kids', note: 'Made to run on low-end TVs' }] },
+      { name: 'Assistants', img: '/img/assistant.webp', items: [{ t: 'Custom text & voice chatbots', note: 'Built for Punjab’s LG&CDD and ADB’s PICIIP programme' }] },
+      { name: 'Applications', img: '/img/videostudio.webp', items: [{ t: 'Custom desktop & web apps', note: 'SyncKutub, AICEMark, AICE Video Studio' }] },
+      { name: 'Video', img: '/img/video-frames.webp', items: [{ t: 'AI video pipelines', note: 'Reverse-engineer any video and its editing style' }] },
+      { name: 'Websites', img: '/img/studio.webp', items: [{ t: 'Custom websites, live in hours' }] },
+      { name: 'Android TV', type: { big: 'Your TV, your rules.', small: 'Launchers · kids’ games' }, items: [{ t: 'Launcher customisation' }, { t: 'High-res games for kids', note: 'Made to run on low-end TVs' }] },
     ],
   },
 ];
 
-export const SERVICE_OPTIONS = [...SERVICES.map((s) => s.name), 'Android TV customisation', 'Something else'];
+export const SERVICE_OPTIONS = [...SERVICES.map((s) => s.name), 'Something else'];
