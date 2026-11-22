@@ -138,7 +138,7 @@ export const WORK: Work[] = [
 
 /* ---------- Expertise: the full list, grouped ---------- */
 export type XpItem = { t: string; note?: string };
-export type XpGroup = { name: string; img?: string; type?: { big: string; small: string }; items: XpItem[] };
+export type XpGroup = { name: string; line: string; img?: string; type?: { big: string; small: string }; items: XpItem[] };
 export type XpDomain = { id: string; title: string; groups: XpGroup[] };
 
 export const EXPERTISE: XpDomain[] = [
@@ -147,7 +147,7 @@ export const EXPERTISE: XpDomain[] = [
     title: 'Engineering',
     groups: [
       {
-        name: 'Design',
+        name: 'Design', line: 'Water, wastewater, treatment and solid waste',
         img: '/img/plant.webp',
         items: [
           { t: 'Water supply systems' },
@@ -158,12 +158,12 @@ export const EXPERTISE: XpDomain[] = [
         ],
       },
       {
-        name: 'Procurement',
+        name: 'Procurement', line: 'Bid documents, evaluation and grievances',
         img: '/img/synckutub.webp',
         items: [{ t: 'Bid documents' }, { t: 'Bid preparation' }, { t: 'Bid evaluation' }, { t: 'Grievance redressal' }],
       },
       {
-        name: 'Contracts',
+        name: 'Contracts', line: 'Variations, EOT, claims and arbitration',
         img: '/img/aicemark.webp',
         items: [
           { t: 'Contract management' },
@@ -178,11 +178,11 @@ export const EXPERTISE: XpDomain[] = [
     id: 'ai',
     title: 'AI & Software',
     groups: [
-      { name: 'Assistants', img: '/img/assistant.webp', items: [{ t: 'Custom text & voice chatbots', note: 'Built for Punjab’s LG&CDD and ADB’s PICIIP programme' }] },
-      { name: 'Applications', img: '/img/videostudio.webp', items: [{ t: 'Custom desktop & web apps', note: 'SyncKutub, AICEMark, AICE Video Studio' }] },
-      { name: 'Video', img: '/img/video-frames.webp', items: [{ t: 'AI video pipelines', note: 'Reverse-engineer any video and its editing style' }] },
-      { name: 'Websites', img: '/img/studio.webp', items: [{ t: 'Custom websites, live in hours' }] },
-      { name: 'Android TV', type: { big: 'Your TV, your rules.', small: 'Launchers · kids’ games' }, items: [{ t: 'Launcher customisation' }, { t: 'High-res games for kids', note: 'Made to run on low-end TVs' }] },
+      { name: 'Assistants', line: 'Text and voice chatbots, built for LG&CDD and PICIIP', img: '/img/assistant.webp', items: [{ t: 'Custom text & voice chatbots', note: 'Built for Punjab’s LG&CDD and ADB’s PICIIP programme' }] },
+      { name: 'Applications', line: 'SyncKutub, AICEMark, AICE Video Studio', img: '/img/videostudio.webp', items: [{ t: 'Custom desktop & web apps', note: 'SyncKutub, AICEMark, AICE Video Studio' }] },
+      { name: 'Video', line: 'Copies any edit’s style onto your footage', img: '/img/video-frames.webp', items: [{ t: 'AI video pipelines', note: 'Reverse-engineer any video and its editing style' }] },
+      { name: 'Websites', line: 'Custom websites, live in hours', img: '/img/studio.webp', items: [{ t: 'Custom websites, live in hours' }] },
+      { name: 'Android TV', line: 'Launchers and light, high-res kids’ games', type: { big: 'Your TV, your rules.', small: 'Launchers · kids’ games' }, items: [{ t: 'Launcher customisation' }, { t: 'High-res games for kids', note: 'Made to run on low-end TVs' }] },
     ],
   },
 ];
