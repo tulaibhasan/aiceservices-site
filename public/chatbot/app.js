@@ -22,7 +22,7 @@
       website: "https://aiceservices.com",
       address: "Lahore / Punjab, Pakistan (Serving National & International Donor-Funded Projects)",
       operatingHours: "Monday – Friday: 09:00 – 18:00 | Saturday: 09:00 – 14:00 (PST)",
-      email: "contact@aiceservices.com",
+      email: "mthasan@aiceservices.com",
       whatsapp: "923013666088"
     },
     branding: {

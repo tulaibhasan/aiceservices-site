@@ -1,5 +1,5 @@
 export const CONTACT = {
-  email: 'contact@aiceservices.com',
+  email: 'mthasan@aiceservices.com',
   phone: '+92 301 3666088',
   phoneHref: 'tel:+923013666088',
   whatsapp: 'https://wa.me/923013666088',
