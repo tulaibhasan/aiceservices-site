@@ -402,3 +402,5 @@ a.tile:hover .tile-arrow { transform: translate(3px, -3px); }
   .xr-foot li.split button { padding-left: 0; }
   .xr-foot button em { display: none; }
 }
+
+.op-links { display: flex; flex-wrap: wrap; gap: 10px 26px; }

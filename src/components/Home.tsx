@@ -70,9 +70,10 @@ function Tile({ w }: { w: Work }) {
     </>
   );
   if (!w.href) return <div className="tile">{inner}</div>;
-  return w.internal
-    ? <Link to={w.href} className="tile">{inner}</Link>
-    : <a href={w.href} className="tile" target="_blank" rel="noopener noreferrer">{inner}</a>;
+  if (w.internal) return <Link to={w.href} className="tile">{inner}</Link>;
+  // product landing pages live on this domain but outside the app, so use a plain link
+  if (w.href.startsWith('/')) return <a href={w.href} className="tile">{inner}</a>;
+  return <a href={w.href} className="tile" target="_blank" rel="noopener noreferrer">{inner}</a>;
 }
 
 function WorkSection() {

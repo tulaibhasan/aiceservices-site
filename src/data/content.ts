@@ -18,6 +18,7 @@ export type Service = {
   name: string;
   line: string; // one short sentence
   plates: [Plate, Plate];
+  link?: { href: string; label: string }; // optional product page
 };
 
 export const SERVICES: Service[] = [
@@ -78,6 +79,7 @@ export const SERVICES: Service[] = [
     n: '06',
     title: 'Video',
     name: 'AI video editing',
+    link: { href: '/video/', label: 'See AICE Video' },
     line: 'AI pipelines that take apart any reference video, editing style and all, and rebuild it on your footage.',
     plates: [
       { kind: 'img', src: '/img/video-frames.webp' },
@@ -107,7 +109,7 @@ export const WORK: Work[] = [
     status: 'Released',
     img: '/img/synckutub.webp',
     alt: 'Stacks of engineering reports and binders beside a laptop',
-    href: 'https://github.com/tulaibhasan/synckutub-releases/releases',
+    href: '/synckutub/',
   },
   {
     id: 'androidtv',
@@ -115,6 +117,7 @@ export const WORK: Work[] = [
     line: 'Ad-free home screens and light, high-res games for kids.',
     status: 'Service',
     type: { big: 'Your TV, your rules.', small: 'Launchers · kids’ games' },
+    href: '/freeyourtv/',
   },
   {
     id: 'videostudio',
@@ -123,6 +126,7 @@ export const WORK: Work[] = [
     status: 'In development',
     img: '/img/videostudio.webp',
     alt: 'A video editing desk with a timeline on screen and a cinema camera',
+    href: '/videostudio/',
   },
   {
     id: 'aicemark',

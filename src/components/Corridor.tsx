@@ -197,7 +197,10 @@ function Opening() {
                 >
                   <span className="mono">{svc.n} / {String(SERVICES.length).padStart(2, '0')} — {svc.name}</span>
                   <p>{svc.line}</p>
-                  <Link to="/#contact" className="link-arrow">Start a project <ArrowRight size={15} aria-hidden="true" /></Link>
+                  <div className="op-links">
+                    <Link to="/#contact" className="link-arrow">Start a project <ArrowRight size={15} aria-hidden="true" /></Link>
+                    {svc.link && <a href={svc.link.href} className="link-arrow">{svc.link.label} <ArrowRight size={15} aria-hidden="true" /></a>}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
