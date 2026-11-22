@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
+import { motion, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
 import { EXPERTISE, type XpGroup } from '../data/content';
 import { Label } from './Layout';
 
@@ -14,7 +14,6 @@ import { Label } from './Layout';
 type Chapter = XpGroup & { domain: string };
 const CHAPTERS: Chapter[] = EXPERTISE.flatMap((d) => d.groups.map((g) => ({ ...g, domain: d.title })));
 const N = CHAPTERS.length;
-const ease = [0.16, 1, 0.3, 1] as const;
 
 function Card({ c, i, p }: { c: Chapter; i: number; p: MotionValue<number> }) {
   // gentle parallax: the picture drifts against the card as the reel moves
@@ -99,11 +98,9 @@ export function ExpertiseFilm() {
               <h2 id="xr-title" className="xr-h2">Two disciplines. One desk.</h2>
             </div>
             <div className="xr-head-r mono">
-              <AnimatePresence mode="wait">
-                <motion.span key={domain} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.35, ease }}>
-                  {domain}
-                </motion.span>
-              </AnimatePresence>
+              <span className="xr-domains">
+                {EXPERTISE.map((d) => <span key={d.id} className={d.title === domain ? 'on' : ''} aria-hidden={d.title !== domain}>{d.title}</span>)}
+              </span>
               <span className="xr-cue">Scroll <i aria-hidden="true">→</i></span>
             </div>
           </div>
