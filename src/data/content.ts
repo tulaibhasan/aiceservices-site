@@ -18,6 +18,7 @@ export type Service = {
   name: string;
   line: string; // one short sentence
   plates: [Plate, Plate];
+  link?: { href: string; label: string }; // optional product page
 };
 
 export const SERVICES: Service[] = [
@@ -78,6 +79,7 @@ export const SERVICES: Service[] = [
     n: '06',
     title: 'Video',
     name: 'AI video editing',
+    link: { href: '/video/', label: 'See AICE Video' },
     line: 'AI pipelines that take apart any reference video, editing style and all, and rebuild it on your footage.',
     plates: [
       { kind: 'img', src: '/img/video-frames.webp' },

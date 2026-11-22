@@ -6,5 +6,6 @@
 /synckutub/*    https://tulaibhasan.github.io/synckutub/:splat                   200
 /videostudio/*  https://tulaibhasan.github.io/aice-video-studio-releases/:splat  200
 /freeyourtv/*   https://tulaibhasan.github.io/freeyourtv/:splat                  200
+/video/*        https://tulaibhasan.github.io/aice-video/:splat                  200
 
 /*    /index.html   200
