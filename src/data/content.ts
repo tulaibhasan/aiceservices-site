@@ -39,8 +39,8 @@ export const SERVICES: Service[] = [
     name: 'Custom websites',
     line: 'Designed and built from scratch in hours, on a minimal budget. Fast, search-ready, yours.',
     plates: [
-      { kind: 'img', src: '/img/web-freemytv.webp' },
       { kind: 'img', src: '/img/studio.webp' },
+      { kind: 'type', big: 'Live in hours', small: 'Design · build · launch', light: true },
     ],
   },
   {
@@ -79,14 +79,6 @@ export type Work = {
 
 export const WORK: Work[] = [
   {
-    id: 'freemytv',
-    name: 'Free My TV',
-    line: 'An ad-free home screen for Google TV, LG and Samsung.',
-    status: 'Live',
-    img: '/img/freemytv.webp',
-    href: 'https://freemytv.io',
-  },
-  {
     id: 'synckutub',
     name: 'SyncKutub',
     line: 'Ask your own files. Answers with clickable citations.',
@@ -94,6 +86,13 @@ export const WORK: Work[] = [
     img: '/img/synckutub.webp',
     alt: 'Stacks of engineering reports and binders beside a laptop',
     href: 'https://github.com/tulaibhasan/synckutub-releases/releases',
+  },
+  {
+    id: 'androidtv',
+    name: 'Android TV',
+    line: 'Ad-free home screens and light, high-res games for kids.',
+    status: 'Service',
+    type: { big: 'Your TV, your rules.', small: 'Launchers · kids’ games' },
   },
   {
     id: 'videostudio',
@@ -115,4 +114,51 @@ export const WORK: Work[] = [
   },
 ];
 
-export const SERVICE_OPTIONS = [...SERVICES.map((s) => s.name), 'Something else'];
+/* ---------- Expertise: the full list, grouped ---------- */
+export type XpItem = { t: string; note?: string };
+export type XpDomain = { id: string; title: string; groups: { name: string; items: XpItem[] }[] };
+
+export const EXPERTISE: XpDomain[] = [
+  {
+    id: 'eng',
+    title: 'Engineering',
+    groups: [
+      {
+        name: 'Design',
+        items: [
+          { t: 'Water supply systems' },
+          { t: 'Wastewater systems' },
+          { t: 'Water & wastewater treatment' },
+          { t: 'Integrated solid waste management' },
+          { t: 'Design review' },
+        ],
+      },
+      {
+        name: 'Procurement',
+        items: [{ t: 'Bid documents' }, { t: 'Bid preparation' }, { t: 'Bid evaluation' }, { t: 'Grievance redressal' }],
+      },
+      {
+        name: 'Contracts',
+        items: [
+          { t: 'Contract management' },
+          { t: 'Planning, scheduling & control' },
+          { t: 'Variations & extension of time' },
+          { t: 'Claims, disputes & arbitration' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'AI & Software',
+    groups: [
+      { name: 'Assistants', items: [{ t: 'Custom text & voice chatbots', note: 'Built for Punjab’s LG&CDD and ADB’s PICIIP programme' }] },
+      { name: 'Applications', items: [{ t: 'Custom desktop & web apps', note: 'SyncKutub, AICEMark, AICE Video Studio' }] },
+      { name: 'Video', items: [{ t: 'AI video pipelines', note: 'Reverse-engineer any video and its editing style' }] },
+      { name: 'Websites', items: [{ t: 'Custom websites, live in hours' }] },
+      { name: 'Android TV', items: [{ t: 'Launcher customisation' }, { t: 'High-res games for kids', note: 'Made to run on low-end TVs' }] },
+    ],
+  },
+];
+
+export const SERVICE_OPTIONS = [...SERVICES.map((s) => s.name), 'Android TV customisation', 'Something else'];

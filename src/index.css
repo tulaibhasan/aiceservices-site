@@ -356,3 +356,20 @@ a.tile:hover .tile-arrow { transform: translate(3px, -3px); }
 }
 
 .still-inner .hero-sub { margin-top: 22px; }
+
+/* ---------- Expertise ---------- */
+.xp-grid { display: grid; gap: clamp(72px, 9vw, 120px); }
+@media (min-width: 1000px) { .xp-grid { grid-template-columns: 1fr 1fr; gap: 0 clamp(40px, 5vw, 96px); } }
+.xp-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid var(--fg); }
+.xp-head h3 { margin: 0; font-weight: 700; font-stretch: 125%; text-transform: uppercase; font-size: clamp(26px, 2.8vw, 46px); letter-spacing: -0.02em; line-height: 1; }
+.xp-head .mono { color: var(--fg-dim); }
+.xp-group { display: grid; grid-template-columns: 9em 1fr; gap: 20px; padding: 22px 0 24px; border-bottom: 1px solid rgba(237, 237, 234, .14); }
+.xp-group > .mono { margin: 0; padding-top: 5px; color: var(--fg-dim); }
+.xp-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.xp-items li { font-size: clamp(18px, 1.55vw, 25px); line-height: 1.22; letter-spacing: -0.012em; transition: transform .5s cubic-bezier(.16, 1, .3, 1), color .3s; }
+.xp-items li small { display: block; margin-top: 3px; font-size: 14px; letter-spacing: 0; color: var(--fg-dim); }
+@media (hover: hover) {
+  .xp-group:hover .xp-items li { color: var(--fg-dim); }
+  .xp-group .xp-items li:hover { color: var(--fg); transform: translateX(8px); }
+}
+@media (max-width: 600px) { .xp-group { grid-template-columns: 1fr; gap: 10px; } }

@@ -26,3 +26,8 @@ A minimal dark design studio at night: one large monitor on a bare wooden desk s
 ---
 
 **Where they go:** `public/img/` as WebP, wired up in `src/data/content.ts`. Work tiles use `img:`; corridor plates use `{ kind: 'img', src: ... }`.
+
+---
+
+## 6. Android TV work tile, 4:3, save as `androidtv.jpg`
+A living room at dusk seen from behind a sofa: a child's silhouette holds a TV remote facing a large wall-mounted TV that shows a bright, simple, colourful cartoon game scene. The TV is the main light source and the room is dark. Cinematic editorial photograph, muted desaturated graphite palette, rich deep blacks, soft natural film grain, medium-format look, shallow depth of field, no text, no logos.

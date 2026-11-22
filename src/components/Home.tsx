@@ -2,7 +2,7 @@ import { useRef, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, type MotionValue } from 'motion/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { CONTACT, SERVICE_OPTIONS, WORK, type Work } from '../data/content';
+import { CONTACT, EXPERTISE, SERVICE_OPTIONS, WORK, type Work } from '../data/content';
 import { Bloom, Label, Reveal } from './Layout';
 import { OpeningSequence } from './Corridor';
 import { AssistantDemo } from './AssistantDemo';
@@ -30,6 +30,40 @@ function Statement() {
           <p className="statement-text">
             {words.map((w, i) => <Word key={i} w={w} i={i} n={words.length} p={scrollYProgress} />)}
           </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Expertise: the full service list, grouped ---------- */
+function Expertise() {
+  return (
+    <section id="expertise" className="sec dark expertise" aria-labelledby="xp-title">
+      <div className="wrap">
+        <div className="sec-head">
+          <Label n="02">Expertise</Label>
+          <h2 id="xp-title" className="h2">Two disciplines.<br />One desk.</h2>
+        </div>
+        <div className="xp-grid">
+          {EXPERTISE.map((d) => (
+            <div key={d.id} className="xp-domain">
+              <Reveal className="xp-head">
+                <h3>{d.title}</h3>
+                <span className="mono">{String(d.groups.reduce((n, g) => n + g.items.length, 0)).padStart(2, '0')}</span>
+              </Reveal>
+              {d.groups.map((g, i) => (
+                <Reveal key={g.name} delay={i * 0.06} className="xp-group">
+                  <p className="mono">{g.name}</p>
+                  <ul className="xp-items">
+                    {g.items.map((it) => (
+                      <li key={it.t}>{it.t}{it.note && <small>{it.note}</small>}</li>
+                    ))}
+                  </ul>
+                </Reveal>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -67,7 +101,7 @@ function WorkSection() {
     <section id="work" className="sec light work" aria-labelledby="work-title">
       <div className="wrap">
         <div className="sec-head">
-          <Label n="02">Selected work</Label>
+          <Label n="03">Selected work</Label>
           <h2 id="work-title" className="h2">Built here.<br />Used out there.</h2>
         </div>
         <ul className="tiles">
@@ -87,7 +121,7 @@ function About() {
   return (
     <section id="about" className="sec light about" aria-labelledby="about-title">
       <div className="wrap about-grid">
-        <Label n="04">About</Label>
+        <Label n="05">About</Label>
         <Reveal className="about-photo">
           <img src="/Muhammad-Tulaib-Hasan-Picture.jpg" alt="Muhammad Tulaib Hasan, founder of AICE Services" width={240} height={300} loading="lazy" decoding="async" />
         </Reveal>
@@ -133,7 +167,7 @@ function Contact() {
   return (
     <section id="contact" className="sec dark contact" aria-labelledby="contact-title">
       <div className="wrap">
-        <Label n="05">Contact</Label>
+        <Label n="06">Contact</Label>
         <h2 id="contact-title" className="mega contact-mega">
           <span className="mask-line in-view"><span>Let’s talk.</span></span>
         </h2>
@@ -184,6 +218,7 @@ export function HomePage() {
     <>
       <OpeningSequence />
       <Statement />
+      <Expertise />
       <WorkSection />
       <AssistantDemo />
       <About />
