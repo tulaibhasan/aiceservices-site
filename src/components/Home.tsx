@@ -7,29 +7,41 @@ import { Bloom, Label, Reveal } from './Layout';
 import { OpeningSequence } from './Corridor';
 import { AssistantDemo } from './AssistantDemo';
 
-/* ---------- Statement: words fill in as you scroll ---------- */
-const STATEMENT =
-  'Ten years of donor-funded engineering, now moving at the speed of AI. We review designs, win bids, and build the websites, assistants and films that move a business forward.';
+/* ---------- Statement: pinned while it lights up a few words at a time ---------- */
+const STATEMENT = [
+  'Ten years of',
+  'donor-funded engineering,',
+  'now moving at',
+  'the speed of AI.',
+  'We review designs,',
+  'win bids,',
+  'and build the websites,',
+  'assistants and films',
+  'that move a business forward.',
+];
 
-function Word({ w, i, n, p }: { w: string; i: number; n: number; p: MotionValue<number> }) {
-  const start = i / n;
+function Chunk({ text, k, n, p }: { text: string; k: number; n: number; p: MotionValue<number> }) {
+  // each phrase owns an equal slice of the pinned scroll, lights over the first 60% of it
+  const span = 0.86 / n;
+  const start = 0.04 + k * span;
   // dimmed words stay above 3:1 contrast (large text)
-  const opacity = useTransform(p, [start - 0.08, start + 0.04], [0.46, 1]);
-  return <motion.span style={{ opacity }}>{w} </motion.span>;
+  const opacity = useTransform(p, [start, start + span * 0.6], [0.46, 1]);
+  return <motion.span style={{ opacity }}>{text} </motion.span>;
 }
 
 function Statement() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.45'] });
-  const words = STATEMENT.split(' ');
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   return (
-    <section className="sec light statement" aria-label="About AICE">
-      <div className="wrap">
-        <Label n="01">Studio</Label>
-        <div ref={ref}>
-          <p className="statement-text">
-            {words.map((w, i) => <Word key={i} w={w} i={i} n={words.length} p={scrollYProgress} />)}
-          </p>
+    <section className="light statement" aria-label="About AICE">
+      <div ref={ref} className="statement-track" style={{ height: `${100 + STATEMENT.length * 22}vh` }}>
+        <div className="statement-pin">
+          <div className="wrap">
+            <Label n="01">Studio</Label>
+            <p className="statement-text">
+              {STATEMENT.map((t, k) => <Chunk key={k} text={t} k={k} n={STATEMENT.length} p={scrollYProgress} />)}
+            </p>
+          </div>
         </div>
       </div>
     </section>

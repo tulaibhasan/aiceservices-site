@@ -25,6 +25,8 @@ const INTRO = 1400;
 const STATION = 2000;
 // ends with the last title at reading distance, so the stage hands off cleanly
 const TRAVEL = INTRO + STATION * (SERVICES.length - 1) + 1350;
+// scroll length grows with the number of stations (≈18px of travel per 1vh of scroll)
+const SCROLL_VH = Math.round(100 + TRAVEL / 18);
 
 function useScale() {
   const get = () => (typeof window === 'undefined' ? 1 : Math.min(1, Math.max(0.42, window.innerWidth / 1440)));
@@ -66,7 +68,7 @@ function PlateBody({ p }: { p: Plate }) {
 
 function PlaneEl({ T, z, x, y, ry, w, h, p, early = false }: { T: MotionValue<number>; z: number; x: number; y: number; ry: number; w: number; h: number; p: Plate; early?: boolean }) {
   // `early`: leave before reaching the caption area (phones)
-  const opacity = useTransform(T, (t) => (t < 350 ? 0 : early ? fade(z + t, -1300, -800, -350, -50) : fade(z + t, -1300, -800, 250, 650)));
+  const opacity = useTransform(T, (t) => (t < 350 ? 0 : early ? fade(z + t, -1300, -900, -750, -480) : fade(z + t, -1300, -800, 250, 650)));
   return (
     <motion.figure
       className={`plane plane-${p.kind}`}
@@ -155,7 +157,7 @@ function Opening() {
 
   return (
     <section id="top" className="opening" aria-labelledby="hero-title">
-      <div ref={scroller} className="op-scroller">
+      <div ref={scroller} className="op-scroller" style={{ height: `${SCROLL_VH}vh` }}>
         <div className="op-stage">
           <motion.div className="op-hero" style={{ opacity: heroOpacity, scale: heroScale }} aria-hidden="true">
             <picture>
@@ -177,7 +179,7 @@ function Opening() {
               <Lines text={['Engineering', '& AI studio']} delay={0} />
             </h1>
             <div className="op-intro-foot">
-              <p className="hero-sub"><Lines text={['Consultancy, websites, AI assistants and video.', 'Precise, and fast.']} delay={0.25} /></p>
+              <p className="hero-sub"><Lines text={['Design, bids and contracts. AI, software and video.', 'Precise, and fast.']} delay={0.25} /></p>
               <span className="scroll-cue mono">Scroll <i aria-hidden="true" /></span>
             </div>
           </motion.div>
@@ -226,7 +228,7 @@ function StillOpening() {
       <div className="wrap still-inner">
         <p className="eyebrow mono">AICE Services</p>
         <h1 id="hero-title" className="mega">Engineering<br />&amp; AI studio</h1>
-        <p className="hero-sub">Consultancy, websites, AI assistants and video. Precise, and fast.</p>
+        <p className="hero-sub">Design, bids and contracts. AI, software and video. Precise, and fast.</p>
       </div>
       <div className="wrap still-list">
         {SERVICES.map((s) => (
