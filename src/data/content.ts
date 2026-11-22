@@ -107,7 +107,7 @@ export const WORK: Work[] = [
     status: 'Released',
     img: '/img/synckutub.webp',
     alt: 'Stacks of engineering reports and binders beside a laptop',
-    href: 'https://github.com/tulaibhasan/synckutub-releases/releases',
+    href: '/synckutub/',
   },
   {
     id: 'androidtv',
@@ -115,6 +115,7 @@ export const WORK: Work[] = [
     line: 'Ad-free home screens and light, high-res games for kids.',
     status: 'Service',
     type: { big: 'Your TV, your rules.', small: 'Launchers · kids’ games' },
+    href: '/freeyourtv/',
   },
   {
     id: 'videostudio',
@@ -123,6 +124,7 @@ export const WORK: Work[] = [
     status: 'In development',
     img: '/img/videostudio.webp',
     alt: 'A video editing desk with a timeline on screen and a cinema camera',
+    href: '/videostudio/',
   },
   {
     id: 'aicemark',
