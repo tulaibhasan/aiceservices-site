@@ -82,7 +82,7 @@ export function AssistantDemo() {
     <section id="assistants" className="sec dark assistants" aria-labelledby="assistant-title">
       <div className="wrap">
         <div className="sec-head">
-          <Label n="03">AI assistants</Label>
+          <Label n="04">AI assistants</Label>
           <h2 id="assistant-title" className="h2">Assistants that sound<br />like your business.</h2>
         </div>
         <div className="assist">

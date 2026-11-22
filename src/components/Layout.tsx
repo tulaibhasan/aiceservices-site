@@ -41,6 +41,7 @@ export function Wordmark() {
 
 /* ---------- Header: one colour, inverted over whatever is beneath ---------- */
 const NAV = [
+  { href: '/#expertise', label: 'Expertise' },
   { href: '/#work', label: 'Work' },
   { href: '/#assistants', label: 'Assistants' },
   { href: '/#about', label: 'About' },
@@ -122,7 +123,7 @@ export function Footer() {
   return (
     <>
       <footer className="ftr">
-        <span className="mono">© {new Date().getFullYear()} AICE Services</span>
+        <span className="mono">© {new Date().getFullYear()} AICE Services · Lahore, Pakistan</span>
         <a className="mono" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
         <span className="ftr-legal">
           <button className="mono" onClick={() => setPrivacy(true)}>Privacy</button>
