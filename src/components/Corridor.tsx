@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  AnimatePresence,
   motion,
   useMotionValueEvent,
   useReducedMotion,
@@ -185,25 +184,22 @@ function Opening() {
           </motion.div>
 
           <div className="op-hud wrap">
-            <AnimatePresence mode="wait">
-              {svc && (
-                <motion.div
-                  key={svc.id}
-                  className="op-detail"
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <span className="mono">{svc.n} / {String(SERVICES.length).padStart(2, '0')} — {svc.name}</span>
-                  <p>{svc.line}</p>
-                  <div className="op-links">
-                    <Link to="/#contact" className="link-arrow">Start a project <ArrowRight size={15} aria-hidden="true" /></Link>
-                    {svc.link && <a href={svc.link.href} className="link-arrow">{svc.link.label} <ArrowRight size={15} aria-hidden="true" /></a>}
+            {/* every caption stays mounted and is faded by CSS, so fast scrolling can never leave one stuck */}
+            <div className="op-details">
+              {SERVICES.map((s, i) => {
+                const on = i === active;
+                return (
+                  <div key={s.id} className={`op-detail ${on ? 'on' : ''}`} aria-hidden={!on}>
+                    <span className="mono">{s.n} / {String(SERVICES.length).padStart(2, '0')} — {s.name}</span>
+                    <p>{s.line}</p>
+                    <div className="op-links">
+                      <Link to="/#contact" className="link-arrow" tabIndex={on ? 0 : -1}>Start a project <ArrowRight size={15} aria-hidden="true" /></Link>
+                      {s.link && <a href={s.link.href} className="link-arrow" tabIndex={on ? 0 : -1}>{s.link.label} <ArrowRight size={15} aria-hidden="true" /></a>}
+                    </div>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                );
+              })}
+            </div>
             <nav className="op-index" aria-label="Services" style={{ opacity: svc ? 1 : 0 }}>
               {SERVICES.map((s, i) => (
                 <button key={s.id} aria-current={i === active ? 'step' : undefined} onClick={() => goTo(i)} tabIndex={svc ? 0 : -1}>

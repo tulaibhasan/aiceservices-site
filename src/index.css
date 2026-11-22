@@ -172,7 +172,9 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
   display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
   padding-bottom: clamp(28px, 6vh, 64px); pointer-events: none;
 }
-.op-detail { pointer-events: auto; max-width: 400px; }
+.op-details { display: grid; align-self: end; }
+.op-detail { grid-area: 1 / 1; align-self: end; max-width: 400px; opacity: 0; visibility: hidden; transform: translateY(14px); pointer-events: none; transition: opacity .35s ease, transform .5s cubic-bezier(.16, 1, .3, 1), visibility 0s linear .35s; }
+.op-detail.on { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition: opacity .45s ease .08s, transform .6s cubic-bezier(.16, 1, .3, 1) .08s, visibility 0s; }
 .op-detail .mono { color: var(--fg-dim); }
 .op-detail p { margin: 10px 0 14px; font-size: 18px; line-height: 1.4; color: var(--fg); }
 .link-arrow { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
@@ -404,3 +406,6 @@ a.tile:hover .tile-arrow { transform: translate(3px, -3px); }
 }
 
 .op-links { display: flex; flex-wrap: wrap; gap: 10px 26px; }
+.xr-domains { display: grid; justify-items: end; }
+.xr-domains > span { grid-area: 1 / 1; opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .4s cubic-bezier(.16, 1, .3, 1); }
+.xr-domains > span.on { opacity: 1; transform: none; }
