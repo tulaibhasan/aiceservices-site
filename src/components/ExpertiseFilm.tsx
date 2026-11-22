@@ -36,13 +36,10 @@ function Card({ c, i, p }: { c: Chapter; i: number; p: MotionValue<number> }) {
         <span>{c.domain}</span>
       </div>
       <h3 className="xr-title">{c.name}</h3>
-      <ul className="xr-items">
-        {c.items.map((it) => (
-          <li key={it.t}>
-            <i aria-hidden="true" />
-            <span>{it.t}{it.note && <small>{it.note}</small>}</span>
-          </li>
-        ))}
+      <p className="xr-line">{c.line}</p>
+      {/* the full service list stays available to screen readers and search engines */}
+      <ul className="sr-only">
+        {c.items.map((it) => <li key={it.t}>{it.t}{it.note ? ` (${it.note})` : ''}</li>)}
       </ul>
     </article>
   );
