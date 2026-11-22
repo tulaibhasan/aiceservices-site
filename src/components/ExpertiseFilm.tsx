@@ -1,119 +1,122 @@
-import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform } from 'motion/react';
-import { EXPERTISE } from '../data/content';
+import { useLayoutEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
+import { EXPERTISE, type XpGroup } from '../data/content';
 import { Label } from './Layout';
 
 /* ------------------------------------------------------------------
-   Expertise as a film: the section pins to the screen and scrolling
-   plays it chapter by chapter. Each chapter wipes in a new picture,
-   slides its title up and staggers its services in. A film-strip
-   timeline along the bottom shows where you are and lets you jump.
+   Expertise as a horizontal reel: the section pins to the screen and
+   scrolling down slides all eight chapter cards sideways, like a film
+   strip. The next cards always peek in from the right, so it never
+   looks like the page has ended. A rail along the bottom tracks
+   progress and jumps to any chapter.
    ------------------------------------------------------------------ */
 
-const CHAPTERS = EXPERTISE.flatMap((d) => d.groups.map((g) => ({ ...g, domain: d.title })));
+type Chapter = XpGroup & { domain: string };
+const CHAPTERS: Chapter[] = EXPERTISE.flatMap((d) => d.groups.map((g) => ({ ...g, domain: d.title })));
 const N = CHAPTERS.length;
 const ease = [0.16, 1, 0.3, 1] as const;
 
-export function ExpertiseFilm() {
-  const track = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: track, offset: ['start start', 'end end'] });
-  const [active, setActive] = useState(0);
-  const bar = useTransform(scrollYProgress, [0, 1], [0, 1]);
+function Card({ c, i, p }: { c: Chapter; i: number; p: MotionValue<number> }) {
+  // gentle parallax: the picture drifts against the card as the reel moves
+  const imgX = useTransform(p, [0, 1], ['6%', '-6%']);
+  return (
+    <article className="xr-card">
+      <div className="xr-media">
+        {c.img ? (
+          <motion.img src={c.img} alt="" loading="lazy" decoding="async" style={{ x: imgX }} />
+        ) : (
+          <div className="xr-typeframe">
+            <span className="mono">{c.type?.small}</span>
+            <strong>{c.type?.big}</strong>
+          </div>
+        )}
+      </div>
+      <div className="xr-meta mono">
+        <span>{String(i + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}</span>
+        <span>{c.domain}</span>
+      </div>
+      <h3 className="xr-title">{c.name}</h3>
+      <ul className="xr-items">
+        {c.items.map((it) => (
+          <li key={it.t}>
+            <i aria-hidden="true" />
+            <span>{it.t}{it.note && <small>{it.note}</small>}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}
 
-  useMotionValueEvent(scrollYProgress, 'change', (p) => {
-    setActive(Math.min(N - 1, Math.max(0, Math.floor(p * N * 0.999))));
+export function ExpertiseFilm() {
+  const section = useRef<HTMLDivElement>(null);
+  const strip = useRef<HTMLDivElement>(null);
+  const [dist, setDist] = useState(0);
+  const [active, setActive] = useState(0);
+
+  // how far the strip has to travel so the last card ends at the right edge
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = strip.current;
+      if (!el) return;
+      const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
+      setDist(Math.max(0, el.scrollWidth - window.innerWidth + pad));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (strip.current) ro.observe(strip.current);
+    window.addEventListener('resize', measure);
+    return () => { ro.disconnect(); window.removeEventListener('resize', measure); };
+  }, []);
+
+  const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end end'] });
+  const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 26, mass: 0.3 });
+  const x = useTransform(smooth, (v) => -v * dist);
+  const rail = useTransform(smooth, [0, 1], [0, 1]);
+
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    setActive(Math.min(N - 1, Math.max(0, Math.round(v * (N - 1)))));
   });
 
   const goTo = (i: number) => {
-    const el = track.current;
+    const el = section.current;
     if (!el) return;
     const top = el.getBoundingClientRect().top + window.scrollY;
     const travel = el.offsetHeight - window.innerHeight;
-    const y = top + travel * ((i + 0.5) / N);
+    const y = top + travel * (i / (N - 1));
     const lenis = (window as unknown as { __lenis?: { scrollTo: (y: number) => void } }).__lenis;
     if (lenis) lenis.scrollTo(y);
     else window.scrollTo({ top: y, behavior: 'smooth' });
   };
 
-  const c = CHAPTERS[active];
+  const domain = CHAPTERS[active].domain;
 
   return (
-    <section id="expertise" className="dark xf" aria-labelledby="xf-title">
-      <div ref={track} className="xf-track" style={{ height: `${100 + N * 75}vh` }}>
-        <div className="xf-stage">
-          <div className="wrap xf-grid">
-            <div className="xf-copy">
-              <div className="xf-top">
-                <Label n="02">Expertise</Label>
-                <h2 id="xf-title" className="sr-only">Expertise</h2>
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={c.domain}
-                    className="xf-domain mono"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.4, ease }}
-                  >
-                    {c.domain}
-                  </motion.p>
-                </AnimatePresence>
-              </div>
-
-              <div className="xf-chapter" aria-live="polite">
-                <AnimatePresence mode="wait">
-                  <motion.div key={active} className="xf-chapter-in" exit={{ opacity: 0, y: -24, transition: { duration: 0.28, ease } }}>
-                    <span className="xf-num mono">{String(active + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}</span>
-                    <h3 className="xf-title">
-                      <span className="xf-mask">
-                        <motion.span initial={{ y: '105%' }} animate={{ y: '0%' }} transition={{ duration: 0.75, ease }}>{c.name}</motion.span>
-                      </span>
-                    </h3>
-                    <ul className="xf-items">
-                      {c.items.map((it, j) => (
-                        <motion.li
-                          key={it.t}
-                          initial={{ opacity: 0, x: -18 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.6, delay: 0.18 + j * 0.07, ease }}
-                        >
-                          <i aria-hidden="true" />
-                          <span>{it.t}{it.note && <small>{it.note}</small>}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+    <section id="expertise" className="dark xr" aria-labelledby="xr-title">
+      {/* vertical scroll distance = horizontal travel, so the reel moves 1:1 with the wheel */}
+      <div ref={section} className="xr-track" style={{ height: `calc(100vh + ${Math.round(dist * 1.1)}px)` }}>
+        <div className="xr-stage">
+          <div className="wrap xr-head">
+            <div>
+              <Label n="02">Expertise</Label>
+              <h2 id="xr-title" className="xr-h2">Two disciplines. One desk.</h2>
             </div>
-
-            <div className="xf-media" aria-hidden="true">
-              <AnimatePresence initial={false}>
-                <motion.div
-                  key={active}
-                  className="xf-frame"
-                  initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
-                  animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
-                  exit={{ opacity: 0, transition: { duration: 0.5, delay: 0.35 } }}
-                  transition={{ duration: 0.9, ease }}
-                >
-                  {c.img ? (
-                    <motion.img src={c.img} alt="" initial={{ scale: 1.18 }} animate={{ scale: 1.04 }} transition={{ duration: 2.4, ease }} />
-                  ) : (
-                    <div className="xf-typeframe">
-                      <span className="mono">{c.type?.small}</span>
-                      <strong>{c.type?.big}</strong>
-                    </div>
-                  )}
-                </motion.div>
+            <div className="xr-head-r mono">
+              <AnimatePresence mode="wait">
+                <motion.span key={domain} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.35, ease }}>
+                  {domain}
+                </motion.span>
               </AnimatePresence>
-              <span className="xf-frame-tag mono">{c.domain} — {c.name}</span>
+              <span className="xr-cue">Scroll <i aria-hidden="true">→</i></span>
             </div>
           </div>
 
-          {/* film-strip timeline */}
-          <div className="wrap xf-strip">
-            <div className="xf-rail"><motion.span style={{ scaleX: bar }} /></div>
+          <motion.div ref={strip} className="xr-strip" style={{ x }}>
+            {CHAPTERS.map((c, i) => <Card key={c.name} c={c} i={i} p={smooth} />)}
+          </motion.div>
+
+          <div className="wrap xr-foot">
+            <div className="xr-rail"><motion.span style={{ scaleX: rail }} /></div>
             <ol>
               {CHAPTERS.map((ch, i) => (
                 <li key={ch.name} className={`${i === active ? 'on' : ''} ${i > 0 && CHAPTERS[i - 1].domain !== ch.domain ? 'split' : ''}`}>
