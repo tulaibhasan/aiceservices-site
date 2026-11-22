@@ -91,8 +91,12 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
   color: #fff; mix-blend-mode: difference; pointer-events: none;
 }
 .hdr > * { pointer-events: auto; }
-.wordmark { font-weight: 700; font-stretch: 125%; font-size: 20px; letter-spacing: -0.01em; display: inline-flex; align-items: baseline; gap: 3px; }
-.wm-dot { width: 7px; height: 7px; background: currentColor; border-radius: 50%; display: inline-block; }
+.mark { fill: currentColor; display: inline-block; height: 1em; width: auto; aspect-ratio: 1131 / 1091; flex: none; }
+.wordmark { font-weight: 700; font-stretch: 125%; font-size: 20px; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 10px; line-height: 1; }
+.wordmark .mark { height: 1.15em; }
+.ftr-brand { display: inline-flex; align-items: center; gap: 0; }
+.ftr-brand .mark { height: 16px; }
+.ftr-brand sup { font-size: 8px; margin: 0 12px 8px 2px; }
 .hdr-nav { display: none; align-items: center; gap: 34px; font-size: 14px; font-weight: 500; }
 .hdr-nav a { position: relative; }
 .hdr-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: -3px; height: 1px; background: currentColor; transition: right .4s var(--ease); }

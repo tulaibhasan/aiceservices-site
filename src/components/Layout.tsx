@@ -31,10 +31,20 @@ export function Label({ n, children }: { n: string; children: string }) {
   return <p className="label mono"><span>({n})</span>{children}</p>;
 }
 
+/* The AICE "A" mark (trademark application 917059), drawn in the current text colour */
+export function Mark({ className = '' }: { className?: string }) {
+  return (
+    <svg className={`mark ${className}`} viewBox="235 266 1131 1091" aria-hidden="true" focusable="false">
+      <rect x="385" y="266" width="831" height="18" />
+      <path d="M642 323H959L1366 1357H1102L800 527L604 1062L800 858L745 993L509 1357H235Z" />
+    </svg>
+  );
+}
+
 export function Wordmark() {
   return (
     <span className="wordmark">
-      AICE<span className="wm-dot" aria-hidden="true" />
+      <Mark />AICE
     </span>
   );
 }
@@ -123,7 +133,7 @@ export function Footer() {
   return (
     <>
       <footer className="ftr">
-        <span className="mono">© {new Date().getFullYear()} AICE Services · Lahore, Pakistan</span>
+        <span className="mono ftr-brand"><Mark /><sup>TM</sup>© {new Date().getFullYear()} AICE Services · Lahore, Pakistan</span>
         <a className="mono" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
         <span className="ftr-legal">
           <button className="mono" onClick={() => setPrivacy(true)}>Privacy</button>
