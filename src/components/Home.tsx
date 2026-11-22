@@ -39,7 +39,7 @@ function Statement() {
 /* ---------- Work ---------- */
 function Tile({ w }: { w: Work }) {
   const media = w.img ? (
-    <img src={w.img} alt={`${w.name} screenshot`} loading="lazy" decoding="async" />
+    <img src={w.img} alt={w.alt ?? `${w.name} screenshot`} loading="lazy" decoding="async" />
   ) : (
     <div className="type-tile">
       <span className="mono">{w.type?.small}</span>

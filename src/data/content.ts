@@ -40,7 +40,7 @@ export const SERVICES: Service[] = [
     line: 'Designed and built from scratch in hours, on a minimal budget. Fast, search-ready, yours.',
     plates: [
       { kind: 'img', src: '/img/web-freemytv.webp' },
-      { kind: 'type', big: 'Live in hours', small: 'Design · build · launch', light: true },
+      { kind: 'img', src: '/img/studio.webp' },
     ],
   },
   {
@@ -49,7 +49,7 @@ export const SERVICES: Service[] = [
     title: 'AI Assistants',
     name: 'AI voice & chat assistants',
     line: 'Assistants that answer your customers by text or voice, from your own documents, on your website.',
-    plates: [{ kind: 'chat' }, { kind: 'type', big: 'Text + Voice', small: 'Trained on your data' }],
+    plates: [{ kind: 'img', src: '/img/assistant.webp' }, { kind: 'chat' }],
   },
   {
     id: 'video',
@@ -71,6 +71,7 @@ export type Work = {
   line: string;
   status: string;
   img?: string;
+  alt?: string;
   type?: { big: string; small: string };
   href?: string;
   internal?: boolean;
@@ -90,7 +91,8 @@ export const WORK: Work[] = [
     name: 'SyncKutub',
     line: 'Ask your own files. Answers with clickable citations.',
     status: 'Released',
-    type: { big: 'Ask your files.', small: 'Windows · private · offline' },
+    img: '/img/synckutub.webp',
+    alt: 'Stacks of engineering reports and binders beside a laptop',
     href: 'https://github.com/tulaibhasan/synckutub-releases/releases',
   },
   {
@@ -98,14 +100,16 @@ export const WORK: Work[] = [
     name: 'AICE Video Studio',
     line: 'An offline video editor for Windows, with 4K export.',
     status: 'In development',
-    type: { big: 'Cut. Caption. Export.', small: 'Offline desktop editor' },
+    img: '/img/videostudio.webp',
+    alt: 'A video editing desk with a timeline on screen and a cinema camera',
   },
   {
     id: 'aicemark',
     name: 'AICEMark',
     line: 'AI answers with maths and tables, into clean Word files.',
     status: 'Free tool',
-    type: { big: '.md → .docx', small: 'Runs in your browser' },
+    img: '/img/aicemark.webp',
+    alt: 'A printed report page with tables and an equation',
     href: '/tools/aicemark',
     internal: true,
   },
