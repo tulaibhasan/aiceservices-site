@@ -138,6 +138,15 @@ export const WORK: Work[] = [
     href: '/tools/aicemark',
     internal: true,
   },
+  {
+    id: 'aicevideo',
+    name: 'AICE Video',
+    line: 'Send a reel you love and your raw clips. We rebuild that edit on your footage.',
+    status: 'Studio',
+    img: '/img/video-frames.webp',
+    alt: 'Raw phone clips turned into an edited reel',
+    href: '/video/',
+  },
 ];
 
 /* ---------- Expertise: the full list, grouped ---------- */
