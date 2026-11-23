@@ -19,11 +19,13 @@ export type Service = {
   line: string; // one short sentence
   plates: [Plate, Plate];
   link?: { href: string; label: string }; // optional product page
+  extra?: Plate; // a third picture in the opening film
 };
 
 export const SERVICES: Service[] = [
   {
     id: 'design',
+    extra: { kind: 'img', src: '/img/hero.webp' },
     n: '01',
     title: 'Design',
     name: 'Water & waste engineering design',
@@ -35,6 +37,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'procurement',
+    extra: { kind: 'img', src: '/img/aicemark.webp' },
     n: '02',
     title: 'Procurement',
     name: 'Bids & procurement',
@@ -46,6 +49,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'contracts',
+    extra: { kind: 'img', src: '/img/pipes.webp' },
     n: '03',
     title: 'Contracts',
     name: 'Contract management & claims',
@@ -57,6 +61,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'assistants',
+    extra: { kind: 'type', big: 'Text + Voice', small: 'Trained on your documents' },
     n: '04',
     title: 'AI Assistants',
     name: 'AI voice & chat assistants',
@@ -65,6 +70,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'software',
+    extra: { kind: 'img', src: '/img/videostudio.webp' },
     n: '05',
     title: 'Software',
     name: 'Apps, websites & Android TV',
@@ -76,6 +82,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'video',
+    extra: { kind: 'img', src: '/img/videostudio.webp' },
     n: '06',
     title: 'Video',
     name: 'AI video editing',
@@ -86,6 +93,14 @@ export const SERVICES: Service[] = [
       { kind: 'img', src: '/img/video-clips.webp' },
     ],
   },
+];
+
+/* ---------- Values: short beats between services in the opening film ---------- */
+export type Value = { n: string; title: string; line: string; side: 'left' | 'right'; plates: [Plate, Plate] };
+export const VALUES: Value[] = [
+  { n: '01', title: 'Precision', line: 'Every drawing, bid and clause, checked line by line.', side: 'left', plates: [{ kind: 'img', src: '/img/pipes.webp' }, { kind: 'img', src: '/img/synckutub.webp' }] },
+  { n: '02', title: 'One desk', line: 'Engineering judgement and AI tools, from the same person.', side: 'right', plates: [{ kind: 'img', src: '/img/hero.webp' }, { kind: 'img', src: '/img/assistant.webp' }] },
+  { n: '03', title: 'Speed', line: 'AI does the heavy lifting, so answers come fast.', side: 'left', plates: [{ kind: 'img', src: '/img/studio.webp' }, { kind: 'img', src: '/img/aicemark.webp' }] },
 ];
 
 /* ---------- Work ---------- */

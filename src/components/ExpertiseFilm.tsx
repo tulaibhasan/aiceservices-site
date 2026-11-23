@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { motion, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
+import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { EXPERTISE, type XpGroup } from '../data/content';
-import { Label } from './Layout';
+import { Label, PHONE, useMedia } from './Layout';
 
 /* ------------------------------------------------------------------
    Expertise as a horizontal reel: the section pins to the screen and
@@ -44,7 +45,7 @@ function Card({ c, i, p }: { c: Chapter; i: number; p: MotionValue<number> }) {
   );
 }
 
-export function ExpertiseFilm() {
+function ExpertiseReel() {
   const section = useRef<HTMLDivElement>(null);
   const strip = useRef<HTMLDivElement>(null);
   const [dist, setDist] = useState(0);
@@ -90,7 +91,7 @@ export function ExpertiseFilm() {
   return (
     <section id="expertise" className="dark xr" aria-labelledby="xr-title">
       {/* vertical scroll distance = horizontal travel, so the reel moves 1:1 with the wheel */}
-      <div ref={section} className="xr-track" style={{ height: `calc(100vh + ${Math.round(dist * 1.1)}px)` }}>
+      <div ref={section} className="xr-track" style={{ height: `calc(100vh + ${Math.round(dist * 0.8)}px)` }}>
         <div className="xr-stage">
           <div className="wrap xr-head">
             <div>
@@ -126,4 +127,47 @@ export function ExpertiseFilm() {
       </div>
     </section>
   );
+}
+
+/* Phones: no pinning. A native swipe carousel with arrows, like a photo strip. */
+function ExpertiseCarousel() {
+  const strip = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const still = useMotionValue(0.5);
+
+  const step = () => {
+    const el = strip.current;
+    const card = el?.firstElementChild as HTMLElement | null;
+    if (!el || !card) return 0;
+    return card.offsetWidth + (parseFloat(getComputedStyle(el).columnGap) || 0);
+  };
+  const onScroll = () => {
+    const el = strip.current;
+    const s = step();
+    if (el && s) setActive(Math.min(N - 1, Math.max(0, Math.round(el.scrollLeft / s))));
+  };
+  const go = (dir: number) => strip.current?.scrollBy({ left: dir * step(), behavior: 'smooth' });
+
+  return (
+    <section id="expertise" className="dark xr xr-m" aria-labelledby="xr-title">
+      <div className="wrap">
+        <Label n="02">Expertise</Label>
+        <h2 id="xr-title" className="xr-h2">Two disciplines. One desk.</h2>
+      </div>
+      <div ref={strip} className="xr-carousel" onScroll={onScroll}>
+        {CHAPTERS.map((c, i) => <Card key={c.name} c={c} i={i} p={still} />)}
+      </div>
+      <div className="wrap xr-m-foot">
+        <span className="mono">{String(active + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}</span>
+        <div className="xr-rail"><span style={{ transform: `scaleX(${(active + 1) / N})` }} /></div>
+        <button onClick={() => go(-1)} aria-label="Previous" disabled={active === 0}><ChevronLeft size={18} /></button>
+        <button onClick={() => go(1)} aria-label="Next" disabled={active === N - 1}><ChevronRight size={18} /></button>
+      </div>
+    </section>
+  );
+}
+
+export function ExpertiseFilm() {
+  const phone = useMedia(PHONE);
+  return phone ? <ExpertiseCarousel /> : <ExpertiseReel />;
 }

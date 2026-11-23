@@ -4,6 +4,20 @@ import { AnimatePresence, motion, useInView } from 'motion/react';
 import { X } from 'lucide-react';
 import { CONTACT } from '../data/content';
 
+/* ---------- useMedia: true while a media query matches (phones get a lighter mode) ---------- */
+export function useMedia(query: string) {
+  const [match, setMatch] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const on = () => setMatch(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, [query]);
+  return match;
+}
+export const PHONE = '(max-width: 900px)';
+
 /* ---------- Reveal: rise + fade once in view ---------- */
 export function Reveal({ children, delay = 0, className, as = 'div' }: { children: ReactNode; delay?: number; className?: string; as?: 'div' | 'li' }) {
   const Comp = as === 'li' ? motion.li : motion.div;
