@@ -1,31 +1,60 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  motion,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-  type MotionValue,
-} from 'motion/react';
-import { ArrowRight } from 'lucide-react';
-import { SERVICES, type Plate, type Service } from '../data/content';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react';
+import { SERVICES, VALUES, type Plate, type Service, type Value } from '../data/content';
 
 /* ------------------------------------------------------------------
-   Opening sequence: hero → 3D corridor through the four services.
+   Opening film: hero → a 3D fly-through of the services.
    A sticky stage with CSS perspective holds a "world" that dollies
-   toward the viewer as you scroll. Two plates per service line the
-   walls; the service name hangs mid-corridor. All motion is one
-   composited transform on the world plus per-plate opacity.
+   toward the viewer as you scroll. Each service is a cluster of
+   pictures at different depths around its name: some behind the
+   title, some in front, all growing until they leave past the edges
+   of the screen. Between services, short "value" beats put a caption
+   in a corner instead, so the text moves left, centre and right.
    ------------------------------------------------------------------ */
 
+type Beat = { kind: 'svc'; svc: Service } | { kind: 'val'; val: Value };
+// Design · Precision · Procurement · Contracts · One desk · Assistants · Software · Speed · Video
+const BEATS: Beat[] = [
+  { kind: 'svc', svc: SERVICES[0] },
+  { kind: 'val', val: VALUES[0] },
+  { kind: 'svc', svc: SERVICES[1] },
+  { kind: 'svc', svc: SERVICES[2] },
+  { kind: 'val', val: VALUES[1] },
+  { kind: 'svc', svc: SERVICES[3] },
+  { kind: 'svc', svc: SERVICES[4] },
+  { kind: 'val', val: VALUES[2] },
+  { kind: 'svc', svc: SERVICES[5] },
+];
+
 const INTRO = 1400;
-const STATION = 2000;
+const STEP = 1500;
+const TITLE_DZ = 1900;
 // ends with the last title at reading distance, so the stage hands off cleanly
-const TRAVEL = INTRO + STATION * (SERVICES.length - 1) + 1350;
-// scroll length grows with the number of stations (≈18px of travel per 1vh of scroll)
-const SCROLL_VH = Math.round(100 + TRAVEL / 18);
+const TRAVEL = INTRO + STEP * (BEATS.length - 1) + 1300;
+// ~40px of travel per 1vh of scroll on desktop, ~50 on phones: the film plays in a few flicks
+const scrollVh = (phone: boolean) => Math.round(100 + TRAVEL / (phone ? 50 : 40));
+
+/* Where the pictures sit around each beat (desktop units at 1440px wide; dz = depth beyond the beat) */
+type Slot = { x: number; y: number; dz: number; w: number; ry: number };
+const SVC_SLOTS: Slot[] = [
+  { x: -560, y: 100, dz: 1500, w: 560, ry: 18 }, // in front of the title, lower left
+  { x: 270, y: -130, dz: 2250, w: 360, ry: -8 }, // behind the title, upper right
+  { x: 770, y: 30, dz: 1100, w: 640, ry: -20 }, // early, sweeps out to the right
+];
+const VAL_SLOTS: Slot[] = [
+  { x: -600, y: 40, dz: 1250, w: 720, ry: 20 },
+  { x: 430, y: -70, dz: 1750, w: 520, ry: -16 },
+];
+// phones: a tall screen, so pictures sit above and below the title instead of beside it
+const SVC_SLOTS_PHONE: Slot[] = [
+  { x: -80, y: 215, dz: 1500, w: 250, ry: 14 },
+  { x: 80, y: -205, dz: 2250, w: 190, ry: -8 },
+  { x: 150, y: -30, dz: 1100, w: 260, ry: -18 },
+];
+const VAL_SLOTS_PHONE: Slot[] = [
+  { x: -70, y: 190, dz: 1250, w: 290, ry: 16 },
+  { x: 70, y: -195, dz: 1750, w: 230, ry: -12 },
+];
 
 function useScale() {
   const get = () => (typeof window === 'undefined' ? 1 : Math.min(1, Math.max(0.42, window.innerWidth / 1440)));
@@ -65,44 +94,51 @@ function PlateBody({ p }: { p: Plate }) {
   );
 }
 
-function PlaneEl({ T, z, x, y, ry, w, h, p, early = false }: { T: MotionValue<number>; z: number; x: number; y: number; ry: number; w: number; h: number; p: Plate; early?: boolean }) {
-  // `early`: leave before reaching the caption area (phones)
-  const opacity = useTransform(T, (t) => (t < 350 ? 0 : early ? fade(z + t, -1300, -900, -750, -480) : fade(z + t, -1300, -800, 250, 650)));
+/* A picture in the world: it fades in far away, then simply keeps coming until it has left the screen */
+function PlaneEl({ T, base, slot, flip, p, phone, k }: { T: MotionValue<number>; base: number; slot: Slot; flip: number; p: Plate; phone: boolean; k: number }) {
+  const z = -(base + slot.dz);
+  const s = phone ? 1 : k;
+  const w = slot.w * s;
+  const h = w * (p.kind === 'chat' ? 0.78 : 0.66);
+  const opacity = useTransform(T, (t) => (t < 300 ? 0 : fade(z + t, -2700, -2100, 880, 1060)));
   return (
     <motion.figure
       className={`plane plane-${p.kind}`}
-      style={{ width: w, height: h, opacity, transform: `translate(-50%, -50%) translate3d(${x}px, ${y}px, ${z}px) rotateY(${ry}deg)` }}
+      style={{
+        width: w, height: h, opacity,
+        transform: `translate(-50%, -50%) translate3d(${slot.x * s * flip}px, ${slot.y * (phone ? 1 : k)}px, ${z}px) rotateY(${slot.ry * flip}deg)`,
+      }}
     >
       <PlateBody p={p} />
     </motion.figure>
   );
 }
 
-function Station({ T, s, svc, k }: { T: MotionValue<number>; s: number; svc: Service; k: number }) {
-  const base = INTRO + s * STATION;
-  const flip = s % 2 === 0 ? 1 : -1;
-  const titleZ = -(base + 1900);
-  const titleOpacity = useTransform(T, (t) => fade(titleZ + t, -2300, -1800, -550, -300));
-  const phone = k < 0.6;
-  const W = phone ? 300 : 700 * k;
+/* Service beat: name, label and one line, hanging in the world so it flies past too */
+function ServiceTitle({ T, base, svc }: { T: MotionValue<number>; base: number; svc: Service }) {
+  const z = -(base + TITLE_DZ);
+  const opacity = useTransform(T, (t) => fade(z + t, -1850, -1500, -420, -120));
   return (
-    <>
-      {phone ? (
-        <>
-          {/* tall screens: plates fly in above and below the title */}
-          <PlaneEl T={T} p={svc.plates[0]} z={-(base + 1000)} x={-40 * flip} y={-360} ry={12 * flip} w={W} h={W * 0.6} />
-          <PlaneEl T={T} p={svc.plates[1]} z={-(base + 1600)} x={40 * flip} y={330} ry={-12 * flip} w={W * 0.9} h={W * 0.9 * 0.62} early />
-        </>
-      ) : (
-        <>
-          <PlaneEl T={T} p={svc.plates[0]} z={-(base + 1000)} x={-920 * k * flip} y={-30 * k} ry={30 * flip} w={W} h={W * 0.6} />
-          <PlaneEl T={T} p={svc.plates[1]} z={-(base + 1600)} x={920 * k * flip} y={40 * k} ry={-30 * flip} w={W * 0.9} h={W * 0.9 * 0.62} />
-        </>
-      )}
-      <motion.div className={`station-title ${svc.title.length > 10 ? 'long' : ''}`} style={{ opacity: titleOpacity, transform: `translate(-50%, -50%) translate3d(0, 0, ${titleZ}px)` }} aria-hidden="true">
-        {svc.title}
+    <motion.div className="station" style={{ opacity, transform: `translate(-50%, -50%) translate3d(0, 0, ${z}px)` }} aria-hidden="true">
+      <span className="station-eyebrow mono">{svc.n} — {svc.name}</span>
+      <span className={`station-title ${svc.title.length > 10 ? 'long' : ''}`}>{svc.title}</span>
+      <span className="station-sub">{svc.line}</span>
+    </motion.div>
+  );
+}
+
+/* Value beat: a caption that slides into a corner of the screen while its pictures fly by */
+function ValueCaption({ T, base, val }: { T: MotionValue<number>; base: number; val: Value }) {
+  const opacity = useTransform(T, (t) => fade(t - base, 250, 550, 1250, 1550));
+  const y = useTransform(T, [base + 250, base + 900], [24, 0]);
+  return (
+    <motion.div className={`op-caption wrap ${val.side}`} style={{ opacity }} aria-hidden="true">
+      <motion.div className="op-caption-in" style={{ y }}>
+        <span className="mono">{val.n}</span>
+        <strong>{val.title}</strong>
+        <p>{val.line}</p>
       </motion.div>
-    </>
+    </motion.div>
   );
 }
 
@@ -128,35 +164,21 @@ function Lines({ text, delay = 0 }: { text: string[]; delay?: number }) {
 function Opening() {
   const scroller = useRef<HTMLDivElement>(null);
   const k = useScale();
+  const phone = k < 0.6;
   const { scrollYProgress } = useScroll({ target: scroller, offset: ['start start', 'end end'] });
-  const smooth = useSpring(scrollYProgress, { stiffness: 110, damping: 24, mass: 0.35 });
+  const smooth = useSpring(scrollYProgress, { stiffness: 170, damping: 30, mass: 0.3 });
   const T = useTransform(smooth, [0, 1], [0, TRAVEL]);
   const world = useTransform(T, (t) => `translate3d(0, 0, ${t}px)`);
-  const introOpacity = useTransform(T, [0, 700], [1, 0]);
-  const introY = useTransform(T, [0, 900], [0, -60]);
+  // the headline itself flies toward you and dissolves as the first pictures sweep over it
+  const introOpacity = useTransform(T, [0, 650], [1, 0]);
+  const introScale = useTransform(T, [0, 900], [1, 1.22]);
   const heroOpacity = useTransform(T, [0, 300, 1300], [1, 0.9, 0]);
   const heroScale = useTransform(T, [0, 1400], [1, 1.35]);
-  const [active, setActive] = useState(-1);
-
-  useMotionValueEvent(T, 'change', (t) => {
-    const i = Math.floor((t - INTRO + 500) / STATION);
-    setActive(t < INTRO - 200 ? -1 : Math.min(SERVICES.length - 1, Math.max(0, i)));
-  });
-
-  const goTo = (i: number) => {
-    const el = scroller.current;
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY;
-    const travel = el.offsetHeight - window.innerHeight;
-    const t = INTRO + i * STATION + 1300;
-    window.scrollTo({ top: top + travel * (t / TRAVEL), behavior: 'smooth' });
-  };
-
-  const svc = active >= 0 ? SERVICES[active] : null;
+  const vignette = useTransform(T, [0, 1000], [1, 0.45]);
 
   return (
     <section id="top" className="opening" aria-labelledby="hero-title">
-      <div ref={scroller} className="op-scroller" style={{ height: `${SCROLL_VH}vh` }}>
+      <div ref={scroller} className="op-scroller" style={{ height: `${scrollVh(phone)}vh` }}>
         <div className="op-stage">
           <motion.div className="op-hero" style={{ opacity: heroOpacity, scale: heroScale }} aria-hidden="true">
             <picture>
@@ -167,12 +189,37 @@ function Opening() {
           <div className="op-glow" aria-hidden="true" />
 
           <motion.div className="op-world" style={{ transform: world }} aria-hidden="true">
-            {SERVICES.map((s, i) => <Station key={s.id} T={T} s={i} svc={s} k={k} />)}
+            {BEATS.map((b, i) => {
+              const base = INTRO + i * STEP;
+              const flip = i % 2 === 0 ? 1 : -1;
+              if (b.kind === 'svc') {
+                const plates: Plate[] = [b.svc.plates[0], b.svc.plates[1], b.svc.extra ?? b.svc.plates[0]];
+                const slots = phone ? SVC_SLOTS_PHONE : SVC_SLOTS;
+                return (
+                  <Fragment key={`s${i}`}>
+                    {slots.map((sl, j) => <PlaneEl key={j} T={T} base={base} slot={sl} flip={flip} p={plates[j]} phone={phone} k={k} />)}
+                  </Fragment>
+                );
+              }
+              const slots = phone ? VAL_SLOTS_PHONE : VAL_SLOTS;
+              return (
+                <Fragment key={`v${i}`}>
+                  {slots.map((sl, j) => <PlaneEl key={j} T={T} base={base} slot={sl} flip={flip} p={b.val.plates[j]} phone={phone} k={k} />)}
+                </Fragment>
+              );
+            })}
           </motion.div>
 
-          <div className="op-vignette" aria-hidden="true" />
+          <motion.div className="op-vignette" style={{ opacity: vignette }} aria-hidden="true" />
 
-          <motion.div className="op-intro wrap" style={{ opacity: introOpacity, y: introY }}>
+          {/* titles fly in their own layer, so a picture passing in front never hides the words */}
+          <motion.div className="op-world" style={{ transform: world }} aria-hidden="true">
+            {BEATS.map((b, i) => (b.kind === 'svc' ? <ServiceTitle key={i} T={T} base={INTRO + i * STEP} svc={b.svc} /> : null))}
+          </motion.div>
+
+          {BEATS.map((b, i) => (b.kind === 'val' ? <ValueCaption key={i} T={T} base={INTRO + i * STEP} val={b.val} /> : null))}
+
+          <motion.div className="op-intro wrap" style={{ opacity: introOpacity, scale: introScale }}>
             <p className="eyebrow mono"><Lines text={['AICE Services']} /></p>
             <h1 id="hero-title" className="mega">
               <Lines text={['Engineering', '& AI studio']} delay={0} />
@@ -182,37 +229,12 @@ function Opening() {
               <span className="scroll-cue mono">Scroll <i aria-hidden="true" /></span>
             </div>
           </motion.div>
-
-          <div className="op-hud wrap">
-            {/* every caption stays mounted and is faded by CSS, so fast scrolling can never leave one stuck */}
-            <div className="op-details">
-              {SERVICES.map((s, i) => {
-                const on = i === active;
-                return (
-                  <div key={s.id} className={`op-detail ${on ? 'on' : ''}`} aria-hidden={!on}>
-                    <span className="mono">{s.n} / {String(SERVICES.length).padStart(2, '0')} — {s.name}</span>
-                    <p>{s.line}</p>
-                    <div className="op-links">
-                      <Link to="/#contact" className="link-arrow" tabIndex={on ? 0 : -1}>Start a project <ArrowRight size={15} aria-hidden="true" /></Link>
-                      {s.link && <a href={s.link.href} className="link-arrow" tabIndex={on ? 0 : -1}>{s.link.label} <ArrowRight size={15} aria-hidden="true" /></a>}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <nav className="op-index" aria-label="Services" style={{ opacity: svc ? 1 : 0 }}>
-              {SERVICES.map((s, i) => (
-                <button key={s.id} aria-current={i === active ? 'step' : undefined} onClick={() => goTo(i)} tabIndex={svc ? 0 : -1}>
-                  <span className="mono">{s.n}</span> {s.title}
-                </button>
-              ))}
-            </nav>
-          </div>
         </div>
       </div>
       {/* full text for screen readers & search engines */}
       <ul className="sr-only">
         {SERVICES.map((s) => <li key={s.id}><h2>{s.name}</h2><p>{s.line}</p></li>)}
+        {VALUES.map((v) => <li key={v.n}><strong>{v.title}</strong>: {v.line}</li>)}
       </ul>
     </section>
   );

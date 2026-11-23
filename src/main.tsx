@@ -6,7 +6,7 @@ import './index.css';
 
 // Smooth, weighted scrolling (skipped for reduced motion)
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+  const lenis = new Lenis({ lerp: 0.15, wheelMultiplier: 1.15, smoothWheel: true });
   (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
   const raf = (t: number) => { lenis.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);

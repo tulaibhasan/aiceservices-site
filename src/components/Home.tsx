@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { CONTACT, SERVICE_OPTIONS, WORK, type Work } from '../data/content';
 import { ExpertiseFilm } from './ExpertiseFilm';
-import { Bloom, Label, Reveal } from './Layout';
+import { Bloom, Label, PHONE, Reveal, useMedia } from './Layout';
 import { OpeningSequence } from './Corridor';
 import { AssistantDemo } from './AssistantDemo';
 
@@ -32,11 +32,13 @@ function Chunk({ text, k, n, p }: { text: string; k: number; n: number; p: Motio
 
 function Statement() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
+  const phone = useMedia(PHONE);
+  // desktop: pinned for a short stretch; phones: the text simply lights up as it passes
+  const { scrollYProgress } = useScroll({ target: ref, offset: phone ? ['start 0.8', 'end 0.45'] : ['start start', 'end end'] });
   return (
-    <section className="light statement" aria-label="About AICE">
-      <div ref={ref} className="statement-track" style={{ height: `${100 + STATEMENT.length * 22}vh` }}>
-        <div className="statement-pin">
+    <section className={`light statement ${phone ? 'sec' : ''}`} aria-label="About AICE">
+      <div ref={ref} className="statement-track" style={phone ? undefined : { height: `${100 + STATEMENT.length * 12}vh` }}>
+        <div className={phone ? '' : 'statement-pin'}>
           <div className="wrap">
             <Label n="01">Studio</Label>
             <p className="statement-text">
